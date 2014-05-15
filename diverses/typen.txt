@@ -1,0 +1,93 @@
+1. methods, classmethods, staticmethod, functions, describe	AKA MEMBERS 	AKA FUNKTIONEN
+2. attributes, data						AKA FIELDS 	AKA Variablen / Konstanten
+3. sections 							AKA MODULES 	AKA Sektionen
+4. classes, exceptions 						AKA CLASSES 	AKA KLASSEN
+
+Info: methods und attributes werden also getrennt betrachtet (Abweichung von der Hauptarbeit)  
+
+
+aus https://docs.python.org/2/tutorial/modules.html: 
+Such a file is called a module;
+Damit kenne ich zu jeder Section automatich das Modul, sofern ich den Dateinamen kenne. 
+
+Für die Stichprobenziehung:
+
+exception, class
+
+attribute, data
+
+method, staticmethod, classmethod
+
+describe
+
+function
+
+section
+
+
+Die dann übrige, aber für die Gesamtstichprobengröße ziemlich relevante Frage ist:
+Fügen wir function und *method auch noch zu einer Gruppe zusammen oder nicht?
+
+Rechnen Sie bitte mal aus, wie viel Unterschied in der Gesamtgröße das ausmacht?
+
+Wenn das wenig ist (hmm, vielleicht unter 60?), würde ich es getrennt lassen, sonst lieber zusammenfügen.
+
+      type       | num  
+-----------------+------
+ exception       |  240
+ class           |  614
+ attribute       |  748
+ method          | 2565
+ data            |  762
+ function        | 1802
+ staticmethod    |    2
+ section         | 1595
+ classmethod     |   26
+ first last data |    4  >> ignorieren (durch Einträge in einer Tabelle entstanden)
+ describe        |   17
+
+Z=1.96 (K=95%), e = 2,5% => n0 = 1537  (Formel: 1537/(1+(1537-1)/X))
+
+ exception, class 			 | 854  STICHPROBE: 549 
+ attribute, data			 | 1510	STICHPROBE: 762
+ method, staticmethod, classmethod,funct.| 4395 STICHPROBE: 1139
+ describe        			 |   17	STICHPROBE: 17
+ section        			 | 1595 STICHPROBE: 783
+
+Z = 1.96, n0 = 384, e = 5%, K=95% 
+
+ exception, class 			 | 854  STICHPROBE:265 
+ attribute, data			 | 1510	STICHPROBE:306
+ method, staticmethod, classmethod,funct.| 4395 STICHPROBE: 651
+ describe        			 |   17	STICHPROBE: 16
+ section        			 | 1595 STICHPROBE: 310
+
+
+Z=1.96 (K=95%), mit e = 10% ergibt sich n0=96 und damit diese Stichprobengrößen: 
+
+ exception, class 			 | 854  STICHPROBE: 86 
+ attribute, data			 | 1510	STICHPROBE: 90
+ method, staticmethod, classmethod,funct.| 4395 STICHPROBE: 183
+ describe        			 |   17	STICHPROBE: 15
+ section        			 | 1595 STICHPROBE: 91
+
+
+
+
+==========================================================================================================
+
+function und method zusammenführen (1802 + 2593 = 4395 Elemente) 
+mit n0=384: 	353 (statt 334 + 317 = 651)
+mit n0=96: 	94  (statt  92 +  91 = 183)
+
+
+==========================================================================================================
+
+
+ first last data |    4  -> ignorieren! 
+
+(11 rows)
+
+
+ 
+

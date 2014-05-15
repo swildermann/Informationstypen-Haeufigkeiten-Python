@@ -1,0 +1,28 @@
+Zum Herausfinden aller gefundenen Typen inklusive Anzahl der Häufigkeit:
+Select type, COUNT(*) AS "num" from extractor_documentationunit group by type;
+
+
+Für die durchschnittliche HTML-Länge der Elemente: 
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE 'function') as testing;
+
+Für die durchschnittliche PLAINTEXT-Länge der Elemente: 
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE 'function') as testing;
+
+
+
+
+=====================================================================================================
+
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE 'exception' or type LIKE 'class') as testing;
+
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE 'attribute' or type LIKE 'data') as testing;
+
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE 'method' or type LIKE 'staticmethod' or type LIKE 'classmethod' or type LIKE 'function') as testing;
+
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE 'describe') as testing;
+
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE 'section') as testing;
+
+---------------------------------------------------------------------------------------------------------
+
+SELECT AVG(len) FROM (SELECT LENGTH(html_text) as len FROM extractor_documentationunit where type LIKE '%method%' or type LIKE 'function') as testing;
