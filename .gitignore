@@ -1,6 +1,9 @@
 ##Temp files
 *.*~
 
+##Backup files
+*.backup
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
