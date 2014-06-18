@@ -1,0 +1,4 @@
+ALTER TABLE extractor_mappingunittouser
+ADD last_change timestamp WITH time zone NOT NULL 
+DEFAULT 'yesterday'
+

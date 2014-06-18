@@ -38,7 +38,7 @@
 \newcommand\parmed{\par\medskip}
 \newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
 %
-% Java Code Listing Style
+% Python Code Listing Style
 \definecolor{darkblue}{rgb}{0,0,.6}
 \definecolor{darkgreen}{rgb}{0,0.5,0}
 \definecolor{darkred}{rgb}{0.5,0,0}
@@ -47,16 +47,17 @@ showstringspaces=false}
 %
 % Titel and author 
 \title{\includegraphics[width=0.6\textwidth]{pictures/logo}\\
-{\normalsize <X-Arbeit> am Institut für Informatik der Freien Universität Berlin, Arbeitsgruppe Software Engineering}\\[6ex]
-<Titel>}
+{\normalsize Bachelorarbeit am Institut für Informatik der Freien Universität Berlin, Arbeitsgruppe Software Engineering}\\[6ex]
+Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation}
 
-\author{<Name>\\
-{\normalsize Matrikelnummer: }\\
-{\normalsize \mailto{example@mail.de}}\\\\
-{\normalsize Betreuer: }\\
-{\normalsize Eingereicht bei: }}
+\author{Sven Wildermann\\
+{\normalsize Matrikelnummer: 4567553}\\
+{\normalsize \mailto{bachelorarbeit@wildermannonline.de}}\\\\
+{\normalsize Betreuer: Prof. Dr. Lutz Prechelt}\\
+{\normalsize Gutachter: Prof. Dr. Lutz Prechelt}\\
+{\normalsize Zweitgutachterin: Prof. Dr. Fehr }}
 
-\date{Berlin, <Datum>}
+\date{Berlin, 27. Juli 2014}
 
 
 \begin{document}
@@ -70,7 +71,8 @@ showstringspaces=false}
 \vfill{}
 
 \begin{abstract}
-Abstract
+Diese Bachelorarbeit hat das Ziel der Messung verschiedener Informations-typenhäufigkeiten in der Python-Dokumentation.
+Grundlage für diese Arbeit ist das Paper von Prof. Robillard und Prof. Maalej. \textbf{to be continued..}
 \end{abstract}
 
 \vfill{}
@@ -79,7 +81,7 @@ Abstract
 
 \pagestyle{empty}
 \clearpage\pagenumbering{roman}
-
+\include{acknowledgements}
 \include{declaration}
 
 \tableofcontents

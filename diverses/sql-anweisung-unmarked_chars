@@ -1,0 +1,5 @@
+ALTER TABLE extractor_mappingunittouser 
+ADD COLUMN unmarked_chars integer NOT NULL DEFAULT 0;
+
+
+
