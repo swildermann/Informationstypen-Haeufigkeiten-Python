@@ -1,3 +1,66 @@
-\section{Extrahierer}
+\section{Konzeption}
 
-Um die Dokumentationseinheiten aus der HTML-Dokumentation von Python zu bekommen, war es nÃ¶tig, einen Extrahierer zu schreiben. Dieser wurde in Python mit Hilfe von BeautifulSoup4 angefertigt. Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in die Datenbank einflieÃŸen. Diese Einheiten sind allerdings hÃ¤ufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klasenbeschreibung vorkommt, welche wiederrum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, habe ich deswegen Platzhalter der Form `[something removed here] an solchen Stellen eingebaut. Platzhalter haben einen Vorteil gegenÃ¼ber dem einfachen Wegelassen dieser Elemente, denn so sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen LÃ¼cken erklÃ¤ren. Dies tritt besonders hÃ¤ufig bei Sektionen auf, da diese alle weiteren Elemente beinhalten. 
+\subsection{Dokumentationseinheiten}
+
+\subsection{Stichprobe}
+
+\section{Durchführung}
+
+\subsection{Extrahierer}
+
+Um die Dokumentationseinheiten aus der HTML-Dokumentation von Python zu erhalten, war es nötig, einen Extrahierer als Skript zu schreiben. Dieser wurde in Python3 mit Hilfe von BeautifulSoup4 angefertigt. Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in die Datenbank importiert werden.  Diese Einheiten sind allerdings häufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klassenbeschreibung vorkommt, welche wiederum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, habe ich deswegen Platzhalter der Form "[something removed here]" an solchen Stellen eingebaut. Platzhalter haben einen wichtigen Vorteil gegenüber dem einfachen Weggelassen dieser Elemente: So sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen Lücken erklären. Dieser Fall tritt besonders häufig bei Sektionen auf, da diese alle weiteren Elemente beinhalten. 
+
+Eine typische Struktur für die Verschachtelung von Dokumentationseinheiten sieht so aus:  \textbf{BILD VON EINER TYPISCHEN STRUKTUR MALEN - TODO }
+
+Warum aber wurde BeautifulSoup eingesetzt und nicht etwa reguläre Ausdrücke?
+
+\subsubsection{BeautifulSoup4}
+
+Für das Parsen der HTML-Einheiten habe ich BeautifulSoup4 verwendet, da es ein hierfür geschaffenes, mächtiges Werkzeug darstellt und gleichzeitig auf Python basiert. Somit konnten Synergieeffekte genutzt werden und ich mich weiter in Python einarbeiten während ich dieses Skript schrieb. Zudem bietet der Einsatz von BeautifulSoup viele Vorteile gegenüber dem Parsen mittels regulären Ausdrücken. In erster Linie ist der Code lesbarer und verständlicher, sowohl für den Programmierer selbst als auch für Dritte. Außerdem gibt es eine ausführliche Dokumentation inklusive zahlreicher Beispiele und auch die Community hinter BeautifulSoup ist groß genug, um auf Internetportalen wie \href{http://www.stackoverflow.com}{Stackoverflow} Unterstützung erhalten zu können.  Die Implementierung selbst wird im nachfolgenden Kapitel erklärt. 
+
+\subsubsection{Implementierung}
+
+Bevor die nötigen Schritte mit BeautifulSoup4 durchgeführt werden konnten, war es nötig, die vollständig Dokumentation herunterzuladen und die notwendigen Dateien ausfindig zu machen. Unter den Link \url{https://docs.python.org/3.4/archives/python-3.4.1-docs-html.zip} ist die gesamte Dokumentation in dem HTML-Format verfügbar. Interessant sind jedoch ledlich die Dateien in dem Unterordner library innerhalb dieser zip-Datei,  da Tutorials und zusätzliche Informationen wie bei der Studie von Maalej und Robillard \cite{MaalejRobillard} ebenso ausgeschlossen wurden wie Inhaltsverzeichnisse und die FAQ .  \newline
+
+Der Extrahierer durchsucht anfangs alle Dateien in dem Unterordner library und fügt den vollständigen Pfad dieser in eine Liste:
+\lstinputlisting[language=Python, firstline=91, lastline=92]{code/extractor.py}
+
+Aus jeder Datei wird dann ein BeautifulSoup-Objekt gemacht, welches die verschachtelte, innere HTML-Datenstruktur repräsentiert:
+\lstinputlisting[language=Python, firstline=94, lastline=95]{code/extractor.py}
+Dieser Schritt ist nötig, um im Anschluss mittels BeautifulSoup-API die einzelnen Dokumentationseinheiten extrahieren zu können. Hierfür wird der Befehl find-all genutzt. Um eine einfache und fehlerfreie Bedienung zu ermöglichen, wurde eine Funktion geschrieben, die das DOM-Element und die Attribute entgegen nimmt:
+\lstinputlisting[language=Python, firstline=84, lastline=86]{code/extractor.py}
+Der Aufruf zum parsen alle Elemente der Form 
+\begin{lstlisting} 
+<dl class="method"> 
+Inhalt des Elements
+</dl>
+\end{lstlisting} 
+und abspeichern dieser in einer Liste funktioniert dann wie folgt:
+\lstinputlisting[language=Python, firstline=99, lastline=99]{code/extractor.py}
+Dieser Schritt wurde analog für alle zehn verschiedenen Elementsytpen ausgeführt. 
+Um später Aussagen über die Lage der Texte innerhalb einer Einheit zu erhalten, wurden zudem die Startoffsets der Elemente berechnet und später zusammen mit dem Endoffsets in der Datenbank abgelegt, wobei sich das Endoffset jeweils sehr leicht errechnen lässt: 
+$ Ende = Start + Laenge$ . \\
+Für die Bestimmung der Startoffsets wurden die einzelnen Elemente in ihrer Datei mittels find aus BeautifulSoup gesucht und die Rückgabe, also der Index an der Stelle des Auftretens, gespeichert. Auch hierfür gibt es eine eigene Funktion, um den Aufruf lesbarer zu gestalten: \\ \\
+\begin{minipage}{\textwidth}
+ \lstinputlisting[language=Python, firstline=28, lastline=36]{code/extractor.py}
+\end{minipage}
+\newline
+Außerdem wurde dann für jedes Element das Vaterelement gesucht, zum Einen, um die Elemente später leichter wieder in die richtige Reihenfolge bringen zu können und zum Anderen, um den Gutachtern die Möglichkeit zu geben, sich den engeren Kontext, in dem die zu bewertende Einheit steht, genauer anzusehen: 
+ \lstinputlisting[language=Python, firstline=63, lastline=65]{code/extractor.py}
+Wegen der bereits erwähnten, verschachelten HTML-Struktur der Elemente musste ein Weg gefunden werden, um zu verhindern, dass ein inneres Element zweimal von den Gutachtern typisiert wird. Also wurden alle Vorkommen von inneren Elementen in den äußeren Elemente durch folgende Platzhalter ersetzt: 
+  \lstinputlisting[language=Python, firstline=138, lastline=138]{code/extractor.py}
+Da so in vielen Fällen, z.B. bei der Aufzählung von Methoden und Attributen,  seitenweise Platzhalter entstanden wären, wurden im Anschluss direkt aufeinander folgende Platzhalter wieder zu einem Platzhalter zusammengefasst:
+  \lstinputlisting[language=Python, firstline=39, lastline=44]{code/extractor.py}
+Die final zur Verfügung stehenden Informationen konnten dann in der Datenbank abgespeichert werden.  
+
+\subsection{Typisierungswebsite}
+Damit die Einheiten von den Studenten typisiert werden konnten, musste ein Werkzeug geschaffen werden, welches mindestens folgende Eigenschaften aufweist:
+\begin{itemize}
+\item Ein- und Auslogfunktion
+\item Betriebssystemunabhängige Online-Erreichbarkeit
+\item Anzeige der dem Student zugewiesenen Einheiten
+\item Markierung von Segementen und Zuweisung zu Informationstypen
+\item Anzeige der gesetzten Markierungen
+\item Anzeige der Anzahl noch verbleibender und schon gespeicherter Einheiten
+\end{itemize}
+

@@ -7,11 +7,14 @@
 \usepackage{fancyref}
 \usepackage{fancyhdr} 
 \usepackage{xcolor}
+\usepackage{framed}
 \usepackage{url}
 \usepackage{makeidx}
 \makeindex
 \usepackage{listings}
 %
+%Colors
+\definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
 % PDF settings
 \usepackage[pdftex]{graphicx}
 \usepackage[pdfstartview=FitH,pdftitle={Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation },pdfauthor={Sven Wildermann}, colorlinks=true, linktocpage]{hyperref}
@@ -48,13 +51,12 @@ showstringspaces=false}
 % Titel and author 
 \title{\includegraphics[width=0.6\textwidth]{pictures/logo}\\
 {\normalsize Bachelorarbeit am Institut für Informatik der Freien Universität Berlin, Arbeitsgruppe Software Engineering}\\[6ex]
-Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation}
+Messung der Informationstypen-Häufigkeiten in \newline der Python-Dokumentation}
 
 \author{Sven Wildermann\\
 {\normalsize Matrikelnummer: 4567553}\\
-{\normalsize \mailto{bachelorarbeit@wildermannonline.de}}\\\\
-{\normalsize Betreuer: Prof. Dr. Lutz Prechelt}\\
-{\normalsize Gutachter: Prof. Dr. Lutz Prechelt}\\
+{\normalsize \mailto{bachelorarbeit@wildermann.berlin}}\\\\
+{\normalsize Betreuer und Gutachter:  Prof. Dr. Lutz Prechelt}\\
 {\normalsize Zweitgutachterin: Prof. Dr. Fehr }}
 
 \date{Berlin, 27. Juli 2014}
@@ -70,10 +72,7 @@ Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation}
 
 \vfill{}
 
-\begin{abstract}
-Diese Bachelorarbeit hat das Ziel der Messung verschiedener Informations-typenhäufigkeiten in der Python-Dokumentation.
-Grundlage für diese Arbeit ist das Paper von Prof. Robillard und Prof. Maalej. \textbf{to be continued..}
-\end{abstract}
+
 
 \vfill{}
 
@@ -81,6 +80,8 @@ Grundlage für diese Arbeit ist das Paper von Prof. Robillard und Prof. Maalej. \
 
 \pagestyle{empty}
 \clearpage\pagenumbering{roman}
+
+\include{abstract}
 \include{acknowledgements}
 \include{declaration}
 
@@ -88,15 +89,18 @@ Grundlage für diese Arbeit ist das Paper von Prof. Robillard und Prof. Maalej. \
 
 \clearpage\pagenumbering{arabic}
 \pagestyle{fancy}
-\nocite{*} 
 \setcounter{page}{1}
+\include{ideas}
 \include{1_introduction}      
 \include{2_fundamentals}      
-\include{\3_main}            
+\include{3_main}            
 \include{4_conclusion}
 \include{5_appendix}      
 
 \bibliographystyle{alpha}
 \bibliography{bibliography}
+\newpage
+\listoffigures
+
 
 \end{document}
