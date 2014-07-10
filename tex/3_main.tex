@@ -1,6 +1,34 @@
 \section{Konzeption}
 
 \subsection{Dokumentationseinheiten}
+Mit Dokumentationseinheiten werden die Teilabschnitte aus der Dokumentation bezeichnet, die ein Gutachter für die Bewertung zusammenhängend angezeigt bekommt. 
+Diese Einheiten wurden anhand der HTML-Syntax in der Original-Dokumentation bestimmt. Es gibt folgende Kategorien mit den dazugehörigen HTML- Syntaxen:
+\begin{enumerate}
+\item Mitglieder (engl. members)
+\begin{itemize}
+\item <dl class=\grqq method \grqq>  Text </dl>
+\item <dl class=\grqq classmethod \grqq>  Text </dl>
+\item <dl class=\grqq staticmethod \grqq>  Text </dl>
+\item <dl class=\grqq function \grqq>  Text </dl>
+\item <dl class=\grqq describe \grqq>  Text </dl>
+\end{itemize}
+\item Felder (engl. fields)
+\begin{itemize}
+\item <dl class=\grqq attribute \grqq>  Text </dl>
+\item <dl class=\grqq data \grqq>  Text </dl>
+\end{itemize}
+\item Module (engl. modules)
+\begin{itemize}
+\item <div class=\grqq section \grqq>  Text </div>
+\end{itemize}
+\item Klassen (engl. classes)
+\begin{itemize}
+\item <dl class=\grqq class \grqq>  Text </dl>
+\end{itemize}
+\end{enumerate}
+
+Während die Einheiten der Kategorien 1,2, und 3 eine kleine Textlänge haben (im Durchschnitt X bis Y  Zeichen), sind die Module in der Regel eher lang (im Durchschnitt X Zeichen). 
+
 
 \subsection{Stichprobe}
 
