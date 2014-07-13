@@ -4,30 +4,40 @@
 Mit Dokumentationseinheiten werden die Teilabschnitte aus der Dokumentation bezeichnet, die ein Gutachter für die Bewertung zusammenhängend angezeigt bekommt. 
 Diese Einheiten wurden anhand der HTML-Syntax in der Original-Dokumentation bestimmt. Es gibt folgende Kategorien mit den dazugehörigen HTML- Syntaxen:
 \begin{enumerate}
-\item Mitglieder (engl. members)
+\item Methoden (engl. members)
 \begin{itemize}
-\item <dl class=\grqq method \grqq>  Text </dl>
-\item <dl class=\grqq classmethod \grqq>  Text </dl>
-\item <dl class=\grqq staticmethod \grqq>  Text </dl>
-\item <dl class=\grqq function \grqq>  Text </dl>
-\item <dl class=\grqq describe \grqq>  Text </dl>
+\item <dl class=\grqq method\grqq>  Text </dl>
+\item <dl class=\grqq classmethod\grqq>  Text </dl>
+\item <dl class=\grqq staticmethod\grqq>  Text </dl>
+\item <dl class=\grqq function\grqq>  Text </dl>
+\item <dl class=\grqq describe\grqq>  Text </dl>
 \end{itemize}
 \item Felder (engl. fields)
 \begin{itemize}
-\item <dl class=\grqq attribute \grqq>  Text </dl>
-\item <dl class=\grqq data \grqq>  Text </dl>
+\item <dl class=\grqq attribute\grqq>  Text </dl>
+\item <dl class=\grqq data\grqq>  Text </dl>
 \end{itemize}
 \item Module (engl. modules)
 \begin{itemize}
-\item <div class=\grqq section \grqq>  Text </div>
+\item <div class=\grqq section\grqq>  Text </div>
 \end{itemize}
 \item Klassen (engl. classes)
 \begin{itemize}
-\item <dl class=\grqq class \grqq>  Text </dl>
-\end{itemize}^^^
+\item <dl class=\grqq class\grqq>  Text </dl>
+\item <dl class=\grqq exception\grqq>  Text </dl>
+\end{itemize}
 \end{enumerate}
 
-Während die Einheiten der Kategorien 1,2, und 3 eine kleine Textlänge haben (im Durchschnitt X bis Y  Zeichen), sind die Module in der Regel eher lang (im Durchschnitt X Zeichen). 
+Während die Einheiten der Kategorien 1,2, und 4 eine kleine Textlänge haben, sind die Module (3. Kategorie) in der Regel lang:
+\begin{figure}[H]
+ \begin{bchart}[step=500,max=3400,scale=1.4]
+  \bcbar[text=Mitglieder]{1076}
+  \bcbar[text=Felder]{619}
+  \bcbar[text=Klassen]{1233}
+  \bcbar[text=Module]{3385}
+ \end{bchart}
+\end{figure}
+Die Häufigkeiten der unterschiedlichen Einheiten verteilen sich wie folgt: 
 \begin{figure}[H]
  \begin{bchart}[step=300,max=2500,scale=1.4]
   \bcbar[value=exception 240]{240}
@@ -43,6 +53,25 @@ Während die Einheiten der Kategorien 1,2, und 3 eine kleine Textlänge haben (im 
 \end{figure}
 
 \subsection{Stichprobe}
+Um für alle Kategorien ein aussagekräftiges Ergebnis erzielen zu können, werden die Stichproben unter Vorgabe von Konfidenzintervall und Fehlerspanne separat von einander pro Kategorie gezogen.  
+Die minimale Anzahl der pro Kategorien zu ziehenden Einheiten wird mit dieser Formel berechnet \cite{Stichprobenziehung}:
+\begin{displaymath}
+MIN = \frac{n_0}{1+\frac{n_0-1}{Stichprobengroesse}} 
+\end{displaymath}
+wobei $n_0$ wie folgt berechnet wird: 
+\begin{displaymath}
+n_0 = \frac{Z^{2}*0.25}{e^{2}}
+\end{displaymath}
+Dabei ist Z die Angabe des Konfidenzintervalls als ??????????? und e die tolierte Fehlerrate. 
+Bei einem Konfidenzintervall von 95\% ist Z=1.96 \cite{Stichprobenziehung}. 
+Mit einer Fehlerrate von 5\% ergeben sich folgende Stichprobengroessen: \newline
+
+-tabelle hier einfügen-
+
+\subsection{Zeitaufwand}
+Da die Gutachter im Rahmen eines Kurses an der Freien Universität Berlin mit 5 ECTS (Fußnote!) teilnehmen, soll der Aufwand so verteilt werden, dass die benötigten Punkte erreicht aber gleichzeitig nicht überschritten werden. Hierfür muss der Zeitaufwand pro Einheit geschätzt werden, so dass die Einheiten pro Gutachter festgelegt werden können. Diese Überlegungen sind auch schon in der Stichprobenziehung mit eingeflossen und haben dazu geführt, dass die Fehlerrate nicht weiter reduziert werden konnte. 
+Die Zeitberechnung wurde wie folgt durchgeführt:  \newline
+-tabelle hier einfügen- 
 
 \section{Durchführung}
 
