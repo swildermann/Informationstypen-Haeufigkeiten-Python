@@ -1,16 +1,17 @@
 \section{Konzeption}
-
+In diesem Abschnitt werden grundlegende Faktoren und Vorgehenweisen erläutert, die während der Bachelorarbeit wichtig geworden sind. 
+Diese betreffen sowohl die Beschaffenheit der Dokumentionseinheiten als auch die Stichprobenziehung und der daraus resultierende Zeitaufwand für die Gutachter. 
 \subsection{Dokumentationseinheiten}
 Mit Dokumentationseinheiten werden die Teilabschnitte aus der Dokumentation bezeichnet, die ein Gutachter für die Bewertung zusammenhängend angezeigt bekommt. 
-Diese Einheiten wurden anhand der HTML-Syntax in der Original-Dokumentation bestimmt. Es gibt folgende Kategorien mit den dazugehörigen HTML- Syntaxen:
+Diese Einheiten wurden anhand der HTML-Syntax in der Original-Dokumentation bestimmt. Es sind folgende Kategorien mit den dazugehörigen HTML- Syntaxen aufgetreten:
 \begin{enumerate}
-\item Methoden (engl. members)
+\item Methoden (engl. methods)
 \begin{itemize}
 \item <dl class=\grqq method\grqq>  Text </dl>
 \item <dl class=\grqq classmethod\grqq>  Text </dl>
 \item <dl class=\grqq staticmethod\grqq>  Text </dl>
 \item <dl class=\grqq function\grqq>  Text </dl>
-\item <dl class=\grqq describe\grqq>  Text </dl>
+
 \end{itemize}
 \item Felder (engl. fields)
 \begin{itemize}
@@ -26,58 +27,127 @@ Diese Einheiten wurden anhand der HTML-Syntax in der Original-Dokumentation best
 \item <dl class=\grqq class\grqq>  Text </dl>
 \item <dl class=\grqq exception\grqq>  Text </dl>
 \end{itemize}
+\item Beschreibungen (engl. describe)
+\begin{itemize}
+\item <dl class=\grqq describe\grqq>  Text </dl>
+\end{itemize}
 \end{enumerate}
 
-Während die Einheiten der Kategorien 1,2, und 4 eine kleine Textlänge haben, sind die Module (3. Kategorie) in der Regel lang:
+Die Kategorien unterscheiden sich von denen aus der Originalstudie in der Form, dass Felder und Methoden unabhängig von einander geführt werden und zusätzlich noch die Beschreibungselemente hinzugekommen sind. Anders als in der Originalstudie wird die Kategorie Module in der späteren Analyse nicht ausgelassen. 
+Die Einheiten unterscheiden sich nebst Inhalt auch stark in ihrer Textlänge. Während die Einheiten der Kategorien 1,2, 4  und 5 tendenziell eine kleine Textlänge haben, sind die Module (3. Kategorie) in der Regel länger:
 \begin{figure}[H]
  \begin{bchart}[step=500,max=3400,scale=1.4]
-  \bcbar[text=Mitglieder]{1076}
+  \bcbar[text=Methoden]{1225}
   \bcbar[text=Felder]{619}
-  \bcbar[text=Klassen]{1233}
   \bcbar[text=Module]{3385}
+  \bcbar[text=Klassen]{1233}
+  \bcbar[value=Beschreibungen 482]{482}  
  \end{bchart}
+ \caption[Durchschnittliche Textlängen je Kategorie]{Durchschnittliche Textlängen je Kategorie}
 \end{figure}
-Die Häufigkeiten der unterschiedlichen Einheiten verteilen sich wie folgt: 
+
+Sehr große Unterschiede gibt es zudem in der Häufigkeit verschiedener Typen. Die wenigsten Vorkommen gibt es von den Einheiten "`describe"', "`classmethod"' und "`staticmethod"'. "`Methods"' treten dagegen am allerhäufigsten auf. Trotz des geringen Auftretens der "`describe"'-Elemente haben wir uns dafür entschlossen, diese als eigene Kategorie zu behandeln, da diese bei den bisher behandelten Programmiersprachen (Java und .NET) nicht existent waren.
 \begin{figure}[H]
  \begin{bchart}[step=300,max=2500,scale=1.4]
+  \bcbar[value=staticmethod 2]{2}
+  \bcbar[value=describe 17]{17}
+  \bcbar[value=classmethod 26]{26}
   \bcbar[value=exception 240]{240}
   \bcbar[text=class]{614}
   \bcbar[text=attribute]{748}
-  \bcbar[text=method]{2568}
   \bcbar[text=data]{762}
-  \bcbar[text=function]{1802}
-  \bcbar[text=staticmethod]{1595}
-  \bcbar[value=classmethod 26]{26}
-  \bcbar[value=describe 17]{17}
+  \bcbar[text=section]{1595}
+  \bcbar[text=function]{1802}  
+  \bcbar[text=method]{2565}
  \end{bchart}
+  \caption[Gesamthäufigkeiten der Einheiten]{Gesamthäufigkeiten der Einheiten}
 \end{figure}
 
+Die Verteilung auf Kategorie-Ebene zeigt ebenfalls einen deutlichen Überschuss an Methoden, nämlich fast drei mal so viele wie es Felder gibt.  Auf Grund der einelementigen Kategorien "`Module"' und "`Beschreibungen"' decken sich hier deren Häufigkeiten exakt mit denen der "`section"' und "`describe"'-Einheiten, so dass auch hier die Beschreibungselemente den geringsten Anteil darstellen. 
+\begin{figure}[H]
+ \begin{bchart}[step=1000,max=4400,scale=1.4]
+  \bcbar[text=Methoden]{4395}
+  \bcbar[text=Felder]{1510}
+  \bcbar[text=Module]{1595}
+  \bcbar[text=Klassen]{854}
+  \bcbar[value=Beschreibungen 17]{17}  
+ \end{bchart}
+  \caption[Gesamthäufigkeiten der Kategorien]{Gesamthäufigkeiten der Kategorien}
+\end{figure}
+
+Mit Hilfe dieser Informationen können die im nächsten Abschnitt beschriebenen Stichprobengrößen berechnet werden. 
 \subsection{Stichprobe}
-Um für alle Kategorien ein aussagekräftiges Ergebnis erzielen zu können, werden die Stichproben unter Vorgabe von Konfidenzintervall und Fehlerspanne separat von einander pro Kategorie gezogen.  
+Um für alle Kategorien ein aussagekräftiges Ergebnis der späteren Begutachtungen erzielen zu können, werden die Stichproben unter Vorgabe von Konfidenzintervall und Fehlerspanne separat von einander pro Kategorie gezogen.  
 Die minimale Anzahl der pro Kategorien zu ziehenden Einheiten wird mit dieser Formel berechnet \cite{Stichprobenziehung}:
 \begin{displaymath}
-MIN = \frac{n_0}{1+\frac{n_0-1}{Stichprobengroesse}} 
+MIN = \frac{n_0}{1+\frac{n_0-1}{Gesamtmenge}} 
 \end{displaymath}
 wobei $n_0$ wie folgt berechnet wird: 
 \begin{displaymath}
 n_0 = \frac{Z^{2}*0.25}{e^{2}}
 \end{displaymath}
-Dabei ist Z die Angabe des Konfidenzintervalls als ??????????? und e die tolierte Fehlerrate. 
+Dabei ist Z die Angabe des Konfidenzintervalls als z-score und e die tolerierte Fehlerrate. 
 Bei einem Konfidenzintervall von 95\% ist Z=1.96 \cite{Stichprobenziehung}. 
-Mit einer Fehlerrate von 5\% ergeben sich folgende Stichprobengroessen: \newline
+Mit einer Fehlerrate von 5\% ergibt sich für $n_0 = 384,16$ und dadurch dann folgende minimale Stichprobengrößen für die jeweiligen Kategorien: \newline
+\begin{figure}[H]
+\begin{tabular}{|c||c|c|}\hline
+   Kategorie & Gesamtmenge & Stichprobengröße\\ \hline \hline
+   Methoden & 4395 & 651 \\ \hline
+   Felder & 1510 & 306\\ \hline
+   Module & 1595 & 310 \\ \hline
+   Klassen & 854 & 265 \\ \hline
+   Beschreibungen & 17 & 16 \\ \hline \hline
+   \textbf{Summe} & 8371 & 1548 \\ \hline
+ \end{tabular}
+\caption[Stichprobengrößen]{Stichprobengrößen}
+\end{figure}
 
--tabelle hier einfügen-
+\subsection{Goldstichprobe}
 
 \subsection{Zeitaufwand}
-Da die Gutachter im Rahmen eines Kurses an der Freien Universität Berlin mit 5 ECTS (Fußnote!) teilnehmen, soll der Aufwand so verteilt werden, dass die benötigten Punkte erreicht aber gleichzeitig nicht überschritten werden. Hierfür muss der Zeitaufwand pro Einheit geschätzt werden, so dass die Einheiten pro Gutachter festgelegt werden können. Diese Überlegungen sind auch schon in der Stichprobenziehung mit eingeflossen und haben dazu geführt, dass die Fehlerrate nicht weiter reduziert werden konnte. 
-Die Zeitberechnung wurde wie folgt durchgeführt:  \newline
--tabelle hier einfügen- 
+Da die Gutachter im Rahmen des Kurses "`Forschungspraktikum"' an der Freien Universität Berlin für fünf ECTS \footnote{European Credit Transfer System} die Einheiten bewerten haben, sollte der Aufwand so verteilt werden, dass die benötigten Punkte erreicht werden, aber gleichzeitig der Zeitaufwand nicht überschritten wird (ein ECTS entspricht etwa 25 bis 30 Arbeitsstunden). Hierfür muss der Aufwand des Markierens pro Einheit geschätzt werden, so dass die Einheiten pro Gutachter festgelegt werden können. Diese Überlegungen sind auch schon in der Stichprobenziehung mit eingeflossen und haben dazu geführt, dass die Fehlerrate auf 5\% gesetzt wurde. Da vor dem Start noch eine intensive Einarbeitung inklusive Hausarbeiten durchgeführt wurde, sind für die eigentliche Bewertung der Einheiten noch drei ECTS pro Student veranschlagt worden. Dadurch, dass jede Einheit von zwei Gutachtern bewertet werden sollte, mussten vorher die Stichprobengrößen mit zwei multipliziert werden, um die Gesamtanzahl der Bewertungen zu erhalten. Diese wurde dann auf die 7 Studenten verteilt (in der Tabelle wurde gerundet): 
+\begin{figure}[H]
+\begin{tabular}{|c||c|c|c|c|}\hline
+    & Anzahl der & Einheiten & Zeitaufwand & Zeitaufwand\\
+   Kategorie & Bewertungen & pro Student & pro Einheit & gesamt\\ \hline \hline
+   Methoden & 1302 & 186  & 5 min & 930 min \\ \hline
+   Felder &  12 & 87 & 5 min & 435 min\\ \hline
+   Module & 620 & 89 & 15 min & 1335 min\\ \hline
+   Klassen &  530  & 76 & 10 min & 760 min\\ \hline
+   Beschreibungen &  32 & 5 & 3 min & 15 min\\ \hline \hline
+   \textbf{Summe} &  3096  & 443 & $\oslash 7.8$ min&  57,92h\\ \hline
+ \end{tabular}
+\caption[Einheiten pro Student inkl. Zeitaufwand]{Einheiten pro Student}
+\end{figure}
+Zusätzlich waren die Gutachter dazu angehalten, regelmäßig das KodierHandbuch zu lesen, um das übergreifende Verständnis nicht zu verlieren sowie gelegentlich mit dem BugTracker\footnote{Ein System zur Erfassung von Defekten und Verbesserungsvorschlägen} umzugehen. Hierfür wurden zusätzlich insgesamt noch etwa 10 Arbeitsstunden invenstiert ,wobei diese geschätze Zahl je nach Gutachter stark nach oben und unten abweicht. 
+\subsection{CADo-Tool vs. Eigenentwicklung}
+Im Rahmen der Forschung von Maalej und Robillard \cite{MaalejRobillard} wurde ein Tool geschaffen, welches folgende Werkzeuge und Fähigkeiten mit sich bringt (übersetzter Auszug) \cite{cado_tool} :
+\begin{itemize}
+\item API-Dokumentionen aus Online-Quellen extrahieren
+\item Ziehen von zufälligen, stratifizierten Stichproben
+\item Erstellung eines Codierungsschemas
+\item Zuweisen von Einheiten zu Gutachtern
+\item Berechnung der Übereinstimmung von Gutachtern
+\end{itemize}
+Aus Sicht der Kodierer birgt dieses Tool folgende Fähigkeiten \cite{cado_tool}
+\begin{itemize}
+\item Online und offline login
+\item Laden der zugewiesenen Einheiten
+\item Einheiten typisieren (Codierungen hinzufügen)
+\item Kodierhandbuch anzeigen 
+\item Darstellung der Dokumentation
+\item Kodiersitzungen zwischenspeichern und laden
+\item Statistiken ansehen
+\end{itemize}
+
+Warum haben wir nicht das CADO-Tool benutzt sondern selbst etwas entwickelt? Welche Entscheidungen wurden hiervon beinträchtigt -> Markierungen statt Blockweise 
+
 
 \section{Durchführung}
 
 \subsection{Extrahierer}
 
-Um die Dokumentationseinheiten aus der HTML-Dokumentation von Python zu erhalten, war es nötig, einen Extrahierer als Skript zu schreiben. Dieser wurde in Python3 mit Hilfe von BeautifulSoup4 angefertigt. Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in die Datenbank importiert werden.  Diese Einheiten sind allerdings häufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klassenbeschreibung vorkommt, welche wiederum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, habe ich deswegen Platzhalter der Form "[something removed here]" an solchen Stellen eingebaut. Platzhalter haben einen wichtigen Vorteil gegenüber dem einfachen Weggelassen dieser Elemente: So sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen Lücken erklären. Dieser Fall tritt besonders häufig bei Sektionen auf, da diese alle weiteren Elemente beinhalten. 
+Um die Dokumentationseinheiten aus der HTML-Dokumentation von Python zu erhalten, war es nötig, einen Extrahierer als Skript zu schreiben. Dieser wurde in Python3 mit Hilfe von BeautifulSoup4 angefertigt. Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in die Datenbank importiert werden.  Diese Einheiten sind allerdings häufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klassenbeschreibung vorkommt, welche wiederum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, habe ich deswegen Platzhalter der Form "`[something removed here]"' an solchen Stellen eingebaut. Platzhalter haben einen wichtigen Vorteil gegenüber dem einfachen Weggelassen dieser Elemente: So sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen Lücken erklären. Dieser Fall tritt besonders häufig bei Sektionen auf, da diese alle weiteren Elemente beinhalten. 
 
 Eine typische Struktur für die Verschachtelung von Dokumentationseinheiten sieht so aus:  \textbf{BILD VON EINER TYPISCHEN STRUKTUR MALEN - TODO }
 
@@ -123,6 +193,7 @@ Da so in vielen Fällen, z.B. bei der Aufzählung von Methoden und Attributen,  se
 Die final zur Verfügung stehenden Informationen konnten dann in der Datenbank abgespeichert werden.  
 
 \subsection{Typisierungswebsite}
+\subsubsection{Anforderungen}
 Damit die Einheiten von den Studenten typisiert werden konnten, musste ein Werkzeug geschaffen werden, welches mindestens folgende Eigenschaften aufweist:
 \begin{itemize}
 \item Ein- und Auslogfunktion
@@ -131,5 +202,12 @@ Damit die Einheiten von den Studenten typisiert werden konnten, musste ein Werkz
 \item Markierung von Segementen und Zuweisung zu Informationstypen
 \item Anzeige der gesetzten Markierungen
 \item Anzeige der Anzahl noch verbleibender und schon gespeicherter Einheiten
+\item Anzeige der eigenen Übereinstimmung mit anderen Studenten
 \end{itemize}
+
+\subsubsection{Umsetzung}
+\subsubsection{Ergebnis}
+\subsection{Gamification}
+
+
 
