@@ -129,7 +129,7 @@ Im Rahmen der Forschung von Maalej und Robillard \cite{MaalejRobillard} wurde ei
 \item Zuweisen von Einheiten zu Gutachtern
 \item Berechnung der Übereinstimmung von Gutachtern
 \end{itemize}
-Aus Sicht der Kodierer birgt dieses Tool folgende Fähigkeiten \cite{cado_tool}
+Aus Sicht der Kodierer birgt dieses Tool zusätzlich noch folgende Fähigkeiten \cite{cado_tool}
 \begin{itemize}
 \item Online und offline login
 \item Laden der zugewiesenen Einheiten
@@ -140,19 +140,65 @@ Aus Sicht der Kodierer birgt dieses Tool folgende Fähigkeiten \cite{cado_tool}
 \item Statistiken ansehen
 \end{itemize}
 
-Warum haben wir nicht das CADO-Tool benutzt sondern selbst etwas entwickelt? Welche Entscheidungen wurden hiervon beinträchtigt -> Markierungen statt Blockweise 
-
+Auf Grund der Vielzahl der für uns nützlichen Fähigkeiten, stellte sich die Frage, ob dieses Werkzeug für diese Bachelorarbeit ebenfalls genutzt werden kann. 
+Also sollte das Werkzeug heruntergeladen und ausprobiert werden. Schon beim Herunterladen gab es Schwierigkeiten, da der auf der Website veröffentlichte Link ungültig war. Nach Rückfrage bei den Autoren wurde dieser Misstand dann schnell behoben. Der Test des Werkzeugs erwies sich dann ebenfalls als schwierig, da es noch in der alpha-Version\footnote{frühes Entwicklungsstadium ohne Garantie auf fehlerfreies funktionieren} und ohne Benutzerhandbuch vorlag. Zudem gab es bei möglichen Fragen keinen einheitlichen Ansprechspartner und keine garantierte Antwortzeit der Entwickler, was ebenfalls zu einem höherem Risikio in der Benutzung geführt hätte. \\
+Somit war es sinnvoller, die für diese Bachelorabeit benötigten Werkzeuge selbst zu entwickeln. Dies hatte noch weitere Vorteile: 
+\begin{itemize}
+\item Grundverständnis des vorliegenden Programmcodes
+\item Änderungen des Grundkonzepts eher möglich
+\item schnellere Weiterentwicklung bei Bedarf
+\item weniger Kommunikationsaufwand 
+\end{itemize}
+Wir haben uns entschlossen, diese Werkzeuge dann mittels Python zu entwicklen, um zusätzlich noch Synergieeffekte bezüglich des Erlernens und Verstehens der Programmiersprache Python auszunutzen. Da der Zugriff verteilt von den Rechnern der Gutachter erfolgen sollte, war die Entwicklung einer Website zu diesem Zweck sinnvoll, so dass Restriktionen bezüglich der Betriebssystemwahl ausgeräumt werden konnten. \\
+Diese Entscheidung führte dazu, dass wir die Typisierungen überhaupt anhand von Markierungen durchführen konnten (siehe Kapitel \ref{sec:Markierungen}).
 
 \section{Durchführung}
 
 \subsection{Extrahierer}
+Um die Dokumentationseinheiten aus der HTML-Dokumentation von Python zu erhalten, war es nötig, einen Extrahierer als Skript zu schreiben. Dieser wurde in Python3 mit Hilfe von BeautifulSoup4 angefertigt. BeautifulSoup wurde genutzt, da es im Gegensatz zu regulären Ausdrücken eine verständlichere Syntax bietet, was zu einer leichteren und wartbareren Entwicklung führt. \\
+Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in eine Datenbank importiert werden. Diese Einheiten sind allerdings häufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klassenbeschreibung vorkommt, welche wiederum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, wurden deswegen Platzhalter der Form "`[something removed here]"' an solchen Stellen eingebaut. Platzhalter haben einen wichtigen Vorteil gegenüber dem einfachen Weggelassen dieser Elemente: So sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen Lücken erklären. Dieser Fall tritt besonders häufig bei Sektionen auf, da diese alle weiteren Elemente beinhalten. 
 
-Um die Dokumentationseinheiten aus der HTML-Dokumentation von Python zu erhalten, war es nötig, einen Extrahierer als Skript zu schreiben. Dieser wurde in Python3 mit Hilfe von BeautifulSoup4 angefertigt. Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in die Datenbank importiert werden.  Diese Einheiten sind allerdings häufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klassenbeschreibung vorkommt, welche wiederum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, habe ich deswegen Platzhalter der Form "`[something removed here]"' an solchen Stellen eingebaut. Platzhalter haben einen wichtigen Vorteil gegenüber dem einfachen Weggelassen dieser Elemente: So sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen Lücken erklären. Dieser Fall tritt besonders häufig bei Sektionen auf, da diese alle weiteren Elemente beinhalten. 
+Eine mögliche Struktur der Verschachtelung von Dokumentationseinheiten sieht ohne Beschränkung der Allgemeinheit so aus:  
+\begin{figure}[H]
+\begin{tikzpicture}[
+  level 1/.style={sibling distance=40mm},
+  edge from parent/.style={->,draw},
+  >=latex]
 
-Eine typische Struktur für die Verschachtelung von Dokumentationseinheiten sieht so aus:  \textbf{BILD VON EINER TYPISCHEN STRUKTUR MALEN - TODO }
+% root of the the initial tree, level 1
+\node[root] {section}
+% The first level, as children of the initial tree
+  child {node[level 2] (c1) {section}}
+  child {node[level 2] (c2) {class}}
+  child {node[level 2] (c3) {section}};
 
-Warum aber wurde BeautifulSoup eingesetzt und nicht etwa reguläre Ausdrücke?
+% The second level, relatively positioned nodes
+\begin{scope}[every node/.style={level 3}]
+\node [below of = c1, xshift=15pt] (c11) {function};
+\node [below of = c11] (c12) {function};
+\node [below of = c12] (c13) {function};
+\node [below of = c13] (c14) {exception};
 
+\node [below of = c2, xshift=15pt] (c21) {method};
+\node [below of = c21] (c22) {attribute};
+\node [below of = c22] (c23) {data};
+\node [below of = c23] (c24) {data};
+
+\node [below of = c3, xshift=15pt] (c31) {section};
+\node [below of = c31] (c32) {section};
+\end{scope}
+
+% lines from each level 1 node to every one of its "children"
+\foreach \value in {1,...,4}
+  \draw[->] (c1.195) |- (c1\value.west);
+
+\foreach \value in {1,...,4}
+  \draw[->] (c2.195) |- (c2\value.west);
+
+\foreach \value in {1,...,2}
+  \draw[->] (c3.195) |- (c3\value.west);
+\end{tikzpicture}
+\end{figure}
 \subsubsection{BeautifulSoup4}
 
 Für das Parsen der HTML-Einheiten habe ich BeautifulSoup4 verwendet, da es ein hierfür geschaffenes, mächtiges Werkzeug darstellt und gleichzeitig auf Python basiert. Somit konnten Synergieeffekte genutzt werden und ich mich weiter in Python einarbeiten während ich dieses Skript schrieb. Zudem bietet der Einsatz von BeautifulSoup viele Vorteile gegenüber dem Parsen mittels regulären Ausdrücken. In erster Linie ist der Code lesbarer und verständlicher, sowohl für den Programmierer selbst als auch für Dritte. Außerdem gibt es eine ausführliche Dokumentation inklusive zahlreicher Beispiele und auch die Community hinter BeautifulSoup ist groß genug, um auf Internetportalen wie \href{http://www.stackoverflow.com}{Stackoverflow} Unterstützung erhalten zu können.  Die Implementierung selbst wird im nachfolgenden Kapitel erklärt. 
@@ -206,7 +252,15 @@ Damit die Einheiten von den Studenten typisiert werden konnten, musste ein Werkz
 \end{itemize}
 
 \subsubsection{Umsetzung}
+Für die Umsetzung der genannten Anforderungen wurde das Webframework "`Django"' verwendet - da es auf Python basiert und eine große Gemeinschaft gibt, die im Zweifel bei Herausforderungen unterstützten können. 
+
 \subsubsection{Ergebnis}
+\begin{figure}[h!] 
+\centering
+\includegraphics[width=1.1\textwidth]{pictures/1898.png}
+\caption[Anzeige einer Dokumentationseinheit mit Markierungen]{Anzeige einer Dokumentationseinheit mit Markierungen}
+\label{fig:1898}
+\end{figure}
 \subsection{Gamification}
 
 
