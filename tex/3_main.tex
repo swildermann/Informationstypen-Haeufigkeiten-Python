@@ -88,7 +88,7 @@ n_0 = \frac{Z^{2}*0.25}{e^{2}}
 \end{displaymath}
 Dabei ist Z die Angabe des Konfidenzintervalls als z-score und e die tolerierte Fehlerrate. 
 Bei einem Konfidenzintervall von 95\% ist Z=1.96 \cite{Stichprobenziehung}. 
-Mit einer Fehlerrate von 5\% ergibt sich für $n_0 = 384,16$ und dadurch dann folgende minimale Stichprobengrößen für die jeweiligen Kategorien: \newline
+Mit einer Fehlerrate von 5\% ergibt sich für $n_0 = 384,16$ und dadurch dann die folgenden minimale Stichprobengrößen für die jeweiligen Kategorien: \newline
 \begin{figure}[H]
 \begin{tabular}{|c||c|c|}\hline
    Kategorie & Gesamtmenge & Stichprobengröße\\ \hline \hline
@@ -101,11 +101,37 @@ Mit einer Fehlerrate von 5\% ergibt sich für $n_0 = 384,16$ und dadurch dann fol
  \end{tabular}
 \caption[Stichprobengrößen]{Stichprobengrößen}
 \end{figure}
-
 \subsection{Goldstichprobe}
-
+Zudem wurde eine so weitere Stichprobe, die Goldstichprobe gezogen. Diese hat folgenden Zweck: 
+\begin{itemize}
+\item Absicherung der Messeung der Korrektheit der Gutachterergebnisse und
+\item Bestimmung eines Wertes für sehr hohe Typisierungsqualität 
+\end{itemize}
+Diese Stichprobe wurde dann von vier unabhängigen Gutachtern der Freien Universität Berlin (Institut für Informatik) jeweils vollständig typisiert. Diese Gutachter waren:
+\begin{itemize}
+\item Prof. Dr. Prechelt, AG Software Engineering
+\item Herr Schmeisky, AG Software Engineering 
+\item Herr Zieris, AG Software Engineering
+\item Sven Wildermann, Verfasser dieser Bachelorarbeit
+\end{itemize}
+Wobei die Herren Schmeisky und Zieris zusammen eine Stichprobe bearbeitet haben. 
+\newline
+Die Größe dieser Stichprobe wurde auf 2\% der Gesamtmenge aller Einheiten festgelegt, damit bei Beibehaltung einer repräsentativen Größe der Aufwand im Rahmen blieb. Für die einzelnen Kategorien ergaben sich somit folgende Mengen: 
+\begin{figure}[H]
+\begin{tabular}{|c||c|c|}\hline
+   Kategorie & Gesamtmenge & Stichprobengröße\\ \hline \hline
+   Methoden & 4395 & 88 \\ \hline
+   Felder & 1510 & 30 \\ \hline
+   Module & 1595 & 32 \\ \hline
+   Klassen & 854 & 17 \\ \hline
+   Beschreibungen & 17 & 1 \\ \hline \hline
+   \textbf{Summe} & 8371 & 168 \\ \hline
+ \end{tabular}
+\caption[Goldstichprobengrößen]{Goldstichprobengrößen}
+\end{figure}
+Dabei wurde der Wert für die Kategorie "`Beschreibungen"' um eins erhöht, da diese Elemente sonst überhaupt nicht in der Goldstichprobe vorgekommen wären. 
 \subsection{Zeitaufwand}
-Da die Gutachter im Rahmen des Kurses "`Forschungspraktikum"' an der Freien Universität Berlin für fünf ECTS \footnote{European Credit Transfer System} die Einheiten bewerten haben, sollte der Aufwand so verteilt werden, dass die benötigten Punkte erreicht werden, aber gleichzeitig der Zeitaufwand nicht überschritten wird (ein ECTS entspricht etwa 25 bis 30 Arbeitsstunden). Hierfür muss der Aufwand des Markierens pro Einheit geschätzt werden, so dass die Einheiten pro Gutachter festgelegt werden können. Diese Überlegungen sind auch schon in der Stichprobenziehung mit eingeflossen und haben dazu geführt, dass die Fehlerrate auf 5\% gesetzt wurde. Da vor dem Start noch eine intensive Einarbeitung inklusive Hausarbeiten durchgeführt wurde, sind für die eigentliche Bewertung der Einheiten noch drei ECTS pro Student veranschlagt worden. Dadurch, dass jede Einheit von zwei Gutachtern bewertet werden sollte, mussten vorher die Stichprobengrößen mit zwei multipliziert werden, um die Gesamtanzahl der Bewertungen zu erhalten. Diese wurde dann auf die 7 Studenten verteilt (in der Tabelle wurde gerundet): 
+Da die Gutachter im Rahmen des Kurses "`Forschungspraktikum"' an der Freien Universität Berlin für fünf ECTS \footnote{European Credit Transfer System} die Einheiten bewerten haben, sollte der Aufwand so verteilt werden, dass die benötigten Punkte erreicht werden, aber gleichzeitig der Zeitaufwand nicht überschritten wird (ein ECTS entspricht etwa 25 bis 30 Arbeitsstunden). Hierfür muss der Aufwand des Markierens pro Einheit geschätzt werden, so dass die Einheiten pro Gutachter festgelegt werden können. Diese Überlegungen sind auch schon in der Stichprobenziehung mit eingeflossen und haben dazu geführt, dass die Fehlerrate auf 5\% gesetzt wurde. Da vor dem Start noch eine intensive Einarbeitung inklusive Hausarbeiten durchgeführt wurde, sind für die eigentliche Bewertung der Einheiten noch drei ECTS pro Student veranschlagt worden. Dadurch, dass jede Einheit von zwei Gutachtern bewertet werden sollte, mussten vorher die Stichprobengrößen mit zwei multipliziert werden, um die Gesamtanzahl der Bewertungen zu erhalten. Diese wurde dann auf die 7 Studenten verteilt (in der Tabelle wurde gerundet) und mit einem grob geschätzten, durchschnittlichen Zeitaufwand pro Einheit multipliziert: 
 \begin{figure}[H]
 \begin{tabular}{|c||c|c|c|c|}\hline
     & Anzahl der & Einheiten & Zeitaufwand & Zeitaufwand\\
@@ -115,13 +141,30 @@ Da die Gutachter im Rahmen des Kurses "`Forschungspraktikum"' an der Freien Univ
    Module & 620 & 89 & 15 min & 1335 min\\ \hline
    Klassen &  530  & 76 & 10 min & 760 min\\ \hline
    Beschreibungen &  32 & 5 & 3 min & 15 min\\ \hline \hline
-   \textbf{Summe} &  3096  & 443 & $\oslash 7.8$ min&  57,92h\\ \hline
+   \textbf{Summe} &  3096  & 443 & $\oslash 7.6$ min&  57,92 h\\ \hline
  \end{tabular}
 \caption[Einheiten pro Student inkl. Zeitaufwand]{Einheiten pro Student}
 \end{figure}
-Zusätzlich waren die Gutachter dazu angehalten, regelmäßig das KodierHandbuch zu lesen, um das übergreifende Verständnis nicht zu verlieren sowie gelegentlich mit dem BugTracker\footnote{Ein System zur Erfassung von Defekten und Verbesserungsvorschlägen} umzugehen. Hierfür wurden zusätzlich insgesamt noch etwa 10 Arbeitsstunden invenstiert ,wobei diese geschätze Zahl je nach Gutachter stark nach oben und unten abweicht. 
+Zusätzlich waren die Gutachter dazu angehalten, regelmäßig das KodierHandbuch zu lesen, um das übergreifende Verständnis nicht zu verlieren sowie gelegentlich mit dem BugTracker\footnote{Ein System zur Erfassung von Defekten und Verbesserungsvorschlägen} umzugehen. Hierfür wurden zusätzlich insgesamt noch etwa 10 Arbeitsstunden invenstiert, wobei der tatsächliche Aufwand je Gutachter stark abweichen kann. \\
+\newline
+Analog kann auch der Zeitaufwand für die Bearbeitung der Goldstichprobe berechnet werden: 
+\begin{figure}[H]
+\begin{tabular}{|c||c|c|c|c|}\hline
+                    & Anzahl der & Zeitaufwand & Zeitaufwand\\
+   Kategorie & Einheiten &  pro Einheit & gesamt\\ \hline \hline
+   Methoden & 88 &  5 min & 440 min \\ \hline
+   Felder &  30 &  5 min & 150 min\\ \hline
+   Module & 32 &  15 min & 480 min\\ \hline
+   Klassen &  17  &  10 min & 170 min\\ \hline
+   Beschreibungen &  1 & 3 min & 3 min\\ \hline \hline
+   \textbf{Summe} &  168  & $\oslash 7.6$ min&  20,72 h \\ \hline
+ \end{tabular}
+\caption[Zeitaufwand für die Goldstichprobe]{Zeitaufwand für die Goldstichprobe}
+\end{figure}
+Da die Goldstichprobe drei mal bearbeitet wurde, ergibt sich so ein Gesamtaufwand für die Bearbeitung dieser von 62,16 Stunden.
+Somit stellt sich als nächstes die Frage, wie diese Einheiten extrahiert und bearbeitet werden sollen. 
 \subsection{CADo-Tool vs. Eigenentwicklung}
-Im Rahmen der Forschung von Maalej und Robillard \cite{MaalejRobillard} wurde ein Tool geschaffen, welches folgende Werkzeuge und Fähigkeiten mit sich bringt (übersetzter Auszug) \cite{cado_tool} :
+Im Rahmen der Forschung von Maalej und Robillard \cite{MaalejRobillard} wurde ein Tool mit dem Namen CADo\footnote{Content Analysis for Software Documentation} geschaffen, welches folgende Werkzeuge und Fähigkeiten mit sich bringt (übersetzter Auszug) \cite{cado_tool} :
 \begin{itemize}
 \item API-Dokumentionen aus Online-Quellen extrahieren
 \item Ziehen von zufälligen, stratifizierten Stichproben
@@ -150,14 +193,13 @@ Somit war es sinnvoller, die für diese Bachelorabeit benötigten Werkzeuge selbst
 \item weniger Kommunikationsaufwand 
 \end{itemize}
 Wir haben uns entschlossen, diese Werkzeuge dann mittels Python zu entwicklen, um zusätzlich noch Synergieeffekte bezüglich des Erlernens und Verstehens der Programmiersprache Python auszunutzen. Da der Zugriff verteilt von den Rechnern der Gutachter erfolgen sollte, war die Entwicklung einer Website zu diesem Zweck sinnvoll, so dass Restriktionen bezüglich der Betriebssystemwahl ausgeräumt werden konnten. \\
-Diese Entscheidung führte dazu, dass wir die Typisierungen überhaupt anhand von Markierungen durchführen konnten (siehe Kapitel \ref{sec:Markierungen}).
+Diese Entscheidung führte dazu, dass wir die Typisierungen überhaupt anhand von Markierungen durchführen konnten (siehe Erläuterung in Kapitel \ref{sec:Markierungen}).
 
-\section{Durchführung}
-
+\section{Entwicklung und Durchführung}
+\textbf{Dieses Kapitel zusammenfassen}
 \subsection{Extrahierer}
 Um die Dokumentationseinheiten aus der HTML-Dokumentation von Python zu erhalten, war es nötig, einen Extrahierer als Skript zu schreiben. Dieser wurde in Python3 mit Hilfe von BeautifulSoup4 angefertigt. BeautifulSoup wurde genutzt, da es im Gegensatz zu regulären Ausdrücken eine verständlichere Syntax bietet, was zu einer leichteren und wartbareren Entwicklung führt. \\
-Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in eine Datenbank importiert werden. Diese Einheiten sind allerdings häufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klassenbeschreibung vorkommt, welche wiederum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, wurden deswegen Platzhalter der Form "`[something removed here]"' an solchen Stellen eingebaut. Platzhalter haben einen wichtigen Vorteil gegenüber dem einfachen Weggelassen dieser Elemente: So sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen Lücken erklären. Dieser Fall tritt besonders häufig bei Sektionen auf, da diese alle weiteren Elemente beinhalten. 
-
+Entsprechend der Definitionen von Dokumentationseinheiten sollten also die HTML-Schnipsel getrennt von einander in eine Datenbank importiert werden. Diese Einheiten sind allerdings häufig geschachtelt, so dass eine Methodendeklaration in der Regel innerhalb einer Klassenbeschreibung vorkommt, welche wiederum innerhalb einer Sektion anzutreffen ist. Um Dopplungen bei der Typisierung zu vermeiden, wurden deswegen Platzhalter der Form "`[something removed here]"' an solchen Stellen eingebaut. Platzhalter haben einen wichtigen Vorteil gegenüber dem einfachen Weggelassen dieser Elemente: So sieht auch der Gutachter, dass hier etwas von der Original-Dokumentation abweicht und kann sich somit die entstandenen Lücken erklären. Dieser Fall tritt besonders häufig bei Sektionen auf, da diese in der Regel alle weiteren Elemente beinhalten. Aneinanderreihungen von Platzhaltern wurden wieder zu einem Platzhalter zusammengefasst.  \\
 Eine mögliche Struktur der Verschachtelung von Dokumentationseinheiten sieht ohne Beschränkung der Allgemeinheit so aus:  
 \begin{figure}[H]
 \begin{tikzpicture}[
@@ -198,21 +240,23 @@ Eine mögliche Struktur der Verschachtelung von Dokumentationseinheiten sieht ohn
 \foreach \value in {1,...,2}
   \draw[->] (c3.195) |- (c3\value.west);
 \end{tikzpicture}
+\caption{Beispielhafte Struktur der HTML-Elemente}
+\label{fig:HTML-Elemente}
 \end{figure}
 \subsubsection{BeautifulSoup4}
 
-Für das Parsen der HTML-Einheiten habe ich BeautifulSoup4 verwendet, da es ein hierfür geschaffenes, mächtiges Werkzeug darstellt und gleichzeitig auf Python basiert. Somit konnten Synergieeffekte genutzt werden und ich mich weiter in Python einarbeiten während ich dieses Skript schrieb. Zudem bietet der Einsatz von BeautifulSoup viele Vorteile gegenüber dem Parsen mittels regulären Ausdrücken. In erster Linie ist der Code lesbarer und verständlicher, sowohl für den Programmierer selbst als auch für Dritte. Außerdem gibt es eine ausführliche Dokumentation inklusive zahlreicher Beispiele und auch die Community hinter BeautifulSoup ist groß genug, um auf Internetportalen wie \href{http://www.stackoverflow.com}{Stackoverflow} Unterstützung erhalten zu können.  Die Implementierung selbst wird im nachfolgenden Kapitel erklärt. 
+Für das Parsen der HTML-Einheiten wurde BeautifulSoup4 verwendet, da es ein hierfür geschaffenes, mächtiges Werkzeug darstellt und gleichzeitig auf Python basiert. Somit konnten Synergieeffekte genutzt werden und sich während des Schreibens des Skriptes weiter in Python eingearbeitet werden. Zudem bietet der Einsatz von BeautifulSoup viele Vorteile gegenüber dem Parsen mittels regulären Ausdrücken. In erster Linie ist der Code lesbarer und verständlicher, sowohl für den Entwickler selbst als auch für Dritte. Außerdem gibt es eine ausführliche Dokumentation inklusive zahlreicher Beispiele und auch die Community hinter BeautifulSoup ist groß genug, um auf Internetportalen wie \href{http://www.stackoverflow.com}{Stackoverflow}\footnote{www.stackoverflow.com} Unterstützung erhalten zu können.  Die Implementierung selbst wird im nachfolgenden Kapitel erklärt. 
 
 \subsubsection{Implementierung}
 
-Bevor die nötigen Schritte mit BeautifulSoup4 durchgeführt werden konnten, war es nötig, die vollständig Dokumentation herunterzuladen und die notwendigen Dateien ausfindig zu machen. Unter den Link \url{https://docs.python.org/3.4/archives/python-3.4.1-docs-html.zip} ist die gesamte Dokumentation in dem HTML-Format verfügbar. Interessant sind jedoch ledlich die Dateien in dem Unterordner library innerhalb dieser zip-Datei,  da Tutorials und zusätzliche Informationen wie bei der Studie von Maalej und Robillard \cite{MaalejRobillard} ebenso ausgeschlossen wurden wie Inhaltsverzeichnisse und die FAQ .  \newline
+Bevor die nötigen Schritte mit BeautifulSoup4 durchgeführt werden konnten, war es nötig, die vollständig Dokumentation herunterzuladen und die notwendigen Dateien ausfindig zu machen. Unter dem Link \url{https://docs.python.org/3.4/archives/python-3.4.1-docs-html.zip} ist die gesamte Dokumentation in einem HTML-Format verfügbar. Interessant sind jedoch ledlich die Dateien in dem Unterordner "`library"' innerhalb dieser zip-Datei,  da Tutorials, Inhaltsverzeichnisse, FAQ und zusätzliche Informationen analog der Studie von Maalej und Robillard \cite{MaalejRobillard} ausgeschlossen wurden. \newline
 
 Der Extrahierer durchsucht anfangs alle Dateien in dem Unterordner library und fügt den vollständigen Pfad dieser in eine Liste:
 \lstinputlisting[language=Python, firstline=91, lastline=92]{code/extractor.py}
 
 Aus jeder Datei wird dann ein BeautifulSoup-Objekt gemacht, welches die verschachtelte, innere HTML-Datenstruktur repräsentiert:
 \lstinputlisting[language=Python, firstline=94, lastline=95]{code/extractor.py}
-Dieser Schritt ist nötig, um im Anschluss mittels BeautifulSoup-API die einzelnen Dokumentationseinheiten extrahieren zu können. Hierfür wird der Befehl find-all genutzt. Um eine einfache und fehlerfreie Bedienung zu ermöglichen, wurde eine Funktion geschrieben, die das DOM-Element und die Attribute entgegen nimmt:
+Dieser Schritt ist nötig, um im Anschluss mittels BeautifulSoup-API die einzelnen Dokumentationseinheiten extrahieren zu können. Hierfür wird der Befehl find-all genutzt. Um eine einfache und fehlerfreie Bedienung zu ermöglichen, wurde eine Funktion geschrieben, die das DOM\footnote{Document Object Model}-Element samt Attribute entgegen nimmt:
 \lstinputlisting[language=Python, firstline=84, lastline=86]{code/extractor.py}
 Der Aufruf zum parsen alle Elemente der Form 
 \begin{lstlisting} 
@@ -225,7 +269,7 @@ und abspeichern dieser in einer Liste funktioniert dann wie folgt:
 Dieser Schritt wurde analog für alle zehn verschiedenen Elementsytpen ausgeführt. 
 Um später Aussagen über die Lage der Texte innerhalb einer Einheit zu erhalten, wurden zudem die Startoffsets der Elemente berechnet und später zusammen mit dem Endoffsets in der Datenbank abgelegt, wobei sich das Endoffset jeweils sehr leicht errechnen lässt: 
 $ Ende = Start + Laenge$ . \\
-Für die Bestimmung der Startoffsets wurden die einzelnen Elemente in ihrer Datei mittels find aus BeautifulSoup gesucht und die Rückgabe, also der Index an der Stelle des Auftretens, gespeichert. Auch hierfür gibt es eine eigene Funktion, um den Aufruf lesbarer zu gestalten: \\ \\
+Für die Bestimmung der Startoffsets wurden die einzelnen Elemente in ihrer Datei mittels "`find"' aus BeautifulSoup gesucht und die Rückgabe, also der Index an der Stelle des Auftretens, gespeichert. Auch hierfür gibt es eine eigene Funktion, um den Aufruf lesbarer zu gestalten: \\ \\
 \begin{minipage}{\textwidth}
  \lstinputlisting[language=Python, firstline=28, lastline=36]{code/extractor.py}
 \end{minipage}
@@ -236,9 +280,10 @@ Wegen der bereits erwähnten, verschachelten HTML-Struktur der Elemente musste ei
   \lstinputlisting[language=Python, firstline=138, lastline=138]{code/extractor.py}
 Da so in vielen Fällen, z.B. bei der Aufzählung von Methoden und Attributen,  seitenweise Platzhalter entstanden wären, wurden im Anschluss direkt aufeinander folgende Platzhalter wieder zu einem Platzhalter zusammengefasst:
   \lstinputlisting[language=Python, firstline=39, lastline=44]{code/extractor.py}
-Die final zur Verfügung stehenden Informationen konnten dann in der Datenbank abgespeichert werden.  
+Die final zur Verfügung stehenden Informationen wurden dann in einer Datenbank abgespeichert.
 
 \subsection{Typisierungswebsite}
+% Die Typisierungwebsite stellt den Zugang für alle Gutachtern zu den Dokumentationseinheiten dar.
 \subsubsection{Anforderungen}
 Damit die Einheiten von den Studenten typisiert werden konnten, musste ein Werkzeug geschaffen werden, welches mindestens folgende Eigenschaften aufweist:
 \begin{itemize}
@@ -252,16 +297,108 @@ Damit die Einheiten von den Studenten typisiert werden konnten, musste ein Werkz
 \end{itemize}
 
 \subsubsection{Umsetzung}
-Für die Umsetzung der genannten Anforderungen wurde das Webframework "`Django"' verwendet - da es auf Python basiert und eine große Gemeinschaft gibt, die im Zweifel bei Herausforderungen unterstützten können. 
-
-\subsubsection{Ergebnis}
-\begin{figure}[h!] 
+Für die Umsetzung der genannten Anforderungen wurde das Webframework "`Django"' verwendet - da es auf "`Python"' basiert und es eine große Gemeinschaft gibt, die im Zweifel bei Herausforderungen unterstützten können. Für die Beantwortung der anfänglichen Fragen wurde das in Berlin stattfindende Meetup der Django User Group\footnote{http://www.meetup.com/django-user-group-berlin/} genutzt. Darüber hinaus gibt es eine Vielzahl von Möglichkeiten, mit anderen Django-Entwicklern zu kommunizieren, z.B. über die Mailingliste oder den IRC-Chat (deutsch / weltweit).
+\paragraph{Login} $\;$ \\
+Der Login soll allen Gutachtern ermöglichen, sich mit einem individuellen Account anzumelden, um geschützten Zugriff auf die Dokumentationseinheiten und die persönliche Statistik zu erhalten. Weiterhin sollen Administratoren sich über diese Maske anmelden können, um Zugriff auf Administratorfunktionalitäten zu erhalten. \newline
+Der Login-Bereich wurde mit Hilfe des bereits in Django vorhandenen Authentifizierungsmoduls gefertigt. Angepasst wurde das Design an das der restlichen Website. Da eine Funktion für das Zurücksetzten des Passwortes nicht benötigt wurde, wurde diese auch nicht implementiert. 
+\begin{figure}[H] 
 \centering
-\includegraphics[width=1.1\textwidth]{pictures/1898.png}
-\caption[Anzeige einer Dokumentationseinheit mit Markierungen]{Anzeige einer Dokumentationseinheit mit Markierungen}
-\label{fig:1898}
+\includegraphics[width=1.0\textwidth]{pictures/login.png}
+\caption[Login-Bereich]{Login-Bereich}
+\label{fig:Login}
 \end{figure}
+\paragraph{Einheit typisieren} $\;$ \\
+Nach dem Login wird der Gutachter direkt zu der nächsten zu typisierenden Einheit weitergeleitet. 
+Auf dieser werden neben der Navigation noch die Identifikationsnummer der Dokumentationseinheit, der Text der Einheit und Steuerungselemente angezeigt. Die Steuerungselemente sind im Einzelnen: 
+\begin{enumerate}
+\item Save - speichert die aktuelle Markierung
+\item Delete All - löscht alle gesetzten Markierungen des Gutachter bei dieser Einheit
+\item Show Parent - zeigt das direkte Vaterelement der Dokumentationseinheit an, siehe Abbildung \ref{fig:HTML-Elemente}
+\item Show File - zeigt die gesamte HTML-Datei, aus welcher diese Dokumentationseinheit stammt, im Original an
+\end{enumerate}
+Sobald Text von dieser Einheit mit dem Mauscursor markiert wurde, erscheint ein Fenster für die Auswahl eines Wissenstypes. 
+Die Position der Markierung wird dann zusammen mit dem Wissenstyp mit Hilfe von Javascript zwischengespeichert und dann beim Klicken auf "`save"' über Ajax als POST-request an den Controller\footnote{entsprechend des "`Model View Controller"'-Musters} (in Django ist es die views.py) gesendet. Nach dem Speichern wird dann die nächste Einheit angezeigt. 
+\begin{figure}[H] 
+\centering
+\includegraphics[width=1.0\textwidth]{pictures/marking.png}
+\caption[Einheit typisieren]{Einheit typisieren}
+\end{figure}
+Die gesetzten Markierungen werden mit JavaScript farblich dargestellt. Bei Doppelmarkierungen wird die Farbe angezeigt, die zuletzt für die Auswahl gewählt wurde. Außerdem erscheint unterhalb der Einheit eine Auflistung aller Markierungen. Sobald ein Element aus dieser Auflistung mit Mouse-Over\footnote{Bewegung des Maus-Cursor auf ein Element ohne es anzuklicken} berührt wird, wird der damit verbundene, markierte Text rot und gestrichelt umrandet. Ein Klick auf dieses Element bewirkt das Löschen der angezeiten Markierung. 
+\begin{figure}[H] 
+\centering
+\includegraphics[width=1.0\textwidth]{pictures/single-delete.png}
+\caption[Einheit typisieren (2)]{Einheit typisieren (2)}
+\end{figure}
+\paragraph{Noch nicht typisierte Einheiten} $\;$ \\
+Für den Fall, dass der Gutachter die zur Zeit nächste Einheit noch nicht bewerten will, weil ihm diese für den Augenblick zu lang erscheint oder ihm gerade zu schwierig ist, kann er sich alle Einheiten auflisten, die noch typisiert werden müssen und davon eine auswählen, die er als nächstes bearbeiten möchte. Dabei wird dem Gutachter die Identifikationsnummer, die Datei aus welcher die Einheit kommt und die Kategorie angezeigt. Der Klick auf eine Zeile führt dann zu der Maske, in welcher die Einheit typisiert werden kann.
+\begin{figure}[H] 
+\centering
+\includegraphics[width=1.0\textwidth]{pictures/list_of_next.png}
+\caption[Noch nicht typisierte Einheiten]{Noch nicht typisierte Einheiten}
+\end{figure}
+
+\paragraph{Typisierte Einheiten} $\;$ \\
+Zudem kann sich der Gutachter alle Einheiten auflisten lassen, die er bereits typisiert hat. Dabei werden alle Einheiten gelb hervorgehoben, die a) zu mehr als 25\% nicht markiert sind und b) mindestens 100 Zeichen nicht markiert sind. Dies wurde so eingeführt, damit sehr kurze Einheiten, bei denen die nicht zu typisierende Überschrift fast genauso lang ist wie der eigentliche Text, nicht fälschlich hervorgehoben werden. Bei den Textlängen wurden außerdem die eingeführen Platzhalter heraus gerechnet, da auch diese nicht markiert werden sollten.
+So hat der Gutachter eine schnelle Übersicht über Einheiten, die er (in der Regel versehentlich) unvollständig abgespeichert hat. 
+Weiterhin wird für jede Einheit der Zeitstempel der letzten Speicherung ausgegeben und bei Hervorhebung noch die Angabe in Prozent, wie viel des Textes nicht markiert ist. 
+\begin{figure}[H] 
+\centering
+\includegraphics[width=1.0\textwidth]{pictures/einheiten-gespeichert.png}
+\caption[Abgespeicherte Einheiten]{Abgespeicherte Einheiten}
+\end{figure}
+\paragraph{Persönliche Statistik} $\;$ \\
+In der Statistik  (kurz: Stats) werdem dem angemeldeten Benutzer folgende Werte angezeigt: 
+\begin{enumerate}
+\item Insgesamt abgespeicherte Einheiten
+\item noch zu typisierende Einheiten (noch nicht abgespeichert)
+\item Insgesamt zugewiesene Einheiten
+\item Übereinstimmung der Markierungen mit den anderen Gutachtern (nur für die Gutachter der Hauptstichprobe)
+\item Angabe der Anzahl der Einheiten, auf die sich die Berechnung der Übereinstimmung stützt
+\end{enumerate}
+Die 5. Angabe ist deswegen wichtig, da die Berechnung bei den schnellen Gutachtern sich auf weniger Einheiten stützt als schon markiert wurden. 
+Das ist der Tatsache geschuldet, dass die Berechnung der Übereinstimmung pro Einheit erst erfolgen kann, wenn zwei Gutachter diese abgespeichert haben.\\
+Diese Angaben werden einmal im Gesamten gemacht und dann anhand der letzten Speicherungsdaten für die letzten 14, 8, 4 und 2 Tage. Das hat den Vorteil, dass jeder Student schnell seinen eigenen Fortschritt für eine kurze Vergangenheit beobachten kann und dann auch ggf. erkennen kann, ob die Übereinstimmung mit anderen Gutachtern eher zu- oder abnimmt. \\ 
+\begin{figure}[H] 
+\centering
+\includegraphics[width=1.0\textwidth]{pictures/personal_stats.png}
+\caption[Persönliche Statistik]{Persönliche Statistik}
+\end{figure}
+
+\paragraph{Kodierhandbuch} $\;$ \\
+Aus der Websitenavigation heraus kann direkt das Kodierhandbuch in einem neuen Tab geöffnet werden. Der Link verweist direkt auf die Website, die dieses enthält. 
+Dieser direkte Link soll dazu führen, dass nochmaliges nachlesen möglichst einfach gemacht wird und die Gutachter nicht erst noch nach dem Link suchen müssen. 
+Der Link ist in der Navigation grau markiert, um zu verdeutlichen, dass es sich dabei um eine externe URL handelt.
+\paragraph{Bugtracker} $\;$ \\
+Ebenso kann der Bugtracker (gehosted bei bitbucket.org) schnell aus der Navigation heraus erreicht werden. Die Gutachter wurden angehalten, Schwierigkeiten in der Bedienung oder auftretende Fehler direkt dort zu melden, so dass alle Aufgaben bezüglich Verbesserung der Website zentral verwaltet werden können. Gegenüber der üblichen e-Mail-Kommunikation hat dies den Vorteil, dass Gutachter erkennen können, wenn ein Fehler bereits gemeldet wurde, so dass Dubletten vermieden werden können. Außerdem können Gutachter noch zusätzliche Informationen zu den einzelnen Aufgaben liefern und für die Erledigung einer Aufgabe stimmen. \\
+Weiterhin kann der interessierte Gutachter sich hierüber den gesamten Quelltext der Website ansehen und so Ursache und Lösung der einzelnen Thematiken nachvollziehen, denn Lösungsmeldungen sind in der Regel mit der lösenden Änderung im Quelltext verknüpft. 
+\begin{figure}[H] 
+\centering
+\includegraphics[width=1.0\textwidth]{pictures/bitbucket.png}
+\caption[Bugtracker]{Bugtracker}
+\end{figure}
+
+\paragraph{Allgemeine Statistik} $\;$ \\
+Die allgemeine Statistik ist eine reine Administratorfunktionalität und zeigt im wesentlichen die persönliche Statistik für alle Gutachter übersichtlich an. Die Übereinstimmung unter den Gutachtern der Goldstichprobe wurde nicht berechnet und deswegen auch nicht angezeigt. Außerdem weist diese Statistik noch die insgesamt zugewiesenen, gespeicherten (auch ohne Markierungen), markierten und nicht gespeicherten Einheiten an. Dabei werden Einheiten von Test- und Administratoraccounts mitberechnet. Da die einzelnen Gutachter hier mit Vornamen aufgelistet werden, wird auf die Einbindung eines Screenshots aus Datenschutzgründen verzichtet. 
+\paragraph{Zufällige Einheit} $\;$ \\
+Der "`Random Unit"'-Button ist ebenfalls eine reine Administratorfunktionalität und dient lediglich dem Testen. Grund für die Einführung dieses Buttons war, dass bei Neuentwicklungen immer wieder anhand bisher unmarkierter Einheiten getestet werden sollte und für die Zuweisung jedes mal die Terminalumgebung genutzt werden musste. \\
+Im Wesentlichen ist hinter dieser Funktion ein Bereich eingetragen, aus dem die Identifikationsnummern für die Dokumentationseinheiten stammen können. Aus diesem Bereich wird dann zufällig eine Nummer ausgewählt und als Einheit dem angemeldeten Benutzer zugewiesen. Dabei wurde keine Rücksicht darauf genommen, ob eine Einheit bereits markiert wurde oder nicht. Sollte eine Einheit erneut zugewiesen werden, die bereits dem Nutzer zugewiesen ist, taucht diese doppelt in den Listenansichten auf, wird aber trotzdem nur einmal bewertet. 
+Da Markierungen von Administratoren sowieso nicht in der Auswertung berücksichtigt werden, ist dies unproblematisch. 
+\paragraph{Logout} $\;$ \\
+Die Logout-Funktionalität ermöglicht allen Gutachtern das sichere Abmelden von der Website. Umgesetzt wurde dieses analog zu der Login-Funktion mit dem in Django verfügbaren Authentifizierungsmodul. Nach dem Logout wird der Benutzer wieder auf die Login-Seite umgeleitet. Im ausgeloggten Zustand kann nur der Login-Bereich besucht werden, alle anderen Funktionalitäten (mit Ausnahme der externen Websites) sind nicht erreichbar. 
+\paragraph{Datenbankmodell} $\;$ \\
+% TODO !  Für die Zuweisung und Markierung von Einheiten (inkl. Knowledgetype):
+% Für das Speichern von Zugriffen:
+
+\paragraph{Hosting} $\;$ \\
+% TODO ! 
+
 \subsection{Gamification}
-
-
-
+Um die Motivation der Gutachter zu erhöhen, wurden spielerische Elemente eingesetzt, auch Gamification genannt. 
+Zum einen hatte jeder der Gutachter Zugriff auf seine persönliche Statistik und erhielt somit einen detailierten Fortschrittsbalken. Zum anderen wurden alle 14 Tage Auszeichnungen in Form von Gutscheinen für einen großen deutschen Versandhandel vergeben. Da die Typisierung aller Einheiten in etwa 6 Wochen gedauert hat, gab es 3 Termine für Auszeichnungen.
+Der 14-tägige Rhythmus wurde allen Teilnehmern vorab bekannt geben. Bei jeder Auszeichnung wurden auch die nicht ausgezeichneten Teilnehmer über den Grund und die Höhe des Gutscheins informiert.  Dabei wurden unterschiedliche Fortschritte prämiert: 
+\begin{enumerate}
+\item Nach den ersten zwei Wochen wurde lediglich der fleißigste Teilnehmer mit einen Gutschein belohnt, da die qualitative Auswertung noch nicht implementiert war.
+\item Zwei Wochen später wurde sowohl der fleißigste Teilnehmer als auch der Teilnehmer mit der besten Übereinstimmung zu anderen Teilnehmern prämiert.
+\item Am Ende erhielten die beiden Teilnehmer mit den besten Übereinstimmungen jeweils einen Gutschein. Da alle Einheiten bewertet wurden, ergab eine Prämierung des "`fleißigsten Teilnehmers"' keinen Sinn mehr.
+\end{enumerate}
+Insgesamt wurden Gutscheine im Wert von 30 EUR ausgezahlt.

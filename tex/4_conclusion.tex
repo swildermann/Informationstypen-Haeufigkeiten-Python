@@ -1,3 +1,42 @@
+
 \section{Fazit /  Ergebnisse}
 \subsection{Auswertung der Typisierungen}
+\subsubsection{Konfusionen}
+Bei der Überprüfung der Verträglichkeit zweier Markierungen gibt es immer wieder den Fall, dass Gutachter A den Typ X, Gutachter B hingegen den Typ Y für sinnvoller hält. Daher wurde überprüft, ob es Typen gibt, die besonders häufig mit einander verglichen werden. Mit Hilfe der folgenden SQL-Anweisung wurden alle aufgetretenen Konfusionen inklusive Häufigkeit des Auftretens ausgegeben: 
+\begin{lstlisting}[language=SQL] 
+SELECT atype_id, btype_id, COUNT(*) 
+FROM extractor_confusions 
+GROUP BY atype_id, btype_id 
+ORDER BY COUNT(*) DESC;
+\end{lstlisting} 
+Wenn jetzt noch die Reihenfolge ignoriert wird, also die Ergbenisse der Tupel (X,Y) mit denen von (Y,X) addiert werden, erhält man folgende Konfusionen, absteigend sortiert nach Häufigkeiten des Auftretens. 
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|c|}\hline
+  Nr. & Typ A & Typ B & Anzahl \\ \hline \hline
+  1 &Functionality and Behaviour      &    Structure and Relationships    &  439 \\ \hline
+  2 &Functionality and Behaviour      &    Purpose and Rationale            &  271 \\ \hline
+  3 & Functionality and Behaviour      &    Concepts                                &  243 \\ \hline
+  4 &Functionality and Behaviour      &    Directives                               &  205 \\ \hline
+  5 &Functionality and Behaviour      &    Non-Information                     &  177 \\ \hline
+  6 & Functionality and Behaviour      &    Qual. Attributes, Intern. Aspects    &  176 \\ \hline
+  7 & Functionality and Behaviour      &    Environment                           &  135 \\ \hline
+  8 & Functionality and Behaviour      &    Patterns                                  &  107 \\ \hline
+  9 &  Concepts                                  &    Structure and Relationships     &  105 \\ \hline
+  10 & Purpose and Rationale               &    Structure and Relationships   &  90 \\ \hline
+  11 & Patterns                                     &    Code Examples                      &  86 \\ \hline
+  12 & Functionality and Behaviour       &    Control-Flow                          &  83 \\ \hline
+  13 & Concepts     								&   Control-Flow 							& 79 \\ \hline
+  14 &  Qual. Attributes, Intern. Aspects & Structure and Relationships & 70 \\ \hline
+  15 & Purpose and Rationale 				& Patterns 									 & 67 \\ \hline
+  16 & Structure and Relationships     & Patterns 										& 65 \\ \hline
+  17 & Functionality and Behavior 			&  Code Examples 						& 63 \\ \hline
+  18 &  Qual. Attributes, Intern. Aspects & Environment 					 & 60 \\ \hline
+  19 & Concepts 									&  Qual. Attributes, Intern. Aspects & 59 \\ \hline
+   20 & Directives 									& Structure and Relationships & 53 \\ \hline
+   21 & Concepts 									& Patterns 								& 51 \\ \hline
+ \end{tabular}
+\caption[Konfusionshäufigkeiten]{Konfusionshäufigkeiten}
+\end{figure} 
+Aufgelistet werden die Konfusionen hier, sobald die untere Schranke von 50 Vorkommen erreicht wird. Um sich später leichter auf einzelne Konfusionen beziehen zu können, wurden diese durchnummeriert.
 \subsection{Herausforderungen}
