@@ -1,6 +1,17 @@
 
 \section{Fazit /  Ergebnisse}
 \subsection{Auswertung der Typisierungen}
+\subsubsection{Übereinstimmung zwischen den Gutachtern}
+Die Übereinstimmung zwischen den Gutachtern kann analog zu dem Originalartikel \cite{MaalejRobillard} so gemessen werden:
+Für jede Einheit wird für jeden Wissenstyp geprüft, ob die Gutachter mindstens eine Markierung dieser Art getätigt haben. 
+Eine Übereinstimmung liegt dann vor, wenn bei beide Gutachter sich einig sind, ob dieser Wissenstyp (mindestens einmal) vorkommt oder nicht. Da es insgesamt 12 Wissenstypen gibt, entspricht jede Übereinstimmung in einem Wissenstyp $\frac{1}{12} = 8,33\%$ . 
+\paragraph{Beispiel}
+Eine Einheit wird von beiden Gutachtern mit genau einem Wissenstypen markiert. Gutachter A vergibt den Wissenstyp 1 und Gutachter B vergibt den Wissenstyp 2. Somit sind sich Gutachter A und B darüber einig, dass die anderen 10 Wissenstypen (3 bis 12) nicht vorhanden sind. Dies ergibt eine Übereinstimmung von $\frac{10}{12} = 83,33 \% $. 
+\paragraph{Ergebnis}
+\paragraph{Vergleich zum Originalartikel}
+\paragraph{Detailierte Auswertung}
+
+
 \subsubsection{Konfusionen}
 Bei der Überprüfung der Verträglichkeit zweier Markierungen gibt es immer wieder den Fall, dass Gutachter A den Typ X, Gutachter B hingegen den Typ Y für sinnvoller hält. Daher wurde überprüft, ob es Typen gibt, die besonders häufig mit einander verglichen werden. Mit Hilfe der folgenden SQL-Anweisung wurden alle aufgetretenen Konfusionen inklusive Häufigkeit des Auftretens ausgegeben: 
 \begin{lstlisting}[language=SQL] 
@@ -14,29 +25,68 @@ Wenn jetzt noch die Reihenfolge ignoriert wird, also die Ergbenisse der Tupel (X
 \centering
 \begin{tabular}{|c|c|c|c|}\hline
   Nr. & Typ A & Typ B & Anzahl \\ \hline \hline
-  1 &Functionality and Behaviour      &    Structure and Relationships    &  439 \\ \hline
-  2 &Functionality and Behaviour      &    Purpose and Rationale            &  271 \\ \hline
-  3 & Functionality and Behaviour      &    Concepts                                &  243 \\ \hline
-  4 &Functionality and Behaviour      &    Directives                               &  205 \\ \hline
-  5 &Functionality and Behaviour      &    Non-Information                     &  177 \\ \hline
-  6 & Functionality and Behaviour      &    Qual. Attributes, Intern. Aspects    &  176 \\ \hline
-  7 & Functionality and Behaviour      &    Environment                           &  135 \\ \hline
-  8 & Functionality and Behaviour      &    Patterns                                  &  107 \\ \hline
-  9 &  Concepts                                  &    Structure and Relationships     &  105 \\ \hline
-  10 & Purpose and Rationale               &    Structure and Relationships   &  90 \\ \hline
-  11 & Patterns                                     &    Code Examples                      &  86 \\ \hline
-  12 & Functionality and Behaviour       &    Control-Flow                          &  83 \\ \hline
-  13 & Concepts     								&   Control-Flow 							& 79 \\ \hline
-  14 &  Qual. Attributes, Intern. Aspects & Structure and Relationships & 70 \\ \hline
-  15 & Purpose and Rationale 				& Patterns 									 & 67 \\ \hline
-  16 & Structure and Relationships     & Patterns 										& 65 \\ \hline
-  17 & Functionality and Behavior 			&  Code Examples 						& 63 \\ \hline
-  18 &  Qual. Attributes, Intern. Aspects & Environment 					 & 60 \\ \hline
-  19 & Concepts 									&  Qual. Attributes, Intern. Aspects & 59 \\ \hline
-   20 & Directives 									& Structure and Relationships & 53 \\ \hline
-   21 & Concepts 									& Patterns 								& 51 \\ \hline
+  1 &Functionality and Behaviour      &    Structure and Relationships    &  324 \\ \hline
+  2 &Functionality and Behaviour      &    Purpose and Rationale            &  232 \\ \hline
+  3 & Functionality and Behaviour      &    Concepts                                &  209 \\ \hline
+  4 &Functionality and Behaviour      &    Directives                               &  161 \\ \hline
+  5 &Functionality and Behaviour      &    Non-Information                     &  147 \\ \hline
+  6 & Functionality and Behaviour      &    Qual. Attributes, Intern. Aspects    &  124 \\ \hline
+  7 & Functionality and Behaviour      &    Environment                           &  110 \\ \hline
+   8 &  Concepts                                  &    Structure and Relationships     &  87 \\ \hline
+   9 & Purpose and Rationale               &    Structure and Relationships   &  83 \\ \hline
+  10 & Functionality and Behaviour      &    Patterns                                  &  78 \\ \hline
+  11 & Patterns                                     &    Code Examples                      &  72 \\ \hline
+  12 & Functionality and Behaviour       &    Control-Flow                          &  65 \\ \hline
+  13 & Concepts     								&   Purpose and Rationale      		& 59 \\ \hline
+   14 & Structure and Relationships     & Patterns 										& 55 \\ \hline
+  15 & Purpose and Rationale 				& Patterns 									 & 54 \\ \hline
+  16 &  Qual. Attributes, Intern. Aspects & Structure and Relationships & 51 \\ \hline
+  17 & Concepts 									&  Qual. Attributes, Intern. Aspects & 51 \\ \hline
  \end{tabular}
 \caption[Konfusionshäufigkeiten]{Konfusionshäufigkeiten}
 \end{figure} 
 Aufgelistet werden die Konfusionen hier, sobald die untere Schranke von 50 Vorkommen erreicht wird. Um sich später leichter auf einzelne Konfusionen beziehen zu können, wurden diese durchnummeriert.
+Für jedes dieser Paare wurde einmal der Typ angegeben, welcher erfahrungsgemäß häufiger der richtige sein müsste. Dabei wird berücksichtigt, dass es besser sein sollte, in einem langen Segment erst den allgemeineneren und danach den spezielleren Fall zu priorisieren (entsprechend des Kodier-Handbuchs). 
+Dies ergibt die ersten beiden Spalten der Tabelle in Abbildung \ref{tabelle:Abschaetzung_Konfusion}.
+Anschließend werden von jedem dieser Konfusionspaare zufällig 10 Stück aus der Stichprobe gezogen und exemplarisch begutachtet. 
+Für jeden dieser Fälle muss dann entschieden werden, welche Kodierung angemessen ist. Dabei gibt es drei Fälle: 
+\begin{itemize}
+\item Typ X ist angemessener
+\item Typ Y ist angemessener
+\item Beide Typen sind gleich (gut oder schlecht) angemessen
+\end{itemize}
+Für die gesamte Stichprobe bekommt dann ein Typ X Vorrang, wenn Typ X mindestens sechs mal und TYP Y höchstens zwei mal besser ist und andersherum. Wenn das Ergebnis aus dieser Betrachtung nicht mit der Ersteinschätzung übereinstimmt, wird es separat disktutiert.  In Bezug auf die gesamte Stichprobe wirken sich diese Vorrangsregeln nur wenig aus, helfen aber dennoch weiter, um aus den Typisierungen einer Einheit von zwei Gutachtern eine endgültige zu erschaffen.
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}\hline
+Nr. & Erfahrungsgemäß  &  Zustimmung & Widerspruch & Neutral \\
+      & besserer Typ 		  &  &  &  \\  \hline \hline
+1  & Structure and Relationships  & 5/10 & 2/10 & 3/10\\ \hline
+2 & Functionality and Behaviour  & 7/10 & 2/10& 1/10\\ \hline
+3 & Concepts 					 & 4/10 & 4/10  & 2/10 \\ \hline
+4 & 	Directives	 				  & 6/10 & 2/10 & 2/10\ \\ \hline
+5&	Functionality and Behaviour  & 7/10 & 2/10  & 1/10\\ \hline
+6&	Qual. Attributes, Intern. Aspects	 & 5/10 & 4/10 & 1/10 \\ \hline
+7&	Environment	 & 1/10 & 5/10 & 3/10 \\ \hline
+8&	Structure and Relationships	 & 9/10 & 1/10 & 0/10\\ \hline
+9&	Structure and Relationships		 & 5/10 & 4/10 & 1/10\\ \hline
+10&	Patterns	 &8/10 & 2/10& 0/10 \\ \hline
+11&	 Code Examples    	 & 9/10 & 0/10& 1/10 \\ \hline
+12&	 Control-Flow 	& 8/10 & 2/10&0/10  \\ \hline
+13&	 Concepts	 & 8/10 & 1/10 & 1/10 \\ \hline
+14&	Patterns	& 8/10 & 2/10 & 0/10 \\ \hline
+15&	Purpose and Rationale 	 & 8/10 & 2/10 & 0/10\\ \hline
+16&	Qual. Attributes, Intern. Aspects	& 7/10 & 2/10 & 1/10 \\ \hline
+17&	Concepts	 & 0/10 & 0/10  & \\ \hline
+ \end{tabular}
+ \caption{Abschätzung der besseren Typen bei Konfusionen}
+ \label{tabelle:Abschaetzung_Konfusion}
+\end{figure}
+Für die Stichprobenziehung von zehn Stück pro Paar wurde eine Django-Funktion geschrieben, welche die betroffenen Benutzer  und die ID der zehn Dokumentationseinheiten unter Angabe eines Konfusionspaares ausgibt. In dem noch zusätzlich die Option "`--count"' übergeben wird, wird die Häufigkeit des angegebenen Konfusionspaares ausgegeben und keine Stichprobenziehung durchgeführt.
+Aufruf und (mögliches) Ergebnis dieser Funktion sehen beispielhaft für Nummer 1 (Wissenstypen 1 und 7) wie folgt aus: 
+\begin{figure}[H] 
+\centering
+\includegraphics[width=1.0\textwidth]{pictures/terminal-confusion-sample.png}
+\caption[Funktion für die Konfusions-Stichprobe]{Funktion für die Konfusions-Stichprobe}
+\end{figure}
 \subsection{Herausforderungen}
