@@ -1,0 +1,47 @@
+\section{Grundlagen}
+\subsection{Artikel von Maalej und Robillard}
+Walid Maalej and Martin P. Robillard veröffentlichten  im Septemer 2013 den Artikel "`Patterns of Knowledge in API Reference Documentation"' \cite{MaalejRobillard} und besprechen darin zum Einen eine Taxonomie von in Dokumentationen vorkommenden Wissenstypen und zum Anderen die durchgeführte Analyse der Programmiersprachendokumentationen von Java SDK 6 and .NET 4.0. Zum Finden dieser Taxonomie stellten Sie zu jedem neu gefundenen Wissenstyp eine neue Frage auf und erhielten so über 100 verschiedene Fragestellungen. Daraufhin wurden ähnliche Fragen zusammengefasst und schließlich die 12 in Abbildung~\ref{fig:Wissenstypen_original} gezeigten verschiedenen Wissenstypen ausfindig gemacht.  Auf der Website zu dieser Studie wurde dann zu dem der "`Coding Guide"' \cite{codingguide_orig} veröffentlicht, welcher für jeden Typ einen Fragenkatalog, Anmerkungen und Beispiele angibt. 
+\begin{figure}[h!] 
+\centering
+\includegraphics[width=1.1\textwidth]{pictures/knowledgetypes_original.png}
+\caption[Wissenstypen in \cite{MaalejRobillard}]{Wissenstypen in \cite{MaalejRobillard}}
+\label{fig:Wissenstypen_original}
+\end{figure}
+Die Vorgehensweise sah vor, dass die Gutachter für jeden Wissenstyp bestimmen, ob dieser in der vorgelegten Einheit vorkommt oder nicht. Hierzu konnten für jede Einheit die verschiedenen Wissenstypen mit Hilfe von "`CheckBoxes"' angekreuzt werden. 
+Jede Einheit wurde von 2 Gutachtern unabhängig bewertet. Die Einheiten wurden in drei verschiedene Kategorieren aufgeteilt: 
+\begin{enumerate}
+\item Module [engl. modules] (entsprechen "`packages"' in Java und "`assemblies"' in .NET)
+\item Typen [engl. types] (vor allem Klassen und Schnittstellen)
+\item Mitglieder [engl. members] (Felder und Methoden)
+\end{enumerate}
+Die Einheiten der Kategorie "`Module"' wurden auf Grund der geringen Anzahl, der Unterschiedlichkeit (vor allem bzgl. der Länge) in Java und .NET und des geringen Informatinosgehalts bei .NET dann aber nicht analysiert. Damit beschränkt sich die Original-Studie also auf Typen und Mitglieder. Die Stichprobe über die verbleibenden vier Kategorien (zwei je Programmiersprache) wurden mit 95\% Konfidenzintervall und 2,5\% Fehlerspanne gezogen, so dass insgesammt 5.575 Einheiten (431.136 Wörter) zufällig ausgewählt und auf 17 Gutachter verteilt wurden. \\
+So sind insgesamt $5.574 * 2 = 11,148  $ Bewertungen vorgenommen worden. Diese wurden dann im Hinblick auf die Übereinstimmung unter den Gutachtern und bezüglich der Wissenstypen analysiert. Ebenso wurden Auswertungen über die Fälle getroffen, in denen sich zwei Gutachter uneinig waren. Zudem konnten so Aussagen darüber getroffen werden, welche Wissenstypen bei welcher Einheitskategorie wie häufig vorkommen und ob bestimmte Wissenstypen mit einander korrelieren, also  ob z.B. der Typ "'Structure"' häufig zusammen mit "`Functionality and Behaviour"' auftritt. Ebenso wurde analysiert, ob und wie ein Zusammenhang zwischen der Anzahl der gefundenen Wissenstypen und der Länge der Einheiten besteht. \\
+Besonders die vorgestellten Wissenstypen und das Kodier-Handbuch [Coding Guide] waren für diese Folgestudie sehr nützlich und wurden deswegen übernommen und angepasst. 
+
+\subsection{Kodier-Handbuch}
+Das in der Original-Studie \cite{MaalejRobillard} verwendete Kodier-Handbuch findet auch in dieser Studie Verwendung, um von allen Gutachtern die selben bzw. sehr ähnliche Ergebnisse erwarten zu können. Es dient als Anleitung bei der Bewertung der Einheiten. Während der Großteil des Handbuchs übernommen wurde und unverändert bliebt, gab es jedoch ein paar wesentliche Anpassungen. 
+
+\subsubsection{Markierungen}
+\label{sec:Markierungen}
+Der wichtigste Unterschied zu dem originalen Kodier-Handbuch \cite{codingguide_orig} ist, dass die Gutachtern nicht nur pro Einheit bewerten sollen, ob bestimmte Wissenstypen vorhanden sind, sondern Markierungen in einer Einheit vornehmen und pro Markierung einen Typ festlegen. Wie mit einem Textmarker soll jede Einheit vollständig bearbeitet werden und abschließend jedes Zeichen (mit wenigen Ausnahmen) markiert sein. Dies führt zu ergänzenten Regeln über :
+\begin{itemize}
+\item Die Art Markierungen vorzunehmen
+\item Der Länge von Markierungen
+\item Die Notwendigkeit von Doppelmarkierungen in einem Segment
+\end{itemize}
+Diese Änderungen wurden im ersten Absatz des Kodier-Handbuchs \cite{codingguide_new} wie folgt formuliert: 
+\input{kodierhandbuch}
+
+\subsubsection{Kleinere Änderungen}
+Zudem waren einige kleine Änderungen notwendig, die sich entweder aus dem Stil der Python-Dokumentation ergeben oder als sinnvoller bei der Bewertung von Einheiten ergeben haben. Folgende Semantische Änderungen gab es dabei: 
+
+\begin{itemize}
+\item Informationen über bestimmten Input einer Funktion oder Methode, welcher zu einer "`Exception"' führt (und nur dann), soll als "`Directive"' und nicht als "`Functionality and Behavior"' markiert werden. 
+\item Die simple Nennung von gültigen Parametertypen wird als nicht als "`Directive"' angesehen, sofern nicht  Schlüsselwörter wie "`must"' oder "`have to"' etc. verwendet werden.
+\item Der Ausdruck "`Changed in version x.y."' soll als "`Environment"' markiert werden. Der darauf anschließend Text kann ebenfalls "`Environment"' sein, muss es aber nicht. 
+\item Platzhalter der Form "`[Something removed here]"' sollen nicht markiert und bewertet werden, da diese lediglich auf ausgelassene, verschachtelte Einheiten hinweisen (siehe Abschnitt "`Extrahierer"')
+\item Der Wissenstyp "`Structure"' wird treffender in "`Structure and Relationship"' umbenannt. 
+\end{itemize}
+
+
+
