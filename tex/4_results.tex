@@ -106,18 +106,32 @@ Es werden alle möglichen Tupel auf die Gesamtverträglichkeit über alle Zeichen b
 Anschließend werden die Markierungen der Gutachter mit dem des Dummys manuell verglichen und wo nötig noch kleinere Korrekturen vorgenommen. 
 Diese sind vor allem folgender Natur:
 \begin{itemize}
-\item Auf einzelne Markierung war anderes Tupel besser (AUSFORMULIEREN!!)
-\item Strucutre and Relationship
-\item External References
+\item Es gibt eine Markierung, die die anderen zwei Gutachter getätigt haben (also nicht in den Markeriungen des Dummys vorkommt). Daher wird eine Markierung des Dummys durch die der anderen Gutachter ersetzt oder hinzugefügt (je nach Übereinstimmung der Segementierungen).
+% Beispiel mit Screenshots!? 
+\item Mindestens einer der Gutachter hat richtig ein Segement mit dem Wissenstyp "`Strucutre and Relationship"' markiert. Wenn dieses in der aktuellen Fassung des Dummys fehlt, wird es hinzugefügt.
+\item Mindestens einer der Gutachter hat richtig ein Segement mit dem Wissenstyp "`External References"' markiert. Wenn dieses in der aktuellen Fassung des Dummys fehlt, wird es hinzugefügt. 
 \end{itemize}
-Somit erhält man ein endgültiges, ideales Ergebnis der Goldstichprobe. 
+Somit erhält man ein endgültiges, fast ideales Ergebnis der Goldstichprobe. Ein ähnlicher Vorgang muss jetzt mit der Hauptstichprobe geschehen.
 
 % Es wurden nicht die Markierungen direkt überprüft und übernommen, da ansonsten mehr Markierungen als üblich übernommen worden wären !?!? 
 
+\subsubsection{Zusammenführen der Stichproben}
+Da jede Einheit aus der Hauptstichprobe von zwei Gutachtern bewertet wurde, müssen auch diese Ergebnisse zusammengeführt werden. 
+Diese Stichprobe ist mit 1548 Einheiten allerdings erheblich größer als die Goldstichprobe mit 168 Einheiten, deswegen soll dies ohne manuelle Zuarbeit geschehen. Gleichzeitig gibt es zwei unterschiedliche Abstraktionshöhen mit unterschliedlichen Vorgehensweise: 
+\begin{enumerate}
+\item Vergleich des Vorkommens von Wissenstypen (ein boolescher Wert pro Wissenstyp ergibt zwölf Werte). Dabei werden alle Werte in das Endresultat übernommen, die übereinstimmen.
+\item Vergleich aller einzelnen Markierungen auf Verträglichkeit und Übernahme in das Endresultat nach einem noch zu definierenden Algorithmus. Siehe Abschnitt \ref{par:Markierungsresultat}.
+\end{enumerate}
+
+\paragraph{Markierungsresultat bestimmen} $\;$\\
+\label{par:Markierungsresultat}
+Überprüfe für alle Markierungen in der Einheit, wie oft jeder Gutachter bei allen auftretenden Konfusionen dieser Einheit den besseren Wissenstypen gewählt hat. Übertrage alle verträglichen Markierungen des besseren Gutachters auf einen Dummy. 
+
+Seien M_{1} und M_{2} zwei unterschiedliche Markierungen, die sich zu mindestens 50 Prozent überlappen. 
 
 \subsection{Auswertung der Typisierungen}
 
-\subsubsection{Übereinstimmung nach Gutachtern}
+\subsubsection{Übereinstimmung pro Wissenstyp nach Gutachtern}
 Die Übereinstimmung der Wissenstypen nach Gutachtern wurde in der vorangegangen Studie wie folgt gemessen \cite{MaalejRobillard}:
 \begin{shaded}
 "`We calculated the agreement score for $C_{i} $by dividing the number of ratings which agree with the second coder by the total number of units coded by $C_{i}$. For example, if $C_{i}$coded 500 units and 400 of their Functionality ratings were the same as the ratings of the co-coder, $C_{i} $s agreement score for Functionality would be $400/500 = 0.80$. We calculated the overall agreement by summing all agreements over all variables and dividing by the number of units times 12 (the number of variables)."' 
@@ -152,6 +166,7 @@ References&0,951 & 0,969 & 0,977 & C4 & C2 \\
 %\paragraph{Vergleich zum Originalartikel}
 %\paragraph{Detailierte Auswertung}
 
+
 \subsubsection{Übereinstimmung nach Wissenstyp}
 Die Übereinstimmung nach Wissenstypen wurde in der Studie von Maalej und Robillard wie folgt berechnet \cite{MaalejRobillard}:
 \begin{shaded}
@@ -160,10 +175,11 @@ Die Übereinstimmung nach Wissenstypen wurde in der Studie von Maalej und Robilla
 Auf Grund der veränderten Typisierungweise in dieser Arbeit ist eine Übereinstimmung durch Zufall sehr viel unwahrscheinlicher, weshalb diese Auswertung für diese Arbeit eher uninteressant ist und somit nicht durchgeführt wird.  
 % ganz weglassen? 
 
-\subsubsection{Übereinstimmung nach Einheit}
+\subsubsection{Übereinstimmung nach Einheiten}
 Zusätzlich kann die Übereinstimmung nach Einheiten berechnet werden. 
 Für jede Einheit wird für jeden Wissenstyp geprüft, ob die Gutachter mindstens eine Markierung dieser Art getätigt haben. 
-Eine Übereinstimmung liegt dann vor, wenn bei beide Gutachter sich einig sind, ob dieser Wissenstyp (mindestens einmal) vorkommt oder nicht. Da es insgesamt 12 Wissenstypen gibt, entspricht jede Übereinstimmung in einem Wissenstyp $\frac{1}{12} = 8,33\%$ . Für jeden Gutachter wird so die Übereinstimmung über alle Einheiten berechnet und der Durchschnittswert in Abbildung \ref{fig:Uebereinstimmung_Einheit} ausgegeben. Der Zeile für des besten Gutachtern ist grün, die des schlechtesten ist rot markiert. Analog wird der Durchschnittswert für die utnerschiedlichen Kategorien in Abbildung \ref{fig:Uebereinstimmung_Einheit_Kategorie} angezeigt. 
+Eine Übereinstimmung liegt dann vor, wenn bei beide Gutachter sich einig sind, ob dieser Wissenstyp (mindestens einmal) vorkommt oder nicht. Da es insgesamt 12 Wissenstypen gibt, entspricht jede Übereinstimmung in einem Wissenstyp $\frac{1}{12} = 8,33\%$ . Für jeden Gutachter wird so die Übereinstimmung über alle Einheiten berechnet und der Durchschnittswert in Abbildung \ref{fig:Uebereinstimmung_Einheit} ausgegeben. Der Zeile für des besten Gutachtern ist grün, die des schlechtesten ist rot markiert. Analog wird der Durchschnittswert für die unterschiedlichen Kategorien in Abbildung \ref{fig:Uebereinstimmung_Einheit_Kategorie} angezeigt. \\
+Diese Übereinstimmung prüft somit nicht nur, ob sich zwei Gutachter darin einig sind, dass ein Wissenstyp vorhanden ist, sondern auch, ob sie sich darin einig sind, dass dieser nicht vorhanden ist. 
 
 \begin{figure}[H]
 \centering
@@ -188,20 +204,109 @@ C8 & 0,898\\
 \centering
 \begin{tabular}{|c|c|}
 Kategorie & Übereinstimmung \\ \hline
-Methoden & 999 \\
+\rowcolor{gray!20 }Methoden & 0,845 \\
+Felder & 0,876 \\
+\rowcolor{gray!20 }Module & 0,805 \\
+Klassen & 0,839 \\
+\rowcolor{gray!20 }Beschreibungen & 0,916 \\
+% man erkennt deutlich: Je länger eine Einheit (siehe Durchschnitt) desto schwieriger ist die gleiche Bewertung dieser Einheit
 \end{tabular}
 \caption{Übereinstimmung nach Einheit je Kategorie}
 \label{fig:Uebereinstimmung_Einheit_Kategorie}
 \end{figure}
-\paragraph{Rechenbeispiel} $\; $ \\
-Eine Einheit wird von beiden Gutachtern mit genau einem Wissenstypen markiert. Gutachter A vergibt den Wissenstyp 1 und Gutachter B vergibt den Wissenstyp 2. Somit sind sich Gutachter A und B darüber einig, dass die anderen zehn Wissenstypen (drei bis zwölf) nicht vorhanden sind. Dies ergibt eine Übereinstimmung in dieser Einheit von $\frac{10}{12} = 83,33 \% $.
+\subsubsection{Rechenbeispiel}
+Um die Bedeutung dieser Berechnungen zur Übereinstimmung zu veranschaulichen, folgt ein Beispiel: \\
+Eine Einheit wird von beiden Gutachtern mit genau einem Wissenstypen markiert. Gutachter A vergibt den Wissenstyp 1 und Gutachter B vergibt den Wissenstyp 2. Somit sind sich Gutachter A und B darüber einig, dass die anderen zehn Wissenstypen (drei bis zwölf) nicht vorhanden sind. Dies ergibt eine Übereinstimmung in dieser Einheit von $\frac{10}{12} = 83,33 \% $. \\
+Die Übereinstimmung misst somit nicht nur die Einigkeit über das Vorhandensein eines Wissenstypen sondern auch über das Fehlen dessen. 
+
+
+\subsubsection{Unstimmigkeiten zur Goldstichprobe}
+Solange sich zwei Gutachter einig sind, wird das Ergebnis der Markierungen als gültiges Endresultat anerkannt. Wenn jedoch zwei Gutachter den falschen Wissenstypen wählen, zum Beispiel weil sie beide den Wissenstypen X mit Wissenstyp Y verwechseln, wird dieses Ergebnis verfälscht. Um solche Tendenzen der Gutachter aufzeigen zu können, vergleiche ich die gefundenen Wissenstypen (als zwölf boolsche Werte) der Gutachter mit den Ergebnissen aus der Goldstichprobe. Dabei gibt es zwei unterschiedliche Unstimmigkeiten:
+\begin{enumerate}
+\item Falsch-Positiv: Gutachter gibt an, dass der Wissenstyp in dieser Einheit vorhanden ist, obwohl dies laut Goldstichprobe nicht der Fall ist.
+\item Falsch-Negativ: Gutachter hat keine Markierung mit diesem Wissenstyp getätigt, obwohl in der Goldstichprobe mindestens eine davon vorhanden ist. 
+\end{enumerate}
+Im folgenden wird für jeden Wissenstyp dargelegt, wie oft die Gutachter die Einheiten der Goldstichprobe falsch markiert haben sowie welche Anteile durch die falsch-positiv (FP) und falsch-negativen (FN)  Bewertungen verursacht wurden. Da jede Einheit doppelt typisiert wurde, liegt eine Menge von 336 Typisierungen mit insgesamt $336 * 12 =  4032$\footnote{Es gibt 12 Wissenstypen} Bewertungen zu Grunde. 
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|} \hline
+\textbf{Wissenstyp} & \textbf{Gesamt} & \textbf{FP} & \textbf{FN}  \\ \hline 
+Functionality & 51 & 0,255 & 0,745 \\
+\rowcolor{gray!20 }Concepts& 33 &0,667 & 0,333 \\
+Directives& 47 & 0,596 & 0,404  \\
+\rowcolor{gray!20 }Purpose& 34  & 0,765 & 0,235  \\
+Quality& 45 & 0,378 & 0,622  \\
+\rowcolor{gray!20 }Control-Flow&17  &  0,412 & 0,588 \\
+Structure& 83 & 0,361 & 0,639   \\
+\rowcolor{gray!20 }Patterns & 25 & 0,560 & 0,440 \\
+Code-Examples &9 & 0,667 & 0,333  \\
+\rowcolor{gray!20 }Environment& 16 & 0,625  & 0,375  \\
+References& 15 & 0,333  & 0,667 \\
+\rowcolor{gray!20 }Non-Info& 40 &0,850 & 0,15 \\ \hline
+\textbf{Gesamt} & 415 & 0,539 & 0,461 \\ \hline
+\end{tabular}
+\end{figure} 
+
+
 
 \subsubsection{Verträglichkeit von Einheiten}
-Weiterhin wird die Verträglichkeit der Einheiten betrachtet und ausgewertet. Genau genommen bezieht sich die Verträglichkeit auf die einzelnen Markierungen. \\
+Weiterhin wird die Verträglichkeit der Einheiten betrachtet und ausgewertet. 
+Die Verträglichkeit bezieht sich auf die einzelnen Markierungen einer Einheit und ist wie folgt definiert. \\
 \textbf{Definition:} Eine Markierung ist verträglich, wenn es eine andere Markierung gibt, die  
-\begin{itemize}
-\item diese umschließt (größer oder gleich groß ist)
-\item ein Teil dieser Markierung (kleiner ist)
-\end{itemize}
-\textbf{Nochmal genau in den Quellcode gucken: wie war das!?}
-Dabei werden die Konfusionen beachtet (und einmal vielleicht nicht?)
+\begin{enumerate}
+\item diese umschließt (größer oder gleich groß ist) \textbf{oder}
+\item zu mindestens 50 Prozent Teil dieser Markierung ist
+\end{enumerate}
+und beide Markierungen den selben Wissenstypen oder eine Kombination aus den Konfusionspaaren besitzen. \\
+Oder anders ausgedrückt: \\
+Sei $B_{i}$ der Beginn, $E_{i}$ das Ende und $W_{i}$ der Wissenstyp der Markierung i, "`\&' das Zeichen für das logische "`und"', "`||"' das Zeichen für das logische "`oder"' und $confusion(i,j)$ eine Funktion, die angibt, ob die Wissenstypen i und j zu den aufgelösten Konfusionen gehören. Dann heißen zwei Markierungen M1 und M2 verträglich, wenn:
+\begin{enumerate}
+\item $(B_{1}>=B_{2}) $ \& $ (E_{1}<=E_{2})$ \textbf{||}
+\item $(B_{1}<=E_{1}>=B_{2}) $ \& $ ((E_{1}-B_{2})>=\frac{E_{1}-B_{1}}{2})$
+\end{enumerate}
+\textbf{\&} $(W_{1} = W_{2}$ \textbf{||} $confusion(W_{1},W_{2}) )$ \\ \\ 
+Die Verträglichkeiten für jede Einheit werden auf zwei Weisen berechnet:
+\begin{enumerate}
+\item nach Anzahl der Markierungen. Dabei wird die Anzahl der verträglichen Markierungen durch die Anzahl der gesamten Markierungen beider Gutachter pro Einheit geteilt.
+\item nach der Menge der verträglichen Zeichen. Hier wird die Anzahl aller Zeichen von verträglichen Markierungen durch die Anzahl aller Zeichen der Markierungen beider Gutachter geteilt.
+\end{enumerate}
+ \\ \\ 
+Während in Abbildung \ref{fig:Verträglichkeit_Gutachter} die durchschnittliche Verträglichkeit pro Gutachter dargestellt wird, zeigt Abbildung \ref{fig:Verträglichkeit_Kategorie} diese pro Kategorie.
+
+% übersehen von kleinen Segmenten wird bei der zweiten Methode weniger stark berücksichtigt -> fairer
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|} 
+& \multicolumn{2}{c}{Verträglichkeit} \\
+Gutachter & (1) nach Zeichen & (2) nach Markierungen \\ \hline
+\rowcolor{gray!20}C1 & 0,819 & 0,786 \\
+C2 & 0,848 & 0,823 \\
+\rowcolor{gray!20 }C3 & 0,818 & 0,788\\
+C4 & 0,704 & 0,674 \\
+\rowcolor{gray!20 }C5 & 0,860 & 0,829 \\
+C6 & 0,783 & 0,750 \\
+\rowcolor{gray!20 }C7 & 0,841 & 0,809 \\
+C8 & 0,922 & 0,895 \\
+\rowcolor{gray!20 }C9 & 0,863 & 0,820 \\ \hline
+\textbf{Durchsch.} & 0.828 & 0,797  \\ 
+\end{tabular}
+\caption{Verträglichkeit nach Gutachtern}
+\label{fig:Verträglichkeit_Gutachter}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|} 
+& \multicolumn{2}{c}{Verträglichkeit} \\
+Kategorie & (1) nach Zeichen & (2) nach Markierungen \\ \hline
+\rowcolor{gray!20 }Methoden & 0,879& 0,800\\
+Felder &0,725& 0,719 \\
+\rowcolor{gray!20 }Module &0,791& 0,730  \\
+Klassen &0,721& 0,698 \\
+\rowcolor{gray!20 }Beschreibungen &0,861& 0,854 \\
+\end{tabular}
+\caption{Verträglichkeit nach Kategorien}
+\label{fig:Verträglichkeit_Kategorie}
+\end{figure}
+
