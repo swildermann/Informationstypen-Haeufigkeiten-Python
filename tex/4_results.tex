@@ -44,7 +44,7 @@ Für jeden dieser Fälle muss dann entschieden werden, welche Kodierung angemessen
 \item Typ Y ist angemessener
 \item Beide Typen sind gleich (gut oder schlecht) angemessen
 \end{itemize}
-Für die gesamte Stichprobe bekommt dann ein Typ X Vorrang, wenn Typ X mindestens zu $\frac{3}{5}$ und TYP Y höchstens zu $\frac{1}{5}$ besser ist und andersherum. Wenn das Ergebnis aus dieser Betrachtung nicht mit der Ersteinschätzung übereinstimmt, werden weitere zehn Elemente begutachtet.  In Bezug auf die gesamte Stichprobe wirken sich diese Vorrangsregeln nur wenig aus, helfen aber dennoch weiter, um aus den Typisierungen einer Einheit von zwei Gutachtern eine endgültige zu erschaffen.
+Für die gesamte Stichprobe bekommt dann ein Typ X Vorrang, wenn Typ X mindestens zu $\frac{3}{5}$ und TYP Y höchstens zu $\frac{1}{5}$ besser ist und andersherum. Wenn das Ergebnis aus dieser Betrachtung nicht eindeutig mit der Ersteinschätzung übereinstimmt, werden weitere zehn Elemente begutachtet.  In Bezug auf die gesamte Stichprobe wirken sich diese Vorrangsregeln eher wenig aus, helfen aber dennoch weiter, um aus den Typisierungen einer Einheit von zwei Gutachtern ein Endergebnis zu erschaffen ohne große Teile der Markierungen weglassen zu müssen.
 \begin{figure}[H]
 \centering
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|c|c|c|c|}\hline
@@ -100,7 +100,7 @@ returned 3 lines
 \label{fig:Funktion-Konfusion}
 \end{figure}
 
-\subsection{Zusammenführen der Goldstichproben}
+\subsection{Ergebnis-Zusammenführung der Goldstichproben}
 Da die Goldstichprobe insgesamt drei mal von verschiedenen Gutachtern typisiert wurde, müssen diese für die weitere Verwendung zusammengeführt werden. Um aus drei Wahrheiten die "`eine"' zu machen, wird wie folgt vorgegangen: \\
 Es werden alle möglichen Tupel auf die Gesamtverträglichkeit über alle Zeichen berechnet . Zwei dieser drei Tupel besitzen somit automatisch den selben Gutachter, so dass diese damit die höchste Gesamtverträglichkeit für diese Einheit besitzt. Die Markierungen dieses Gutachtern werden dann einem "`Dummy-Benutzer"' kopiert. \\
 Anschließend werden die Markierungen der Gutachter mit dem des Dummys manuell verglichen und wo nötig noch kleinere Korrekturen vorgenommen. 
@@ -115,19 +115,17 @@ Somit erhält man ein endgültiges, fast ideales Ergebnis der Goldstichprobe. Ein 
 
 % Es wurden nicht die Markierungen direkt überprüft und übernommen, da ansonsten mehr Markierungen als üblich übernommen worden wären !?!? 
 
-\subsubsection{Zusammenführen der Stichproben}
-Da jede Einheit aus der Hauptstichprobe von zwei Gutachtern bewertet wurde, müssen auch diese Ergebnisse zusammengeführt werden. 
-Diese Stichprobe ist mit 1548 Einheiten allerdings erheblich größer als die Goldstichprobe mit 168 Einheiten, deswegen soll dies ohne manuelle Zuarbeit geschehen. Gleichzeitig gibt es zwei unterschiedliche Abstraktionshöhen mit unterschliedlichen Vorgehensweise: 
-\begin{enumerate}
-\item Vergleich des Vorkommens von Wissenstypen (ein boolescher Wert pro Wissenstyp ergibt zwölf Werte). Dabei werden alle Werte in das Endresultat übernommen, die übereinstimmen.
-\item Vergleich aller einzelnen Markierungen auf Verträglichkeit und Übernahme in das Endresultat nach einem noch zu definierenden Algorithmus. Siehe Abschnitt \ref{par:Markierungsresultat}.
-\end{enumerate}
+\subsection{Ergebnis-Zusammenführung der Hauptstichproben}
+Da jede Einheit aus der Hauptstichprobe ebenfalls von zwei Gutachtern bewertet wurde, müssen auch diese Ergebnisse zusammengeführt werden. 
+Diese Stichprobe ist mit 1548 Einheiten allerdings erheblich größer als die Goldstichprobe mit 168 Einheiten, deswegen soll dies durch ein Skript (Django-Kommando) automatisiert werden. 
 
 \paragraph{Markierungsresultat bestimmen} $\;$\\
 \label{par:Markierungsresultat}
-Überprüfe für alle Markierungen in der Einheit, wie oft jeder Gutachter bei allen auftretenden Konfusionen dieser Einheit den besseren Wissenstypen gewählt hat. Übertrage alle verträglichen Markierungen des besseren Gutachters auf einen Dummy. 
+Das Markierungsresultat wird für die Markierungen der Gutachter G_{i} und G_{j} wie folgt bestimmt: \\
+Die Markierung werden nach ihrem Auftreten aufsteigend sortiert. 
+Nacheinander werden alle Markierungen, die sich zu mindestens 50 Prozent überschneiden, mit einander verglichen. Sobald ein Gutachter bei diesem Vergleich die Markierung mit dem "`besseren"' Wissenstyp (laut Konfusionergebnis) getätigt hat, bekommt dieser einen "`Pluspunkt"' und seine Markierung wird in das Endresultat übernommen. Wenn es für eine Markierung entweder eine Übereinstimmung der Wissenstypen gibt oder diese so verschieden sind, dass diese nicht zu den aufgelösten Konfusionspaaren gehören, dann wird (1) die Markierung des Gutachtern mit mehr "`Pluspunkten"' übernommen. 
+Falls die "`Pluspunkte"' kein eindeutiges Ergebnis liefern, werden die Gutachter mit den besseren Ergebnissen im Vergleich zur Goldstichprobe bevorzugt. 
 
-Seien M_{1} und M_{2} zwei unterschiedliche Markierungen, die sich zu mindestens 50 Prozent überlappen. 
 
 \subsection{Auswertung der Typisierungen}
 
@@ -218,7 +216,8 @@ Klassen & 0,839 \\
 Um die Bedeutung dieser Berechnungen zur Übereinstimmung zu veranschaulichen, folgt ein Beispiel: \\
 Eine Einheit wird von beiden Gutachtern mit genau einem Wissenstypen markiert. Gutachter A vergibt den Wissenstyp 1 und Gutachter B vergibt den Wissenstyp 2. Somit sind sich Gutachter A und B darüber einig, dass die anderen zehn Wissenstypen (drei bis zwölf) nicht vorhanden sind. Dies ergibt eine Übereinstimmung in dieser Einheit von $\frac{10}{12} = 83,33 \% $. \\
 Die Übereinstimmung misst somit nicht nur die Einigkeit über das Vorhandensein eines Wissenstypen sondern auch über das Fehlen dessen. 
-
+\subsubsection{Übereinstimmung mit Goldstichprobe}
+Um die Gutachter entsprechend der Qualität ihrer Leistungen einordnen zu können, werden die Typisierungen dieser mit den Ergebnissen aus der Goldstichprobe verglichen. Aus den Übereinstimmungswerten ergibt sich dann direkt eine Platzierung für jeden Gutachter. Die Übereinstimmung wird analog zu der in Kapitel XY berechnet. 
 
 \subsubsection{Unstimmigkeiten zur Goldstichprobe}
 Solange sich zwei Gutachter einig sind, wird das Ergebnis der Markierungen als gültiges Endresultat anerkannt. Wenn jedoch zwei Gutachter den falschen Wissenstypen wählen, zum Beispiel weil sie beide den Wissenstypen X mit Wissenstyp Y verwechseln, wird dieses Ergebnis verfälscht. Um solche Tendenzen der Gutachter aufzeigen zu können, vergleiche ich die gefundenen Wissenstypen (als zwölf boolsche Werte) der Gutachter mit den Ergebnissen aus der Goldstichprobe. Dabei gibt es zwei unterschiedliche Unstimmigkeiten:
@@ -247,6 +246,7 @@ References& 15 & 0,333  & 0,667 \\
 \end{tabular}
 \end{figure} 
 
+\textbf{HIER NOCH DIE HAUPT-VERURSACHER MIT AUFNEHMEN}
 
 
 \subsubsection{Verträglichkeit von Einheiten}
