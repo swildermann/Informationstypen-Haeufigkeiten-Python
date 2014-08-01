@@ -119,9 +119,9 @@ Somit erhält man ein endgültiges, fast ideales Ergebnis der Goldstichprobe. Ein 
 Da jede Einheit aus der Hauptstichprobe ebenfalls von zwei Gutachtern bewertet wurde, müssen auch diese Ergebnisse zusammengeführt werden. 
 Diese Stichprobe ist mit 1548 Einheiten allerdings erheblich größer als die Goldstichprobe mit 168 Einheiten, deswegen soll dies durch ein Skript (Django-Kommando) automatisiert werden. 
 
-\paragraph{Markierungsresultat bestimmen} $\;$\\
+\subsubsection{Markierungsresultat bestimmen} 
 \label{par:Markierungsresultat}
-Das Markierungsresultat wird für die Markierungen der Gutachter G_{i} und G_{j} wie folgt bestimmt: \\
+Das Markierungsresultat wird für die Markierungen der Gutachter $G_{i}$ und $ G_{j}$ wie folgt bestimmt: \\
 Die Markierung werden nach ihrem Auftreten aufsteigend sortiert. 
 Nacheinander werden alle Markierungen, die sich zu mindestens 50 Prozent überschneiden, mit einander verglichen. Sobald ein Gutachter bei diesem Vergleich die Markierung mit dem "`besseren"' Wissenstyp (laut Konfusionergebnis) getätigt hat, bekommt dieser einen "`Pluspunkt"' und seine Markierung wird in das Endresultat übernommen. Wenn es für eine Markierung entweder eine Übereinstimmung der Wissenstypen gibt oder diese so verschieden sind, dass diese nicht zu den aufgelösten Konfusionspaaren gehören, dann wird (1) die Markierung des Gutachtern mit mehr "`Pluspunkten"' übernommen. 
 Falls die "`Pluspunkte"' kein eindeutiges Ergebnis liefern, werden die Gutachter mit den besseren Ergebnissen im Vergleich zur Goldstichprobe bevorzugt. 
@@ -219,6 +219,81 @@ Die Übereinstimmung misst somit nicht nur die Einigkeit über das Vorhandensein e
 \subsubsection{Übereinstimmung mit Goldstichprobe}
 Um die Gutachter entsprechend der Qualität ihrer Leistungen einordnen zu können, werden die Typisierungen dieser mit den Ergebnissen aus der Goldstichprobe verglichen. Aus den Übereinstimmungswerten ergibt sich dann direkt eine Platzierung für jeden Gutachter. Die Übereinstimmung wird analog zu der in Kapitel XY berechnet. 
 
+%***START***
+%username:robert
+%75.36790099999999
+%20
+%***********
+%username:jakob
+%85.37473274509804
+%51
+%***********
+%username:josephine
+%71.56433599999998
+%60
+%***********
+%username:lennart
+%80.06050749999999
+%48
+%***********
+%username:leon
+%74.98821765957446
+%47
+%***********
+%username:malte
+%65.16846339285715
+%56
+%***********
+%username:michael
+%81.51374388888888
+%54
+%***********
+%username:prechelt_extra_28
+%could not compare anything
+%***********
+%username:sven_extra_28
+%could not compare anything
+%***********
+
+
+%***START***
+%username:robert
+%90.536611
+%20
+%***********
+%username:jakob
+%93.37414372549017
+%51
+%***********
+%username:josephine
+%90.58970899999998
+%60
+%***********
+%username:lennart
+%93.78278312500002
+%48
+%***********
+%username:leon
+%91.21594531914893
+%47
+%***********
+%username:malte
+%89.75318660714287
+%56
+%***********
+%username:michael
+%96.26911648148149
+%54
+%***********
+%username:prechelt_extra_28
+%could not compare anything
+%***********
+%username:sven_extra_28
+%could not compare anything
+%***********
+
+
+
 \subsubsection{Unstimmigkeiten zur Goldstichprobe}
 Solange sich zwei Gutachter einig sind, wird das Ergebnis der Markierungen als gültiges Endresultat anerkannt. Wenn jedoch zwei Gutachter den falschen Wissenstypen wählen, zum Beispiel weil sie beide den Wissenstypen X mit Wissenstyp Y verwechseln, wird dieses Ergebnis verfälscht. Um solche Tendenzen der Gutachter aufzeigen zu können, vergleiche ich die gefundenen Wissenstypen (als zwölf boolsche Werte) der Gutachter mit den Ergebnissen aus der Goldstichprobe. Dabei gibt es zwei unterschiedliche Unstimmigkeiten:
 \begin{enumerate}
@@ -270,7 +345,7 @@ Die Verträglichkeiten für jede Einheit werden auf zwei Weisen berechnet:
 \item nach Anzahl der Markierungen. Dabei wird die Anzahl der verträglichen Markierungen durch die Anzahl der gesamten Markierungen beider Gutachter pro Einheit geteilt.
 \item nach der Menge der verträglichen Zeichen. Hier wird die Anzahl aller Zeichen von verträglichen Markierungen durch die Anzahl aller Zeichen der Markierungen beider Gutachter geteilt.
 \end{enumerate}
- \\ \\ 
+
 Während in Abbildung \ref{fig:Verträglichkeit_Gutachter} die durchschnittliche Verträglichkeit pro Gutachter dargestellt wird, zeigt Abbildung \ref{fig:Verträglichkeit_Kategorie} diese pro Kategorie.
 
 % übersehen von kleinen Segmenten wird bei der zweiten Methode weniger stark berücksichtigt -> fairer
