@@ -82,7 +82,7 @@ def find_type(r):
 
 
 def grab_elements(soup, elem, attr1, attr2):
-    """grabs the different elemens with the given attributes out of a soup"""
+    """grabs the different elements with the given attributes out of a soup-element"""
     return soup.find_all([elem], attrs={attr1: [attr2]})
 
 

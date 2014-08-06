@@ -2,40 +2,40 @@
 In diesem Abschnitt werden alle Ergebnisse der Auswertungen aufgezeigt und die dafür notwendigen Schritte erklärt. 
 
 \subsection{Konfusionen}
-Bei der Überprüfung der Verträglichkeit zweier Markierungen gibt es immer wieder den Fall, dass Gutachter A den Typ X, Gutachter B hingegen den Typ Y für sinnvoller hält. Daher wird überprüft, ob es Typen gibt, die besonders häufig mit einander verwechselt  werden. Mit Hilfe der folgenden SQL-Anweisung wurden alle aufgetretenen Konfusionen inklusive Häufigkeit des Auftretens ausgegeben: 
+Bei der Überprüfung der Verträglichkeit zweier Markierungen gibt es immer wieder den Fall, dass Gutachter A den Typ X, Gutachter B hingegen den Typ Y für sinnvoller hält. Daher wird überprüft, ob es Typen gibt, die besonders häufig mit-einander verwechselt  werden. Mit Hilfe der folgenden SQL-Anweisung wurden alle aufgetretenen Konfusionen inklusive Häufigkeit des Auftretens ausgegeben: 
 \begin{lstlisting}[language=SQL] 
 SELECT atype_id, btype_id, COUNT(*) 
 FROM extractor_confusions 
 GROUP BY atype_id, btype_id 
 ORDER BY COUNT(*) DESC;
 \end{lstlisting} 
-Wenn jetzt noch die Reihenfolge ignoriert wird, also die Ergbenisse der Tupel (X,Y) mit denen von (Y,X) addiert werden, erhält man folgende Konfusionen, absteigend sortiert nach Häufigkeiten des Auftretens. 
+Wenn jetzt noch die Reihenfolge ignoriert wird, also die Ergbenisse der Tupel (X,Y) mit denen von (Y,X) addiert werden, erhält man folgende Konfusionen (absteigend sortiert nach Häufigkeiten des Auftretens): 
 \begin{figure}[H]
 \centering
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|c|c|c|}\hline
   Nr. & Typ A & Typ B & Anzahl \\ \hline \hline
-  1 &Functionality and Behaviour      &    Structure and Relationships    &  324 \\ \hline
+\rowcolor{gray!30} 1 &Functionality and Behaviour      &    Structure and Relationships    &  324 \\ \hline
   2 &Functionality and Behaviour      &    Purpose and Rationale            &  232 \\ \hline
-  3 & Functionality and Behaviour      &    Concepts                                &  209 \\ \hline
+\rowcolor{gray!30}   3 & Functionality and Behaviour      &    Concepts                                &  209 \\ \hline
   4 &Functionality and Behaviour      &    Directives                               &  161 \\ \hline
-  5 &Functionality and Behaviour      &    Non-Information                     &  147 \\ \hline
+\rowcolor{gray!30}   5 &Functionality and Behaviour      &    Non-Information                     &  147 \\ \hline
   6 & Functionality and Behaviour      &    Qual. Attributes, Intern. Aspects    &  124 \\ \hline
-  7 & Functionality and Behaviour      &    Environment                           &  110 \\ \hline
+ \rowcolor{gray!30}  7 & Functionality and Behaviour      &    Environment                           &  110 \\ \hline
    8 &  Concepts                                  &    Structure and Relationships     &  87 \\ \hline
-   9 & Purpose and Rationale               &    Structure and Relationships   &  83 \\ \hline
+ \rowcolor{gray!30}   9 & Purpose and Rationale               &    Structure and Relationships   &  83 \\ \hline
   10 & Functionality and Behaviour      &    Patterns                                  &  78 \\ \hline
-  11 & Patterns                                     &    Code Examples                      &  72 \\ \hline
+ \rowcolor{gray!30}  11 & Patterns                                     &    Code Examples                      &  72 \\ \hline
   12 & Functionality and Behaviour       &    Control-Flow                          &  65 \\ \hline
-  13 & Concepts     								&   Purpose and Rationale      		& 59 \\ \hline
+ \rowcolor{gray!30}  13 & Concepts     								&   Purpose and Rationale      		& 59 \\ \hline
    14 & Structure and Relationships     & Patterns 										& 55 \\ \hline
-  15 & Purpose and Rationale 				& Patterns 									 & 54 \\ \hline
+  \rowcolor{gray!30} 15 & Purpose and Rationale 				& Patterns 									 & 54 \\ \hline
   16 &  Qual. Attributes, Intern. Aspects & Structure and Relationships & 51 \\ \hline
-  17 & Concepts 									&  Qual. Attributes, Intern. Aspects & 51 \\ \hline
+  \rowcolor{gray!30} 17 & Concepts 									&  Qual. Attributes, Intern. Aspects & 51 \\ \hline
  \end{tabular}
 \caption[Konfusionshäufigkeiten]{Konfusionshäufigkeiten}
 \end{figure} 
 Aufgelistet werden die Konfusionen hier, sobald die untere Schranke von 50 Vorkommen erreicht wird. Um sich später leichter auf einzelne Konfusionen beziehen zu können, sind diese durchnummeriert.
-Für jedes dieser Paare wird einmal der Typ angegeben, welcher erfahrungsgemäß häufiger der richtige sein müsste. Dabei wird berücksichtigt, dass es besser sein sollte, in einem langen Segment erst den allgemeineneren und danach den spezielleren Fall zu priorisieren (entsprechend des Kodier-Handbuchs). 
+Für jedes dieser Paare wird einmal der Typ angegeben, welcher erfahrungsgemäß häufiger der richtige sein müsste. Dabei wird berücksichtigt, dass es in der Regel besser sein sollte, in einem langen Segment erst den allgemeineneren (stärkeren) und danach den spezielleren (schwächeren) Fall zu typisieren (entsprechend des Kodier-Handbuchs). 
 Dies ergibt die zweite und dritte Spalte der Tabelle in Abbildung \ref{tabelle:Abschaetzung_Konfusion}.
 Anschließend werden von jedem dieser Konfusionspaare zufällig zehn Stück aus der Stichprobe gezogen und exemplarisch begutachtet. 
 Für jeden dieser Fälle muss dann entschieden werden, welche Kodierung angemessen ist. Dabei gibt es drei Fälle: 
@@ -44,7 +44,7 @@ Für jeden dieser Fälle muss dann entschieden werden, welche Kodierung angemessen
 \item Typ Y ist angemessener
 \item Beide Typen sind gleich (gut oder schlecht) angemessen
 \end{itemize}
-Für die gesamte Stichprobe bekommt dann ein Typ X Vorrang, wenn Typ X mindestens zu $\frac{3}{5}$ und TYP Y höchstens zu $\frac{1}{5}$ besser ist und andersherum. Wenn das Ergebnis aus dieser Betrachtung nicht eindeutig mit der Ersteinschätzung übereinstimmt, werden weitere zehn Elemente begutachtet.  In Bezug auf die gesamte Stichprobe wirken sich diese Vorrangsregeln eher wenig aus, helfen aber dennoch weiter, um aus den Typisierungen einer Einheit von zwei Gutachtern ein Endergebnis zu erschaffen ohne große Teile der Markierungen weglassen zu müssen.
+Für die gesamte Stichprobe bekommt dann ein Typ X Vorrang, wenn Typ X mindestens zu $\frac{3}{5}$ und TYP Y höchstens zu $\frac{1}{5}$ besser ist und andersherum. Wenn das Ergebnis aus dieser Betrachtung nicht eindeutig mit der Erst\-einschätzung übereinstimmt, werden weitere zehn Elemente begutachtet.  In Bezug auf die gesamte Stichprobe wirken sich diese Vorrangsregeln eher wenig aus, helfen aber dennoch weiter, um aus den Typisierungen einer Einheit von zwei Gutachtern ein Endergebnis zu erschaffen, ohne große Teile der Markierungen weglassen zu müssen.
 \begin{figure}[H]
 \centering
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|c|c|c|c|}\hline
@@ -56,7 +56,7 @@ Nr. & Erfahrungsgemäß  &  Zustimmung & Widerspruch & Neutral \\
  4 & 	Directives	 				  & 6/20 & 12/20 & 2/20\ \\ \hline
 \rowcolor{green!30} 5&	Functionality and Behaviour  & 7/10 & 2/10  & 1/10\\ \hline
 6&	Qual. Attributes, Intern. Aspects	 & 9/20 & 10/20 & 1/20 \\ \hline
-\rowcolor{red!30} 7&	Environment	 & 3/20 & 12/20 & 5/20 \\ \hline
+\rowcolor{green!30} 7&	Functionality and Behaviour 	 & 12/20 & 3/20 & 5/20 \\ \hline
 \rowcolor{green!30}  8&	Structure and Relationships	 & 9/10 & 1/10 & 0/10\\ \hline
 9&	Structure and Relationships		 & 13/20 & 6/20 & 1/20\\ \hline
 \rowcolor{green!30} 10&	Patterns	 &8/10 & 2/10& 0/10 \\ \hline
@@ -71,17 +71,13 @@ Nr. & Erfahrungsgemäß  &  Zustimmung & Widerspruch & Neutral \\
  \caption{Abschätzung der besseren Typen bei Konfusionen}
  \label{tabelle:Abschaetzung_Konfusion}
 \end{figure}
-Insgesamt können so 12 von 17 häufigen Konfusionen aufgelöst werden. Vier Konfusionen haben ein uneindeutiges Ergebnis. In einem der 17 Fälle entspricht dem Ergebnis nicht der Erwartungen und sollte daher separat diskutiert werden. 
+Insgesamt können so 13 von 17 häufigen Konfusionen aufgelöst werden. Vier Konfusionen haben ein uneindeutiges Ergebnis. Keines der Ergebnisse widerspricht völlig den Erwartungen, auch wenn nicht alle Erwartungen mit Sicherheit bestätigt werden konnten. 
 
 Sobald eine der obigen Konfusionen auftritt und ein besserer Typ indentifiziert wurde (grüne Zeilen), wird dieser dann als richtige Typisierung gewertet.
-% so lassen? 
-\subsubsection{Diskussion: Konfusion Nr. 7}
-
-
 \subsubsection{Hilfsmittel}
 Für diese Stichprobenziehung wurde eine Django-Funktion geschrieben, welche die betroffenen Benutzer  und die ID der zehn Dokumentationseinheiten unter Angabe eines Konfusionspaares ausgibt. In dem noch zusätzlich die Option "`--count"' übergeben wird, wird die Häufigkeit des angegebenen Konfusionspaares ausgegeben und keine Stichprobenziehung durchgeführt.
-Aufruf und (mögliches) Ergebnis dieser Funktion sehen beispielhaft für Nummer 1 (Wissenstypen 1 und 7) aus wie in Abbildung \ref{fig:Funktion-Konfusion} gezeigt.. \\
-Die zuletzt ausgebene Zahl gibt zum Zweck der Überprüfung die Anzahl der ausgebenen Zeilen an. Solange mehr als 10 Konfusionspaare der abgefragten Kombination vorhanden sind, wird eine 10 ausgeben, andernfalls die Anzahl der verfügbaren Konfusionen. Beispielsweise erhält man bei der Eingabe 
+Aufruf und (mögliches) Ergebnis dieser Funktion sehen beispielhaft für Nummer 1 (Wissenstypen 1 und 7) aus wie in Abbildung \ref{fig:Funktion-Konfusion}. \\
+Die zuletzt ausgebene Zahl gibt zum Zweck der Überprüfung die Anzahl der ausgebenen Zeilen an. Solange mehr als zehn Konfusionspaare der abgefragten Kombination vorhanden sind, wird eine "`10"' ausgeben, andernfalls die Anzahl der verfügbaren Konfusionen. Beispielsweise erhält man bei der Eingabe 
 \begin{lstlisting} 
 python manage.py get_sample_of_confusion 4 11
 \end{lstlisting} 
@@ -101,10 +97,11 @@ returned 3 lines
 \end{figure}
 
 \subsection{Ergebnis-Zusammenführung der Goldstichproben}
-Da die Goldstichprobe insgesamt drei mal von verschiedenen Gutachtern typisiert wurde, müssen diese für die weitere Verwendung zusammengeführt werden. Um aus drei Wahrheiten die "`eine"' zu machen, wird wie folgt vorgegangen: \\
-Es werden alle möglichen Tupel auf die Gesamtverträglichkeit über alle Zeichen berechnet . Zwei dieser drei Tupel besitzen somit automatisch den selben Gutachter, so dass diese damit die höchste Gesamtverträglichkeit für diese Einheit besitzt. Die Markierungen dieses Gutachtern werden dann einem "`Dummy-Benutzer"' kopiert. \\
+Da die Goldstichprobe insgesamt drei-mal von verschiedenen Gutachtern typisiert wurde, müssen diese für die weitere Verwendung zusammengeführt werden. Um aus drei Wahrheiten die "`eine"' zu machen, wird wie folgt vorgegangen: \\
+Es werden alle möglichen Tupel auf die Gesamtverträglichkeit über alle Zeichen berechnet. 
+Zwei dieser drei Tupel besitzen somit automatisch den selben Gutachter, so dass diese damit die höchste Gesamtverträglichkeit für diese Einheit besitzt. Die Markierungen dieses Gutachtern werden dann einem "`Dummy-Benutzer"' kopiert. \\
 Anschließend werden die Markierungen der Gutachter mit dem des Dummys manuell verglichen und wo nötig noch kleinere Korrekturen vorgenommen. 
-Diese sind vor allem folgender Natur:
+Diese sind folgender Natur:
 \begin{itemize}
 \item Es gibt eine Markierung, die die anderen zwei Gutachter getätigt haben (also nicht in den Markeriungen des Dummys vorkommt). Daher wird eine Markierung des Dummys durch die der anderen Gutachter ersetzt oder hinzugefügt (je nach Übereinstimmung der Segementierungen).
 % Beispiel mit Screenshots!? 
@@ -115,19 +112,7 @@ Somit erhält man ein endgültiges, fast ideales Ergebnis der Goldstichprobe. Ein 
 
 % Es wurden nicht die Markierungen direkt überprüft und übernommen, da ansonsten mehr Markierungen als üblich übernommen worden wären !?!? 
 
-\subsection{Ergebnis-Zusammenführung der Hauptstichproben}
-Da jede Einheit aus der Hauptstichprobe ebenfalls von zwei Gutachtern bewertet wurde, müssen auch diese Ergebnisse zusammengeführt werden. 
-Diese Stichprobe ist mit 1548 Einheiten allerdings erheblich größer als die Goldstichprobe mit 168 Einheiten, deswegen soll dies durch ein Skript (Django-Kommando) automatisiert werden. 
-
-\subsubsection{Markierungsresultat bestimmen} 
-\label{par:Markierungsresultat}
-Das Markierungsresultat wird für die Markierungen der Gutachter $G_{i}$ und $ G_{j}$ wie folgt bestimmt: \\
-Die Markierung werden nach ihrem Auftreten aufsteigend sortiert. 
-Nacheinander werden alle Markierungen, die sich zu mindestens 50 Prozent überschneiden, mit einander verglichen. Sobald ein Gutachter bei diesem Vergleich die Markierung mit dem "`besseren"' Wissenstyp (laut Konfusionergebnis) getätigt hat, bekommt dieser einen "`Pluspunkt"' und seine Markierung wird in das Endresultat übernommen. Wenn es für eine Markierung entweder eine Übereinstimmung der Wissenstypen gibt oder diese so verschieden sind, dass diese nicht zu den aufgelösten Konfusionspaaren gehören, dann wird (1) die Markierung des Gutachtern mit mehr "`Pluspunkten"' übernommen. 
-Falls die "`Pluspunkte"' kein eindeutiges Ergebnis liefern, werden die Gutachter mit den besseren Ergebnissen im Vergleich zur Goldstichprobe bevorzugt. 
-
-
-\subsection{Auswertung der Typisierungen}
+\subsection{Übereinstimmungen}
 
 \subsubsection{Übereinstimmung pro Wissenstyp nach Gutachtern}
 Die Übereinstimmung der Wissenstypen nach Gutachtern wurde in der vorangegangen Studie wie folgt gemessen \cite{MaalejRobillard}:
@@ -175,8 +160,8 @@ Auf Grund der veränderten Typisierungweise in dieser Arbeit ist eine Übereinstim
 
 \subsubsection{Übereinstimmung nach Einheiten}
 Zusätzlich kann die Übereinstimmung nach Einheiten berechnet werden. 
-Für jede Einheit wird für jeden Wissenstyp geprüft, ob die Gutachter mindstens eine Markierung dieser Art getätigt haben. 
-Eine Übereinstimmung liegt dann vor, wenn bei beide Gutachter sich einig sind, ob dieser Wissenstyp (mindestens einmal) vorkommt oder nicht. Da es insgesamt 12 Wissenstypen gibt, entspricht jede Übereinstimmung in einem Wissenstyp $\frac{1}{12} = 8,33\%$ . Für jeden Gutachter wird so die Übereinstimmung über alle Einheiten berechnet und der Durchschnittswert in Abbildung \ref{fig:Uebereinstimmung_Einheit} ausgegeben. Der Zeile für des besten Gutachtern ist grün, die des schlechtesten ist rot markiert. Analog wird der Durchschnittswert für die unterschiedlichen Kategorien in Abbildung \ref{fig:Uebereinstimmung_Einheit_Kategorie} angezeigt. \\
+Für jede Einheit wird für jeden Wissenstypen geprüft, ob die Gutachter mindstens eine Markierung dieser Art getätigt haben. 
+Eine Übereinstimmung liegt dann vor, wenn bei beide Gutachter sich einig sind, ob dieser Wissenstyp (mindestens einmal) vorkommt oder nicht. Da es insgesamt zwölf Wissenstypen gibt, entspricht jede Übereinstimmung in einem Wissenstyp $\frac{1}{12} = 8,33$ Prozent . Für jeden Gutachter wird so die Übereinstimmung über alle Einheiten berechnet und der Durchschnittswert in Abbildung \ref{fig:Uebereinstimmung_Einheit} ausgegeben. Der Zeile für des besten Gutachtern ist grün, die des schlechtesten ist rot markiert. Analog wird der Durchschnittswert für die unterschiedlichen Kategorien in Abbildung \ref{fig:Uebereinstimmung_Einheit_Kategorie} angezeigt. \\
 Diese Übereinstimmung prüft somit nicht nur, ob sich zwei Gutachter darin einig sind, dass ein Wissenstyp vorhanden ist, sondern auch, ob sie sich darin einig sind, dass dieser nicht vorhanden ist. 
 
 \begin{figure}[H]
@@ -217,90 +202,31 @@ Um die Bedeutung dieser Berechnungen zur Übereinstimmung zu veranschaulichen, fo
 Eine Einheit wird von beiden Gutachtern mit genau einem Wissenstypen markiert. Gutachter A vergibt den Wissenstyp 1 und Gutachter B vergibt den Wissenstyp 2. Somit sind sich Gutachter A und B darüber einig, dass die anderen zehn Wissenstypen (drei bis zwölf) nicht vorhanden sind. Dies ergibt eine Übereinstimmung in dieser Einheit von $\frac{10}{12} = 83,33 \% $. \\
 Die Übereinstimmung misst somit nicht nur die Einigkeit über das Vorhandensein eines Wissenstypen sondern auch über das Fehlen dessen. 
 \subsubsection{Übereinstimmung mit Goldstichprobe}
-Um die Gutachter entsprechend der Qualität ihrer Leistungen einordnen zu können, werden die Typisierungen dieser mit den Ergebnissen aus der Goldstichprobe verglichen. Aus den Übereinstimmungswerten ergibt sich dann direkt eine Platzierung für jeden Gutachter. Die Übereinstimmung wird analog zu der in Kapitel XY berechnet. 
-
-%***START***
-%username:robert
-%75.36790099999999
-%20
-%***********
-%username:jakob
-%85.37473274509804
-%51
-%***********
-%username:josephine
-%71.56433599999998
-%60
-%***********
-%username:lennart
-%80.06050749999999
-%48
-%***********
-%username:leon
-%74.98821765957446
-%47
-%***********
-%username:malte
-%65.16846339285715
-%56
-%***********
-%username:michael
-%81.51374388888888
-%54
-%***********
-%username:prechelt_extra_28
-%could not compare anything
-%***********
-%username:sven_extra_28
-%could not compare anything
-%***********
-
-
-%***START***
-%username:robert
-%90.536611
-%20
-%***********
-%username:jakob
-%93.37414372549017
-%51
-%***********
-%username:josephine
-%90.58970899999998
-%60
-%***********
-%username:lennart
-%93.78278312500002
-%48
-%***********
-%username:leon
-%91.21594531914893
-%47
-%***********
-%username:malte
-%89.75318660714287
-%56
-%***********
-%username:michael
-%96.26911648148149
-%54
-%***********
-%username:prechelt_extra_28
-%could not compare anything
-%***********
-%username:sven_extra_28
-%could not compare anything
-%***********
-
+Um die Gutachter entsprechend der Qualität ihrer Leistungen einordnen zu können, werden die Typisierungen dieser mit den Ergebnissen aus der Goldstichprobe anhand der Verträglichkeit (siehe Kapitel \ref{sec:Vertraeglichkeit}) verglichen. Aus den Verträglichkeitswerten ergibt sich dann direkt eine Platzierung für alle Gutachter der Hauptstichprobe ? mit Ausnahme der Gutachter C8 und C9 wegen der in Kapitel \ref{sec:Aenderung} besprochenen Änderung bezüglich der Stichprobenverteilung. Daher wurden die Platzierungen für die Gutachter C8 und C9 aus den Übereinstimmungswerten in Abbildung \ref{fig:Uebereinstimmung_Einheit} entnommen. Wegen des geringen Anteils dieser Bewertungen an der gesamten Stichprobe ist diese Vorgehensweise tolerierbar.
+\begin{figure}[H]
+\centering
+\begin{tabular}{|c|c|c|}
+Platzierung & Gutachter & Übereinstimmung \\ \hline
+\rowcolor{gray!20}1 & C9 & - \\
+2 & C8 & - \\
+\rowcolor{gray!20}3& C7 & 96.269 \\
+4& C4 & 93.782 \\
+\rowcolor{gray!20}5& C2 & 93.374 \\
+6& C5 & 91.215 \\
+\rowcolor{gray!20}7& C3 & 90.589 \\
+8& C1 & 90.536 \\
+\rowcolor{gray!20} 9&  C6 & 89.753 
+\end{tabular}
+\end{figure}
 
 
 \subsubsection{Unstimmigkeiten zur Goldstichprobe}
 Solange sich zwei Gutachter einig sind, wird das Ergebnis der Markierungen als gültiges Endresultat anerkannt. Wenn jedoch zwei Gutachter den falschen Wissenstypen wählen, zum Beispiel weil sie beide den Wissenstypen X mit Wissenstyp Y verwechseln, wird dieses Ergebnis verfälscht. Um solche Tendenzen der Gutachter aufzeigen zu können, vergleiche ich die gefundenen Wissenstypen (als zwölf boolsche Werte) der Gutachter mit den Ergebnissen aus der Goldstichprobe. Dabei gibt es zwei unterschiedliche Unstimmigkeiten:
 \begin{enumerate}
-\item Falsch-Positiv: Gutachter gibt an, dass der Wissenstyp in dieser Einheit vorhanden ist, obwohl dies laut Goldstichprobe nicht der Fall ist.
-\item Falsch-Negativ: Gutachter hat keine Markierung mit diesem Wissenstyp getätigt, obwohl in der Goldstichprobe mindestens eine davon vorhanden ist. 
+\item Falsch-Positiv: Der Gutachter gibt an, dass der Wissenstyp in dieser Einheit vorhanden ist, obwohl dies laut Goldstichprobe nicht der Fall ist.
+\item Falsch-Negativ: Der Gutachter hat keine Markierung mit diesem Wissenstyp getätigt, obwohl in der Goldstichprobe mindestens eine davon vorhanden ist. 
 \end{enumerate}
-Im folgenden wird für jeden Wissenstyp dargelegt, wie oft die Gutachter die Einheiten der Goldstichprobe falsch markiert haben sowie welche Anteile durch die falsch-positiv (FP) und falsch-negativen (FN)  Bewertungen verursacht wurden. Da jede Einheit doppelt typisiert wurde, liegt eine Menge von 336 Typisierungen mit insgesamt $336 * 12 =  4032$\footnote{Es gibt 12 Wissenstypen} Bewertungen zu Grunde. 
+Im folgenden wird für jeden Wissenstyp dargelegt, wie oft die Gutachter die Einheiten der Goldstichprobe falsch markiert haben, sowie welche Anteile durch die falsch-positiv (FP) und falsch-negativen (FN)  Bewertungen verursacht wurden. Da jede Einheit doppelt typisiert wurde, liegt eine Menge von 336 Typisierungen mit insgesamt $336 * 12 =  4032$\footnote{Es gibt 12 Wissenstypen} Bewertungen zu Grunde. 
 \begin{figure}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|} \hline
@@ -325,8 +251,9 @@ References& 15 & 0,333  & 0,667 \\
 
 
 \subsubsection{Verträglichkeit von Einheiten}
+\label{sec:Vertraeglichkeit}
 Weiterhin wird die Verträglichkeit der Einheiten betrachtet und ausgewertet. 
-Die Verträglichkeit bezieht sich auf die einzelnen Markierungen einer Einheit und ist wie folgt definiert. \\
+Die Verträglichkeit bezieht sich auf die einzelnen Markierungen einer Einheit und ist wie folgt definiert: \\
 \textbf{Definition:} Eine Markierung ist verträglich, wenn es eine andere Markierung gibt, die  
 \begin{enumerate}
 \item diese umschließt (größer oder gleich groß ist) \textbf{oder}
@@ -337,7 +264,7 @@ Oder anders ausgedrückt: \\
 Sei $B_{i}$ der Beginn, $E_{i}$ das Ende und $W_{i}$ der Wissenstyp der Markierung i, "`\&' das Zeichen für das logische "`und"', "`||"' das Zeichen für das logische "`oder"' und $confusion(i,j)$ eine Funktion, die angibt, ob die Wissenstypen i und j zu den aufgelösten Konfusionen gehören. Dann heißen zwei Markierungen M1 und M2 verträglich, wenn:
 \begin{enumerate}
 \item $(B_{1}>=B_{2}) $ \& $ (E_{1}<=E_{2})$ \textbf{||}
-\item $(B_{1}<=E_{1}>=B_{2}) $ \& $ ((E_{1}-B_{2})>=\frac{E_{1}-B_{1}}{2})$
+\item $(E_{1}>=B_{2}$ \& $B_{1}<=B_{2}) $ \& $ ((E_{1}-B_{2})>=\frac{E_{1}-B_{1}}{2})$
 \end{enumerate}
 \textbf{\&} $(W_{1} = W_{2}$ \textbf{||} $confusion(W_{1},W_{2}) )$ \\ \\ 
 Die Verträglichkeiten für jede Einheit werden auf zwei Weisen berechnet:
@@ -355,16 +282,16 @@ Während in Abbildung \ref{fig:Verträglichkeit_Gutachter} die durchschnittliche V
 \begin{tabular}{|c|c|c|} 
 & \multicolumn{2}{c}{Verträglichkeit} \\
 Gutachter & (1) nach Zeichen & (2) nach Markierungen \\ \hline
-\rowcolor{gray!20}C1 & 0,819 & 0,786 \\
-C2 & 0,848 & 0,823 \\
-\rowcolor{gray!20 }C3 & 0,818 & 0,788\\
-C4 & 0,704 & 0,674 \\
-\rowcolor{gray!20 }C5 & 0,860 & 0,829 \\
-C6 & 0,783 & 0,750 \\
-\rowcolor{gray!20 }C7 & 0,841 & 0,809 \\
-C8 & 0,922 & 0,895 \\
-\rowcolor{gray!20 }C9 & 0,863 & 0,820 \\ \hline
-\textbf{Durchsch.} & 0.828 & 0,797  \\ 
+\rowcolor{gray!20}C1 & 0,894 & 0,873 \\
+C2 & 0,894 & 0,879 \\
+\rowcolor{gray!20 }C3 & 0,875 & 0,856\\
+C4 & 0,776 & 0,758 \\
+\rowcolor{gray!20 }C5 & 0,902 & 0,878 \\
+C6 & 0,851 & 0,831 \\
+\rowcolor{gray!20 }C7 & 0,892 & 0,874 \\
+C8 & 0,965 & 0,938 \\
+\rowcolor{gray!20 }C9 & 0,917 & 0,887 \\ \hline
+\textbf{Durchsch.} & 0.885 & 0,863  \\ 
 \end{tabular}
 \caption{Verträglichkeit nach Gutachtern}
 \label{fig:Verträglichkeit_Gutachter}
@@ -375,13 +302,802 @@ C8 & 0,922 & 0,895 \\
 \begin{tabular}{|c|c|c|} 
 & \multicolumn{2}{c}{Verträglichkeit} \\
 Kategorie & (1) nach Zeichen & (2) nach Markierungen \\ \hline
-\rowcolor{gray!20 }Methoden & 0,879& 0,800\\
-Felder &0,725& 0,719 \\
-\rowcolor{gray!20 }Module &0,791& 0,730  \\
-Klassen &0,721& 0,698 \\
-\rowcolor{gray!20 }Beschreibungen &0,861& 0,854 \\
+\rowcolor{gray!20 }Methoden & 0,914 & 0,862 \\
+Felder &0,774& 0,769 \\
+\rowcolor{gray!20 }Module &0,876& 0,841  \\
+Klassen &0,786& 0,772 \\
+\rowcolor{gray!20 }Beschreibungen &0,861& 0,854 \\ \hline
+\textbf{Durchschn.} & 0,842 & 0,819 \\
 \end{tabular}
 \caption{Verträglichkeit nach Kategorien}
 \label{fig:Verträglichkeit_Kategorie}
 \end{figure}
 
+\subsection{Ergebnis-Zusammenführung der Hauptstichproben}
+Da jede Einheit aus der Hauptstichprobe ebenfalls von zwei Gutachtern bewertet wurde, müssen auch diese Ergebnisse zusammengeführt werden. 
+Diese Stichprobe ist mit 1548 Einheiten allerdings erheblich größer als die Goldstichprobe mit 168 Einheiten, deswegen soll dies durch ein Skript (Django-Kommando) automatisiert werden. 
+Das Markierungsresultat wird für die Markierungen der Gutachter $G_{i}$ und $ G_{j}$ wie folgt bestimmt: \\ \\
+Die Markierung werden nach ihrem Auftreten aufsteigend sortiert. 
+Nacheinander werden alle Markierungen, die sich zu mindestens 50 Prozent überschneiden, mit einander verglichen. Sobald ein Gutachter bei diesem Vergleich die Markierung mit dem "`besseren"' Wissenstyp (laut Konfusionergebnis) getätigt hat, bekommt dieser einen "`Pluspunkt"' und seine Markierung wird in das Endresultat übernommen (erster Fall). Wenn es für eine Markierung entweder eine Übereinstimmung der Wissenstypen gibt oder diese so verschieden sind, dass diese nicht zu den aufgelösten Konfusionspaaren gehören, dann wird die Markierung des Gutachters mit mehr "`Pluspunkten"' übernommen (zweiter Fall). 
+Falls die "`Pluspunkte"' kein eindeutiges Ergebnis liefern, werden die Gutachter mit dem besseren Ergebnissen im Vergleich zur Goldstichprobe bevorzugt (dritter Fall). 
+\\
+Wenn die Segmentierungsweisen (also die Start und Endpunkte der Markierungen) beider Gutachtern stark von einander abweichen, entstehen im Endergebnis unter Umständen mehr Markierungen als im Durchschnitt beider Gutachter. Insgesamt wurden so 5737 Markierungen auf 1548 Einheiten identifiziert, also im Durchschnitt 3.7 Markierungen pro Einheit.
+
+\subsection{Strukturen und Muster der Wissenstypen}
+In diesem Abschnitt wird das Endergebnis der Hauptstichprobe auf die Strukturen und Muster der vorkommenden Wissenstypen untersucht.  
+\subsubsection{Vorkommen und Verhältnis }
+\label{sec:Vorkommen_Verhaeltnis}
+Abbildung \ref{fig:Haeufigkeiten-Wissenstypen} zeigt die Häufigkeit aller aufgetretenen Wissenstypen über alle Markierungen in absoluten Zahlen an. In Abbildung \ref{fig:Haeufigkeiten-Wissenstypen-prozent} wird diese Darstellung noch einmal mit relativen Zahlen im Bezug zur Gesamtmenge aller Markierungen wiederholt. In Abbildung \ref{fig:Verhaeltnis-Wissenstypen} wird das Verhältnis der Wissenstypen über alle Dokumentationseinheiten  dargestellt, zum Beispiel enthalten 72 Prozent aller Einheiten den Wissenstyp "`Functionality and Behaviour"'. Diese Informationen werden dann in Abbildung \ref{tab:Verhaeltnis-Wissesntypen-Kategorie} noch einmal für jede Kategorie einzeln dargestellt. Aus dieser Tabelle wird beispielsweise deutlich, dass die Einheiten der Kategorie "`Methoden"' eindeutig mehr Wissen zu dem Wissenstyp "`Functionality and Behavior"' enthalten als alle anderen Einheiten (mindestens 30 Prozent mehr) und, dass in Modulen viel häufiger Programmierbeispiele vorkommen als in allen anderen Kategorien (mindestens dreieinhalb mal so viel).
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+ \tikzstyle{every node}=[font=\small]
+\begin{axis}[height=6cm, 
+width=12cm, 
+ybar,
+enlargelimits=0.15,
+bar width=0.4cm,
+ytick={500,1000,1500,2000},
+ylabel={Häufigkeit, absolut},
+xticklabels={Functionality, Concepts, Directive, Purpose, Quality, Control, Structure, Patterns, Examples, Environment, References, Non-info},
+nodes near coords,
+legend style={nodes=right},
+nodes near coords align={vertical},
+x tick label style={rotate=45,anchor=east},
+xtick=data
+]
+\addplot table {proportion_knowledgetypes.csv};
+\legend{Gesamt: 5737 }
+\end{axis}
+\end{tikzpicture}
+\caption{Häufigkeiten der Wissenstypen}
+\label{fig:Haeufigkeiten-Wissenstypen}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+ \tikzstyle{every node}=[font=\small]
+\pgfkeys{
+     /pgf/number format/precision=2, 
+    /pgf/number format/fixed zerofill=true,
+    /pgf/number format/fixed
+}
+\begin{axis}[height=6cm, 
+width=12cm, 
+ybar,
+enlargelimits=0.15,
+bar width=0.4cm,
+ytick={0,0.05,0.1,0.2,0.3},
+ylabel={Häufigkeit, prozentual},
+xticklabels={Functionality, Concepts, Directive, Purpose, Quality, Control, Structure, Patterns, Examples, Environment, References, Non-info},
+nodes near coords,
+legend style={nodes=right},
+yticklabel style={/pgf/number format/fixed},
+nodes near coords align={vertical},
+x tick label style={rotate=45,anchor=east},
+xtick=data,
+]
+\addplot table {proportion_knowledgetypes-percent.csv};
+\legend{Gesamt: 1.0}
+\end{axis}
+\end{tikzpicture}
+\caption{prozentuale Häufigkeiten der Wissenstypen}
+\label{fig:Haeufigkeiten-Wissenstypen-prozent}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+ \tikzstyle{every node}=[font=\small]
+\pgfkeys{
+     /pgf/number format/precision=2, 
+    /pgf/number format/fixed zerofill=true,
+    /pgf/number format/fixed
+}
+\begin{axis}[height=6cm, 
+width=12cm, 
+ybar,
+enlargelimits=0.15,
+bar width=0.4cm,
+ytick={0.1,0.2,0.4,0.6,0.8,1.0},
+ylabel={Vorkommen in Einheiten},
+xticklabels={Functionality, Concepts, Directive, Purpose, Quality, Control, Structure, Patterns, Examples, Environment, References, Non-info},
+nodes near coords,
+yticklabel style={/pgf/number format/fixed},
+nodes near coords align={vertical},
+x tick label style={rotate=45,anchor=east},
+xtick=data,
+]
+\addplot table {proportion_types.csv};
+\end{axis}
+\end{tikzpicture}
+\caption{Verhältnis der Wissenstypen pro Dokumentationseinheiten}
+\label{fig:Verhaeltnis-Wissenstypen}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|} \hline
+Wissenstyp &Methoden&Felder &Module&Klassen&Beschreibungen\\ \hline
+\rowcolor{gray!30}Functionality& 0.94 &	0.59 &	0.44	&0.64&	0.88	\\ \hline
+Concepts& 0.08 &0.09 &0.38 &0.24 &0.00 \\ \hline
+\rowcolor{gray!30}Directives& 0.18& 0.03& 0.15 & 0.17 & 0.00 \\ \hline
+Purpose& 0.10& 0.05& 0.25& 0.22& 0.00 \\ \hline
+\rowcolor{gray!30}Quality&0.08 & 0.04 & 0.26 & 0.12 & 0.00 \\ \hline
+Control& 0.08& 0.0 & 0.05 & 0.05 & 0.00 \\ \hline
+\rowcolor{gray!30}Structure& 0.18  & 0.13 &0.32& 0.38&0.13 \\ \hline
+Patterns& 0.12 &0.03 & 0.28 &0.15 & 0.06  \\ \hline
+\rowcolor{gray!30}Examples& 0.10 & 0.05 & 0.37 & 0.08 & 0.06 \\ \hline
+Environm.& 0.19 & 0.20 & 0.18 & 0.23 & 0.00 \\ \hline
+\rowcolor{gray!30}Referenc.&0.02 & 0.03 & 0.12 & 0.03 & 0.00  \\ \hline
+Non-Info.&0.02 & 0.02 & 0.17 & 0.08 & 0.00 \\ \hline
+\end{tabular}
+}
+\caption{Verhältnis der Wissenstypen pro Kategorie}
+\label{tab:Verhaeltnis-Wissesntypen-Kategorie}
+\end{figure}
+
+
+\subsubsection{Kookkurrenz}
+Die Auswertung in Kapitel \ref{sec:Vorkommen_Verhaeltnis} zeigt die Verteilung der verschiedenen Wissenstypen, jedoch kein direktes Muster von gemeinsam auftretenden Wissenstypen. Fraglich ist, ob es beispielsweise den Wissenstyp "`Quality Attributes and Internal Aspects"' meist in Verbindung mit "`Functionality and Behavior"' gibt. \\ Daher wird in Abbildung \ref{tab:Kookurrenz-absolut} die Korrelation zwischen zwei verschiedenen Wissenstypen in absoluten Zahlen und in Abbildung \ref{tab:Kookurrenz-prozentual} im Verhältnis zum Vorkommen des jeweiligen Typen angezeigt. Die Berechnung dieser Werte erfolgte jeweils innerhalb eines Django-Kommandos. Wenn ein Wissenstyp mehr als einmal in einer Dokumentationseinheit vorgekommen ist, wurde dieser (analog zum Artikel von Maalej und Robillard \cite{MaalejRobillard}) nur einmal gewertet. \\
+In diesem Abbildungen erkennt man, dass es keine Kombination gibt, die nicht aufgetreten ist. Die prozentualen Werte reichen von 6 Prozent ("`Non-Information"' mit "`Functionaltiy and Behaivor"' und "`Control-Flow"' mit "'Structure and Relationships"') bis  49 Prozent ("`Concepts"' mit "`Structure"'). 
+
+\begin{figure}[H]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} \hline
+\rowcolor{gray!30}-&Concepts&Directives &Purpose&Quality&Control&Structure&Patterns&Examples&Environm.&Referenc.&Non-Info\\ \hline
+Functionality& 159 & 188 & 172 & 134 &73  &259 &165 &145 &233 & 55 & 62 \\ \hline
+\rowcolor{gray!30}Concepts& & 72 &90 &66 &14 &128 &78 & 81&74 &32 &39\\ \hline
+Directives& & & 65& 67& 32& 89& 67& 61& 85& 13&32 \\ \hline
+\rowcolor{gray!30}Purpose& & & & 63& 19& 99& 82& 71& 74& 23&33 \\ \hline
+Quality& & & & & 14& 83& 69& 56& 70&21&34 \\ \hline
+\rowcolor{gray!30}Control& & & & & & 32& 25& 15&22& 5& 7\\ \hline
+Structure& & & & & & &99 &90&114& 34&49 \\ \hline
+\rowcolor{gray!30}Patterns& & & & & & & &100 &73& 19&34 \\ \hline
+Examples& & & & & & & & &60& 18&37 \\ \hline
+\rowcolor{gray!30}Environm.& & & & & & & && & 28& 29\\ \hline
+Referenc.& & & & & & & & && &12 \\ \hline
+\end{tabular}
+}
+\caption{absolute Kookurrenz von Wissenstypen}
+\label{tab:Kookurrenz-absolut}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|} \hline
+-&Concepts&Directives &Purpose&Quality&Control&Structure&Patterns&Examples&Environm.&Referenc.&Non-Info\\ \hline
+\rowcolor{gray!30}Functionality& 0.14 &	0.17 &	0.15	&0.12&	0.07	&0.23	&0.15	&0.13	&0.21	&0.05&	0.06 \\ \hline
+Concepts& & 0.28 &0.35 &0.25 &0.05 &0.49 &0.30 & 0.31 &0.29  &0.12 &0.15 \\ \hline
+\rowcolor{gray!30}Directives& & & 0.30& 0.31& 0.15 & 0.41 & 0.31 & 0.28 & 0.39 & 0.06 & 0.15 \\ \hline
+Purpose& & & & 0.29& 0.09& 0.46& 0.38& 0.33& 0.35& 0.11 & 0.15 \\ \hline
+\rowcolor{gray!30}Quality& & & & & 0.08 & 0.48 & 0.40 & 0.32 & 0.40 &0.12&0.20 \\ \hline
+Control& & & & & & 0.39& 0.30& 0.18 & 0.27 & 0.06 & 0.09\\ \hline
+\rowcolor{gray!30}Structure& & & & & & &0.28  & 0.25 &0.32& 0.09&0.14 \\ \hline
+Patterns& & & & & & & &0.47 &0.34 & 0.09 &0.16 \\ \hline
+\rowcolor{gray!30}Examples& & & & & & & & &0.28 & 0.08 & 0.17 \\ \hline
+Environm.& & & & & & & && & 0.09 & 0.10\\ \hline
+\rowcolor{gray!30}Referenc.& & & & & & & & && &0.18 \\ \hline
+\end{tabular}
+}
+\caption{prozentuale Kookurrenz von Wissenstypen}
+\label{tab:Kookurrenz-prozentual}
+\end{figure}
+
+\subsubsection{Längenanalyse}
+Weiterhin kann die Beziehung zwischen der Anzahl der verschiedenen Wissenstypen in einer Dokumentationseinheit und der Länge dieser Einheit betrachtet werden. 
+Für die Länge der Einheiten wird analog zur Originalstudie die Anzahl der Wörter gemessen. Wörter sind hierfür als durch Leerzeichen getrennte Zeichenketten definiert. 
+In Abbildung \ref{tab:Woerter-Kategorie} wird die Beziehung zwischen der Länge der Einheiten und der Kategorie angegeben und in Abbildung \ref{fig:Woerter-Kategorie} mit Hilfe eines Boxplot-Diagramms dargestellt. \\ 
+In den Abbildungen \ref{fig:Methoden:Woerter:Wissenstypen} bis \ref{fig:Beschreibungen:Woerter:Wissenstypen} werden für je eine Kategorie die Anzahl der verschiedenen typisierten Wissenstypen mit den Längen der Einheiten dargestellt. Während "`Minimum"' und "`Maximum"' die "`Antennen"' (auch "`Whisker"' genannt) der Boxplots angeben, wird das Rechteck durch die Werte "`unteres Quartil"' und "`oberes Quartil"' gegeben. Die zusätzlich Linie innerhalb des Rechtecks bezeichnet den "`Median"'. In der Studie von Maalej und Robillard wurden die "`Whisker"' anders berechnet, so dass zusätzlich noch "`Ausreißer"' als Punkte mit dargestellt werden konnten. Da die Berechnung dieser "`Antennen"' allerdings nicht einheitlich geregelt ist und sich in der Originalstudie keinen Hinweis darauf finden lässt, wie diese berechnet wurde, werden hier die Extrema dafür festgelegt. \\
+Es ist dabei eine deutliche Korrelation zwischen Länge der Einheiten und gefundenen Wissenstypen erkennbar. Am deutlichsten ausgeprägt ist diese für die Einheiten der Kategorien "`Methoden"' und "`Klassen"'. Die Einheiten ohne zugeordnete Wissenstypen haben zwei unterschiedliche Ursachen. Zum einen gibt es immer wieder Einheiten, welche lediglich eine Überschrift und nur den Satz "`[something removed here]"' besitzen, da der Inhalt vollständig in untere Kategorien durch den Extrahierer aufgeteilt wurde. Zum anderen gab es einige, wenige ($< 6$ Einheiten, die keine Informationen über die API sondern über die Benutzung der GUI \footnote{Graphical User Interface (engl.) = Grafische Benutzeroberfläche} beinhalteten und deswegen auch nicht typisiert wurden. 
+
+\begin{figure}[H]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{c|c|c|c|c|c|c|} 
+&unt. Quartil & Median & Durschn. &ober. Quartil & Min &Max \\ \hline
+\rowcolor{gray!30}Methoden & 126 & 226 & 371.30 & 430.5 & 38  & 3333  \\
+Felder & 58&  131& 185.59 & 230 & 9 & 2292 \\
+\rowcolor{gray!30}Module & 298 &739.5 & 1062.25 & 1438.5 &  41  & 9439 \\
+Klassen & 137 & 263& 479.46 & 539&22  &2841 \\
+\rowcolor{gray!30}Beschreibungen & 43 &65.5 & 120.31 &110& 37 & 823 \\
+Gesamt & 117 &  238.5 & 488.88 & 521 & 9 & 9439 \\
+\end{tabular}
+}
+\caption{Anzahl der Wörter nach Kategorie}
+\label{tab:Woerter-Kategorie}
+\end{figure}
+
+
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+boxplot/draw direction=y,
+x axis line style={opacity=0},
+axis x line*=bottom,
+axis y line=left,
+ymin = -10,
+ymax=250,
+enlarge y limits,
+ymajorgrids,
+xtick={1,2,3,4,5},
+xticklabels={Methoden, Felder, Module, Klassen, Beschreibungen},
+x tick label style={rotate=45,anchor=east},
+ylabel={Länge der Einheiten (Wörter)},
+]
+table[row sep=\\,y index=0] { };
+%methods
+\addplot+[
+boxplot prepared={
+lower whisker=4, lower quartile=18,
+median=33,
+upper quartile=65.5, upper whisker=517,
+},
+]
+coordinates {};
+%fields
+\addplot+[
+boxplot prepared={
+lower whisker=1, lower quartile=8,
+median=18,
+upper quartile=32.5, upper whisker=325,
+},
+]
+coordinates {};
+%modules
+\addplot+[
+boxplot prepared={
+lower whisker=5, lower quartile=44,
+median=102.5,
+upper quartile=201.5, upper whisker=1467,
+},
+]
+coordinates {};
+%classes
+\addplot+[
+boxplot prepared={
+lower whisker=2, lower quartile=18,
+median=34,
+upper quartile=73, upper whisker=449,
+},
+]
+coordinates {};
+%describe
+\addplot+[
+boxplot prepared={
+lower whisker=7, lower quartile=9,
+median=9,
+upper quartile=16.5, upper whisker=134,
+},
+]
+coordinates {};
+\end{axis}
+\end{tikzpicture}
+\caption{Anzahl der Wörter nach Kategorie in einem Boxplot-Diagramm}
+\label{fig:Woerter-Kategorie}
+\end{figure}
+
+% Methoden: Anzahl der Wörter und Anzahl der Wissenstypen
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+boxplot/draw direction=y,
+x axis line style={opacity=0},
+axis x line*=bottom,
+axis y line=left,
+%ymin = -10,
+%ymax=250,
+enlarge y limits,
+ymajorgrids,
+xtick={1,2,3,4,5,6,7,8,9,10,11},
+xticklabels={0,1,2,3,4,5,6,7,8,9,10},
+ytick={0,50,100,200,400},
+xlabel={Anzahl der Wissenstypen},
+ylabel={Länge der Einheiten (Wörter)},
+]
+table[row sep=\\,y index=0] { };
+%0
+\addplot+[
+boxplot prepared={
+lower whisker=4, lower quartile=10,
+median=20.5,
+upper quartile=34.5, upper whisker=51,
+},
+]
+coordinates {};
+%1
+\addplot+[
+boxplot prepared={
+lower whisker=4, lower quartile=12,
+median=19,
+upper quartile=32.5, upper whisker=114,
+},
+]
+coordinates {};
+%2
+\addplot+[
+boxplot prepared={
+lower whisker=10, lower quartile=21,
+median=19,
+upper quartile=32.5, upper whisker=114,
+},
+]
+coordinates {};
+3
+\addplot+[
+boxplot prepared={
+lower whisker=23, lower quartile=43,
+median=55,
+upper quartile=85, upper whisker=264,
+},
+]
+coordinates {};
+%4
+\addplot+[
+boxplot prepared={
+lower whisker=23, lower quartile=54,
+median=87,
+upper quartile=153.5, upper whisker=497,
+},
+]
+coordinates {};
+%5
+\addplot+[
+boxplot prepared={
+lower whisker=36, lower quartile=82,
+median=114,
+upper quartile=168, upper whisker=450,
+},
+]
+coordinates {};
+%6
+\addplot+[
+boxplot prepared={
+lower whisker=77, lower quartile=114,
+median=157,
+upper quartile=217.5, upper whisker=318,
+},
+]
+coordinates {};
+%7
+\addplot+[
+boxplot prepared={
+lower whisker=120, lower quartile=132,
+median=193,
+upper quartile=287, upper whisker=517,
+},
+]
+coordinates {};
+%8
+\addplot+[
+boxplot prepared={
+lower whisker=162, lower quartile=178,
+median=365,
+upper quartile=417, upper whisker=510,
+},
+]
+coordinates {};
+%9
+\addplot+[
+boxplot prepared={
+lower whisker=350, lower quartile=350,
+median=350,
+upper quartile=350, upper whisker=350,
+},
+]
+coordinates {};
+%10
+\addplot+[
+boxplot prepared={
+lower whisker=496, lower quartile=496,
+median=496,
+upper quartile=496, upper whisker=496,
+},
+]
+coordinates {};
+\end{axis}
+\end{tikzpicture}
+\caption{Methoden: Anzahl der Wörter und Anzahl der Wissenstypen}
+\label{fig:Methoden:Woerter:Wissenstypen}
+\end{figure}
+
+
+
+% Felder: Anzahl der Wörter und Anzahl der Wissenstypen
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+boxplot/draw direction=y,
+x axis line style={opacity=0},
+axis x line*=bottom,
+axis y line=left,
+%ymin = -10,
+%ymax=250,
+enlarge y limits,
+ymajorgrids,
+xtick={1,2,3,4,5,6,7,8,9,10,11},
+xticklabels={0,1,2,3,4,5,6,7,8,9,10},
+ytick={0,50,100,200,400},
+ylabel={Länge der Einheiten (Wörter)},
+xlabel={Anzahl der Wissenstypen},
+]
+table[row sep=\\,y index=0] { };
+%0
+\addplot+[
+boxplot prepared={
+lower whisker=1, lower quartile=3,
+median=7,
+upper quartile=14.5, upper whisker=51,
+},
+]
+coordinates {};
+%1
+\addplot+[
+boxplot prepared={
+lower whisker=2, lower quartile=7,
+median=14,
+upper quartile=23.5, upper whisker=82,
+},
+]
+coordinates {};
+%2
+\addplot+[
+boxplot prepared={
+lower whisker=6, lower quartile=21,
+median=32,
+upper quartile=47.5, upper whisker=146,
+},
+]
+coordinates {};
+%3
+\addplot+[
+boxplot prepared={
+lower whisker=18, lower quartile=31,
+median=41.5,
+upper quartile=60.5, upper whisker=92,
+},
+]
+coordinates {};
+%4
+\addplot+[
+boxplot prepared={
+lower whisker=80, lower quartile=80,
+median=111,
+upper quartile=219.5, upper whisker=325,
+},
+]
+coordinates {};
+%5
+\addplot+[
+boxplot prepared={
+lower whisker=64, lower quartile=69,
+median=72,
+upper quartile=76, upper whisker=109,
+},
+]
+coordinates {};
+%6
+\addplot+[
+boxplot prepared={
+lower whisker=80, lower quartile=80,
+median=173,
+upper quartile=201.5, upper whisker=230,
+},
+]
+coordinates {};
+\end{axis}
+\end{tikzpicture}
+\caption{Felder: Anzahl der Wörter und Anzahl der Wissenstypen}
+\label{fig:Felder:Woerter:Wissenstypen}
+\end{figure}
+
+
+
+% Module: Anzahl der Wörter und Anzahl der Wissenstypen
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+boxplot/draw direction=y,
+x axis line style={opacity=0},
+axis x line*=bottom,
+axis y line=left,
+%ymin = -10,
+%ymax=250,
+enlarge y limits,
+ymajorgrids,
+xtick={1,2,3,4,5,6,7,8,9,10,11},
+xticklabels={0,1,2,3,4,5,6,7,8,9,10},
+ylabel={Länge der Einheiten (Wörter)},
+xlabel={Anzahl der Wissenstypen},
+]
+table[row sep=\\,y index=0] { };
+%0
+\addplot+[
+boxplot prepared={
+lower whisker=5, lower quartile=5,
+median=7,
+upper quartile=32.0, upper whisker=293,
+},
+]
+coordinates {};
+%1
+\addplot+[
+boxplot prepared={
+lower whisker=10, lower quartile=30,
+median=61,
+upper quartile=104.5, upper whisker=387,
+},
+]
+coordinates {};
+%2
+\addplot+[
+boxplot prepared={
+lower whisker=19, lower quartile=44,
+median=70.5,
+upper quartile=134.5, upper whisker=559,
+},
+]
+coordinates {};
+3
+\addplot+[
+boxplot prepared={
+lower whisker=27, lower quartile=71,
+median=103,
+upper quartile=236, upper whisker=808,
+},
+]
+coordinates {};
+%4
+\addplot+[
+boxplot prepared={
+lower whisker=45, lower quartile=102,
+median=134.5,
+upper quartile=210.0, upper whisker=388,
+},
+]
+coordinates {};
+%5
+\addplot+[
+boxplot prepared={
+lower whisker=95, lower quartile=124,
+median=161,
+upper quartile=235, upper whisker=590,
+},
+]
+coordinates {};
+%6
+\addplot+[
+boxplot prepared={
+lower whisker=69, lower quartile=132,
+median=185,
+upper quartile=301.5, upper whisker=732,
+},
+]
+coordinates {};
+%7
+\addplot+[
+boxplot prepared={
+lower whisker=159, lower quartile=210,
+median=261,
+upper quartile=321.5, upper whisker=384,
+},
+]
+coordinates {};
+%8
+\addplot+[
+boxplot prepared={
+lower whisker=173, lower quartile=317,
+median=460,
+upper quartile=628, upper whisker=1467,
+},
+]
+coordinates {};
+%9
+\addplot+[
+boxplot prepared={
+lower whisker=125, lower quartile=195,
+median=242,
+upper quartile=480, upper whisker=639,
+},
+]
+coordinates {};
+%10
+\addplot+[
+boxplot prepared={
+lower whisker=407, lower quartile=407,
+median=407,
+upper quartile=407, upper whisker=407,
+},
+]
+coordinates {};
+\end{axis}
+\end{tikzpicture}
+\caption{Module: Anzahl der Wörter und Anzahl der Wissenstypen}
+\label{fig:Module:Woerter:Wissenstypen}
+\end{figure}
+
+
+
+% Klassen: Anzahl der Wörter und Anzahl der Wissenstypen
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+boxplot/draw direction=y,
+x axis line style={opacity=0},
+axis x line*=bottom,
+axis y line=left,
+%ymin = -10,
+%ymax=250,
+enlarge y limits,
+ymajorgrids,
+xtick={1,2,3,4,5,6,7,8,9,10,11},
+xticklabels={0,1,2,3,4,5,6,7,8,9,10},
+ylabel={Länge der Einheiten (Wörter)},
+xlabel={Anzahl der Wissenstypen},
+]
+table[row sep=\\,y index=0] { };
+%0
+\addplot+[
+boxplot prepared={
+lower whisker=2, lower quartile=9,
+median=17,
+upper quartile=26, upper whisker=74,
+},
+]
+coordinates {};
+%1
+\addplot+[
+boxplot prepared={
+lower whisker=5, lower quartile=13,
+median=19,
+upper quartile=27, upper whisker=65,
+},
+]
+coordinates {};
+%2
+\addplot+[
+boxplot prepared={
+lower whisker=10, lower quartile=20,
+median=37,
+upper quartile=64, upper whisker=238,
+},
+]
+coordinates {};
+3
+\addplot+[
+boxplot prepared={
+lower whisker=14, lower quartile=29,
+median=44,
+upper quartile=57, upper whisker=115,
+},
+]
+coordinates {};
+%4
+\addplot+[
+boxplot prepared={
+lower whisker=23, lower quartile=59,
+median=78.5,
+upper quartile=172.5, upper whisker=242,
+},
+]
+coordinates {};
+%5
+\addplot+[
+boxplot prepared={
+lower whisker=48, lower quartile=105,
+median=144,
+upper quartile=241, upper whisker=354,
+},
+]
+coordinates {};
+%6
+\addplot+[
+boxplot prepared={
+lower whisker=56, lower quartile=120,
+median=197,
+upper quartile=281.5, upper whisker=449,
+},
+]
+coordinates {};
+%7
+\addplot+[
+boxplot prepared={
+lower whisker=81, lower quartile=160,
+median=244,
+upper quartile=321, upper whisker=436,
+},
+]
+coordinates {};
+%8
+\addplot+[
+boxplot prepared={
+lower whisker=151, lower quartile=151,
+median=206,
+upper quartile=277.5, upper whisker=349,
+},
+]
+coordinates {};
+%9
+\addplot+[
+boxplot prepared={
+lower whisker=229, lower quartile=229,
+median=229,
+upper quartile=229, upper whisker=229,
+},
+]
+coordinates {};
+\end{axis}
+\end{tikzpicture}
+\caption{Klassen: Anzahl der Wörter und Anzahl der Wissenstypen}
+\label{fig:Klassen:Woerter:Wissenstypen}
+\end{figure}
+
+
+
+% Beschreibungen: Anzahl der Wörter und Anzahl der Wissenstypen
+\begin{figure}[H]
+\begin{tikzpicture}
+\begin{axis}[
+boxplot/draw direction=y,
+x axis line style={opacity=0},
+axis x line*=bottom,
+axis y line=left,
+%ymin = -10,
+%ymax=250,
+enlarge y limits,
+ymajorgrids,
+xtick={1,2,3,4,5,6,7,8,9,10,11},
+xticklabels={0,1,2,3,4,5,6,7,8,9,10},
+ylabel={Länge der Einheiten (Wörter)},
+xlabel={Anzahl der Wissenstypen},
+]
+table[row sep=\\,y index=0] { };
+%0
+\addplot+[
+boxplot prepared={
+lower whisker=9, lower quartile=9,
+median=9.5,
+upper quartile=9.5, upper whisker=10,
+},
+]
+coordinates {};
+%1
+\addplot+[
+boxplot prepared={
+lower whisker=7, lower quartile=9,
+median=10,
+upper quartile=15.5, upper whisker=27,
+},
+]
+coordinates {};
+%2
+\addplot+[
+boxplot prepared={
+lower whisker=16, lower quartile=16,
+median=16.5,
+upper quartile=16.5, upper whisker=17,
+},
+]
+coordinates {};
+3
+\addplot+[
+boxplot prepared={
+lower whisker=134, lower quartile=134,
+median=134,
+upper quartile=134, upper whisker=134,
+},
+]
+coordinates {};
+\end{axis}
+\end{tikzpicture}
+\caption{Beschreibungen: Anzahl der Wörter und Anzahl der Wissenstypen}
+\label{fig:Beschreibungen:Woerter:Wissenstypen}
+\end{figure}
