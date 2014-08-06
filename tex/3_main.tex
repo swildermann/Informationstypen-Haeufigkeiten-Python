@@ -327,10 +327,10 @@ $\;$ \\
 Nach dem Login wird der Gutachter direkt zu der nächsten zu typisierenden Einheit weitergeleitet. 
 Auf dieser werden neben der Navigation noch die Identifikationsnummer der Dokumentationseinheit, der Text der Einheit und Steuerungselemente angezeigt. Die Steuerungselemente sind im Einzelnen: 
 \begin{enumerate}
-\item Save ? speichert die aktuelle Markierung
-\item Delete All ? löscht alle gesetzten Markierungen des Gutachter bei dieser Einheit
-\item Show Parent ? zeigt das direkte Vaterelement der Dokumentationseinheit an (siehe Abbildung \ref{fig:HTML-Elemente})
-\item Show File ? zeigt die gesamte HTML-Datei, aus welcher diese Dokumentationseinheit stammt, im Original an
+\item Save - speichert die aktuelle Markierung
+\item Delete All - löscht alle gesetzten Markierungen des Gutachter bei dieser Einheit
+\item Show Parent - zeigt das direkte Vaterelement der Dokumentationseinheit an (siehe Abbildung \ref{fig:HTML-Elemente})
+\item Show File - zeigt die gesamte HTML-Datei, aus welcher diese Dokumentationseinheit stammt, im Original an
 \end{enumerate}
 Sobald der Text von dieser Einheit mit dem Mauscursor markiert wurde, erscheint ein Fenster für die Auswahl eines Wissenstypes. 
 Die Position der Markierung wird dann zusammen mit dem Wissenstyp mit Hilfe von Javascript zwischengespeichert und dann beim Klicken auf "`save"' über Ajax als POST-request an den Controller\footnote{Entsprechend des "`Model View Controller"'-Musters} (in Django ist es die views.py) gesendet. Nach dem Speichern wird dann die nächste Einheit angezeigt.  $\;$ \\

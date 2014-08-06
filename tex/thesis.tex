@@ -4,10 +4,12 @@
 \usepackage{babel}
 \usepackage{ae}
 \usepackage{bchart}
-\usepackage{pgfplots}
 \usepackage{float}
 \usepackage{ulem}
 \usepackage{tikz}
+\usepackage{mathpazo}
+\usepackage{pgfplots}
+    \pgfplotsset{compat=newest}
 
 \usepgfplotslibrary{statistics}
 \usetikzlibrary{arrows,shapes,positioning,shadows,trees}
@@ -22,6 +24,8 @@
 }
 %
 %
+
+
 %
 \usepackage{fancyref}
 \usepackage{fancyhdr} 
@@ -36,6 +40,8 @@
 %
 %Colors
 \definecolor{shadecolor}{rgb}{0.9,0.9,0.9}
+\definecolor{skyblue}{rgb}{0.447,0.624,0.812}
+
 % PDF settings
 \usepackage[pdfstartview=FitH,pdftitle={Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation },pdfauthor={Sven Wildermann}, colorlinks=true, linktocpage]{hyperref}
 % colorlinks=false, pdfborder={0 0 0} = keine farbigen Links
@@ -72,7 +78,7 @@ showstringspaces=false,numbers=left,frame=none}
 % Titel and author 
 \title{\includegraphics[width=0.6\textwidth]{pictures/logo}\\
 {\normalsize Bachelorarbeit am Institut für Informatik der Freien Universität Berlin, Arbeitsgruppe Software Engineering}\\[6ex]
-Messung der Informationstypen-Häufigkeiten in \newline der Python-Dokumentation}
+Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation}
 
 \author{Sven Wildermann\\
 {\normalsize Matrikelnummer: 4567553}\\
@@ -114,7 +120,7 @@ Messung der Informationstypen-Häufigkeiten in \newline der Python-Dokumentation}
 \pagestyle{fancy}
 \setcounter{page}{0}
 
-\include{ideas}
+%\include{ideas}
 \include{1_introduction}      
 \include{2_fundamentals}      
 \include{3_main}            
