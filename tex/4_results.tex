@@ -2,7 +2,7 @@
 In diesem Abschnitt werden alle Ergebnisse der Auswertungen aufgezeigt und die dafür notwendigen Schritte erklärt. 
 
 \subsection{Konfusionen}
-Bei der Überprüfung der Verträglichkeit zweier Markierungen gibt es immer wieder den Fall, dass Gutachter A den Typ X, Gutachter B hingegen den Typ Y für sinnvoller hält. Daher wird überprüft, ob es Typen gibt, die besonders häufig mit-einander verwechselt  werden. Mit Hilfe der folgenden SQL-Anweisung wurden alle aufgetretenen Konfusionen inklusive Häufigkeit des Auftretens ausgegeben: 
+Bei der Überprüfung der Verträglichkeit zweier Markierungen gibt es immer wieder den Fall, dass Gutachter A den Typ X, Gutachter B hingegen den Typ Y für sinnvoller hält. Daher wird überprüft, ob es Typen gibt, die besonders häufig miteinander verwechselt  werden. Mit Hilfe der folgenden SQL-Anweisung wurden alle aufgetretenen Konfusionen inklusive Häufigkeit des Auftretens ausgegeben: 
 \begin{lstlisting}[language=SQL] 
 SELECT atype_id, btype_id, COUNT(*) 
 FROM extractor_confusions 
@@ -35,7 +35,7 @@ Wenn jetzt noch die Reihenfolge ignoriert wird, also die Ergbenisse der Tupel (X
 \caption[Konfusionshäufigkeiten]{Konfusionshäufigkeiten}
 \end{figure} 
 Aufgelistet werden die Konfusionen hier, sobald die untere Schranke von 50 Vorkommen erreicht wird. Um sich später leichter auf einzelne Konfusionen beziehen zu können, sind diese durchnummeriert.
-Für jedes dieser Paare wird einmal der Typ angegeben, welcher erfahrungsgemäß häufiger der richtige sein müsste. Dabei wird berücksichtigt, dass es in der Regel besser sein sollte, in einem langen Segment erst den allgemeineneren (stärkeren) und danach den spezielleren (schwächeren) Fall zu typisieren (entsprechend des Kodier-Handbuchs). 
+Für jedes dieser Paare wird einmal der Typ angegeben, welcher erfahrungsgemäß häufiger der richtige sein müsste. Dabei wird berücksichtigt, dass es in der Regel besser sein sollte, in einem langen Segment erst den allgemeinen (stärkeren) und danach den speziellen (schwächeren) Fall zu typisieren (entsprechend des Kodier-Handbuchs). 
 Dies ergibt die zweite und dritte Spalte der Tabelle in Abbildung \ref{tabelle:Abschaetzung_Konfusion}.
 Anschließend werden von jedem dieser Konfusionspaare zufällig zehn Stück aus der Stichprobe gezogen und exemplarisch begutachtet. 
 Für jeden dieser Fälle muss dann entschieden werden, welche Kodierung angemessen ist. Dabei gibt es drei Fälle: 
@@ -44,7 +44,7 @@ Für jeden dieser Fälle muss dann entschieden werden, welche Kodierung angemessen
 \item Typ Y ist angemessener
 \item Beide Typen sind gleich (gut oder schlecht) angemessen
 \end{itemize}
-Für die gesamte Stichprobe bekommt dann ein Typ X Vorrang, wenn Typ X mindestens zu $\frac{3}{5}$ und TYP Y höchstens zu $\frac{1}{5}$ besser ist und andersherum. Wenn das Ergebnis aus dieser Betrachtung nicht eindeutig mit der Erst\-einschätzung übereinstimmt, werden weitere zehn Elemente begutachtet.  In Bezug auf die gesamte Stichprobe wirken sich diese Vorrangsregeln eher wenig aus, helfen aber dennoch weiter, um aus den Typisierungen einer Einheit von zwei Gutachtern ein Endergebnis zu erschaffen, ohne große Teile der Markierungen weglassen zu müssen.
+Für die gesamte Stichprobe bekommt dann ein Typ X Vorrang, wenn Typ X mindestens zu $\frac{3}{5}$ und TYP Y höchstens zu $\frac{1}{5}$ besser ist, und andersherum. Wenn das Ergebnis aus dieser Betrachtung nicht eindeutig mit der Erst\-einschätzung übereinstimmt, werden weitere zehn Elemente begutachtet.  In Bezug auf die gesamte Stichprobe wirken sich diese Vorrangsregeln eher wenig aus, helfen aber dennoch weiter, um aus den Typisierungen einer Einheit von zwei Gutachtern ein Endergebnis zu schaffen, ohne große Teile der Markierungen weglassen zu müssen.
 \begin{figure}[H]
 \centering
 \begin{tabular}{|>{\columncolor[gray]{0.8}}c|c|c|c|c|}\hline
@@ -73,9 +73,9 @@ Nr. & Erfahrungsgemäß  &  Zustimmung & Widerspruch & Neutral \\
 \end{figure}
 Insgesamt können so 13 von 17 häufigen Konfusionen aufgelöst werden. Vier Konfusionen haben ein uneindeutiges Ergebnis. Keines der Ergebnisse widerspricht völlig den Erwartungen, auch wenn nicht alle Erwartungen mit Sicherheit bestätigt werden konnten. 
 
-Sobald eine der obigen Konfusionen auftritt und ein besserer Typ indentifiziert wurde (grüne Zeilen), wird dieser dann als richtige Typisierung gewertet.
+Sobald eine der obigen Konfusionen auftritt und ein besserer Typ identifiziert wurde (grüne Zeilen), wird dieser dann als richtige Typisierung gewertet.
 \subsubsection{Hilfsmittel}
-Für diese Stichprobenziehung wurde eine Django-Funktion geschrieben, welche die betroffenen Benutzer  und die ID der zehn Dokumentationseinheiten unter Angabe eines Konfusionspaares ausgibt. In dem noch zusätzlich die Option "`--count"' übergeben wird, wird die Häufigkeit des angegebenen Konfusionspaares ausgegeben und keine Stichprobenziehung durchgeführt.
+Für diese Stichprobenziehung wurde eine Django-Funktion geschrieben, welche die betroffenen Benutzer  und die ID der zehn Dokumentationseinheiten unter Angabe eines Konfusionspaares ausgibt. Indem noch zusätzlich die Option "`--count"' übergeben wird, wird die Häufigkeit des angegebenen Konfusionspaares ausgegeben und keine Stichprobenziehung durchgeführt.
 Aufruf und (mögliches) Ergebnis dieser Funktion sehen beispielhaft für Nummer 1 (Wissenstypen 1 und 7) aus wie in Abbildung \ref{fig:Funktion-Konfusion}. \\
 Die zuletzt ausgebene Zahl gibt zum Zweck der Überprüfung die Anzahl der ausgebenen Zeilen an. Solange mehr als zehn Konfusionspaare der abgefragten Kombination vorhanden sind, wird eine "`10"' ausgeben, andernfalls die Anzahl der verfügbaren Konfusionen. Beispielsweise erhält man bei der Eingabe 
 \begin{lstlisting} 
@@ -97,9 +97,9 @@ returned 3 lines
 \end{figure}
 
 \subsection{Ergebnis-Zusammenführung der Goldstichproben}
-Da die Goldstichprobe insgesamt drei-mal von verschiedenen Gutachtern typisiert wurde, müssen diese für die weitere Verwendung zusammengeführt werden. Um aus drei Wahrheiten die "`eine"' zu machen, wird wie folgt vorgegangen: \\
+Da die Goldstichprobe insgesamt dreimal von verschiedenen Gutachtern typisiert wurde, müssen deren für die weitere Verwendung zusammengeführt werden. Um aus drei Wahrheiten die "`eine"' zu machen, wird wie folgt vorgegangen: \\
 Es werden alle möglichen Tupel auf die Gesamtverträglichkeit über alle Zeichen berechnet. 
-Zwei dieser drei Tupel besitzen somit automatisch den selben Gutachter, so dass diese damit die höchste Gesamtverträglichkeit für diese Einheit besitzt. Die Markierungen dieses Gutachtern werden dann einem "`Dummy-Benutzer"' kopiert. \\
+Zwei dieser drei Tupel besitzen somit automatisch denselben Gutachter, so dass sie damit die höchste Gesamtverträglichkeit für diese Einheit besitzt. Die Markierungen dieser Gutachter werden dann einem "`Dummy-Benutzer"' kopiert. \\
 Anschließend werden die Markierungen der Gutachter mit dem des Dummys manuell verglichen und wo nötig noch kleinere Korrekturen vorgenommen. 
 Diese sind folgender Natur:
 \begin{itemize}
@@ -115,7 +115,7 @@ Diese sind folgender Natur:
 \subsubsection{Übereinstimmung pro Wissenstyp nach Gutachtern}
 Die Übereinstimmung der Wissenstypen nach Gutachtern wurde in der vorangegangen Studie wie folgt gemessen \cite{MaalejRobillard}:
 \begin{shaded}
-"`We calculated the agreement score for $C_{i} $by dividing the number of ratings which agree with the second coder by the total number of units coded by $C_{i}$. For example, if $C_{i}$coded 500 units and 400 of their Functionality ratings were the same as the ratings of the co-coder, $C_{i} $s agreement score for Functionality would be $400/500 = 0.80$. We calculated the overall agreement by summing all agreements over all variables and dividing by the number of units times 12 (the number of variables)."' 
+"`We calculated the agreement score for $C_{i} $ by dividing the number of ratings which agree with the second coder by the total number of units coded by $C_{i}$. For example, if $C_{i}$ coded 500 units and 400 of their Functionality ratings were the same as the ratings of the co-coder, $C_{i} $s agreement score for Functionality would be $400/500 = 0.80$. We calculated the overall agreement by summing all agreements over all variables and dividing by the number of units times 12 (the number of variables)."' 
 \end{shaded}
 Diese Auswertung habe ich analog auf diese Arbeit übertragen und mittels eines Django-Kommandos umgesetzt. 
 Ein Wissenstyp in einer Einheit ist vorhanden, sobald mindestens eine Markierung mit diesem in dieser Einheit gefunden wurde. 
@@ -153,10 +153,10 @@ Auf Grund der veränderten Typisierungweise in dieser Arbeit ist eine Übereinstim
 \subsubsection{Übereinstimmung nach Einheiten}
 Zusätzlich kann die Übereinstimmung nach Einheiten berechnet werden. 
 Für jede Einheit wird für jeden Wissenstypen geprüft, ob die Gutachter mindstens eine Markierung dieser Art getätigt haben. 
-Eine Übereinstimmung liegt dann vor, wenn bei beide Gutachter sich einig sind, ob dieser Wissenstyp (mindestens einmal) vorkommt oder nicht. Da es insgesamt zwölf Wissenstypen gibt, entspricht jede Übereinstimmung in einem Wissenstyp $\frac{1}{12} = 8,33$ Prozent . Für jeden Gutachter wird so die Übereinstimmung über alle Einheiten berechnet und der Durchschnittswert in Abbildung \ref{fig:Uebereinstimmung_Einheit} ausgegeben. Der Zeile für des besten Gutachtern ist grün, die des schlechtesten ist rot markiert. Analog wird der Durchschnittswert für die unterschiedlichen Kategorien in Abbildung \ref{fig:Uebereinstimmung_Einheit_Kategorie} angezeigt. \\
+Eine Übereinstimmung liegt dann vor, wenn beide Gutachter sich einig sind, ob dieser Wissenstyp (mindestens einmal) vorkommt oder nicht. Da es insgesamt zwölf Wissenstypen gibt, entspricht jede Übereinstimmung in einem Wissenstyp $\frac{1}{12} = 8,33$ Prozent . Für jeden Gutachter wird so die Übereinstimmung über alle Einheiten berechnet und der Durchschnittswert in Abbildung \ref{fig:Uebereinstimmung_Einheit} ausgegeben. Der Zeile des besten Gutachters ist grün, die des schlechtesten rot markiert. Analog wird der Durchschnittswert für die unterschiedlichen Kategorien in Abbildung \ref{fig:Uebereinstimmung_Einheit_Kategorie} angezeigt. \\
 Diese Übereinstimmung prüft somit nicht nur, ob sich zwei Gutachter darin einig sind, dass ein Wissenstyp vorhanden ist, sondern auch, ob sie sich darin einig sind, dass dieser nicht vorhanden ist. \\
 Die Werte entsprechen genau denen, die den Gutachtern und Administratoren während der Typisierung unter den eigenen Statistiken angezeigt werden und wurden von dort übernommen. 
-In Abbildung \ref{fig:Uebereinstimmung_Einheit} ist erkennbar, dass Gutachter C9 am meisten mit dem Typisierungen der anderen Gutachtern übereinstimmte. Wenn man die Gutachter C8 und C9 wegen der in Kapitel \ref{sec:Aenderung} beschriebenen Problematik bei der Analyse ausblendet, so ergibt sich Gutachter C7 sehr knapp vor C2 als Gutachter mit den höchsten Übereinstimmungswerten. Am wenigsten Übereinstimmung mit den anderen Gutachtern hat deutlich C6. \\
+In Abbildung \ref{fig:Uebereinstimmung_Einheit} ist erkennbar, dass Gutachter C9 am meisten mit den Typisierungen der anderen Gutachtern übereinstimmte. Wenn man die Gutachter C8 und C9 wegen der in Kapitel \ref{sec:Aenderung} beschriebenen Problematik bei der Analyse ausblendet, so ergibt sich Gutachter C7 sehr knapp vor C2 als Gutachter mit den höchsten Übereinstimmungswerten. Am wenigsten Übereinstimmung mit den anderen Gutachtern hat C6. \\
 Die Übereinstimmung allein sagt aber noch wenig über die Güte der Typisierungsergebnisse aus. Wenn man davon ausgeht, dass es den Fall geben kann, dass ein Großteil der Gutachter sich in manchen Fällen (auf die selbe Weise) irrt und ein anderer Gutachter die Situation richtig einschätzt, so wird dieser mit schlechten Übereinstimmungswerten abgestraft. Da die Unterschiede zwischen den Übereinstimmungswerten gering sind (maximal 6,2 Prozent), kann man von einer eher gleichmäßigen Qualität ausgehen. 
 
 \begin{figure}[H]
@@ -194,10 +194,10 @@ Klassen & 0,839 \\
 \end{figure}
 \subsubsection{Rechenbeispiel}
 Um die Bedeutung dieser Berechnungen zur Übereinstimmung zu veranschaulichen, folgt ein Beispiel: \\
-Eine Einheit wird von beiden Gutachtern mit genau einem Wissenstypen markiert. Gutachter A vergibt den Wissenstyp 1 und Gutachter B vergibt den Wissenstyp 2. Somit sind sich Gutachter A und B darüber einig, dass die anderen zehn Wissenstypen (drei bis zwölf) nicht vorhanden sind. Dies ergibt eine Übereinstimmung in dieser Einheit von $\frac{10}{12} = 83,33 \% $. \\
-Die Übereinstimmung misst somit nicht nur die Einigkeit über das Vorhandensein eines Wissenstypen sondern auch über das Fehlen dessen. 
+Eine Einheit wird von beiden Gutachtern mit genau einem Wissenstyp markiert. Gutachter A vergibt den Wissenstyp 1 und Gutachter B vergibt den Wissenstyp 2. Somit sind sich Gutachter A und B darüber einig, dass die anderen zehn Wissenstypen (drei bis zwölf) nicht vorhanden sind. Dies ergibt eine Übereinstimmung in dieser Einheit von $\frac{10}{12} = 83,33 \% $. \\
+Die Übereinstimmung misst somit nicht nur die Einigkeit über das Vorhandensein eines Wissenstypen sondern auch über das Fehlen desselben. 
 \subsubsection{Übereinstimmung mit Goldstichprobe}
-Um die Gutachter entsprechend der Qualität ihrer Leistungen einordnen zu können, werden die Typisierungen dieser mit den Ergebnissen aus der Goldstichprobe anhand der Verträglichkeit (siehe Kapitel \ref{sec:Vertraeglichkeit}) verglichen. Aus den Verträglichkeitswerten ergibt sich dann direkt eine Platzierung für alle Gutachter der Hauptstichprobe - mit Ausnahme der Gutachter C8 und C9 wegen der in Kapitel \ref{sec:Aenderung} besprochenen Änderung bezüglich der Stichprobenverteilung. Daher wurden die Platzierungen für die Gutachter C8 und C9 aus den Übereinstimmungswerten in Abbildung \ref{fig:Uebereinstimmung_Einheit} entnommen. Wegen des geringen Anteils dieser Bewertungen an der gesamten Stichprobe ist diese Vorgehensweise tolerierbar. \\
+Um die Gutachter entsprechend der Qualität ihrer Leistungen einordnen zu können, werden die Typisierungen dieser mit den Ergebnissen aus der Goldstichprobe anhand der Verträglichkeit (siehe Kapitel \ref{sec:Vertraeglichkeit}) verglichen. Aus den Verträglichkeitswerten ergibt sich dann direkt eine Platzierung für alle Gutachter der Hauptstichprobe --- mit Ausnahme der Gutachter C8 und C9 wegen der in Kapitel \ref{sec:Aenderung} besprochenen Änderung bezüglich der Stichprobenverteilung. Daher wurden die Platzierungen für die Gutachter C8 und C9 aus den Übereinstimmungswerten in Abbildung \ref{fig:Uebereinstimmung_Einheit} entnommen. Wegen des geringen Anteils dieser Bewertungen an der gesamten Stichprobe ist diese Vorgehensweise tolerierbar. \\
 So erhält man einen ungefähren Wert für gute Typisierungsqualität. Die Markierungen von Gutachter C7 sind in 96,269 Prozent der Fälle mit dem Markierungen aus der Goldstichprobe verträglich. Anders ausgedrückt sind weniger als 4 von 100 Markierungen von Gutachter C7 nicht verträglich mit den Markierungen der Goldstichprobe. 
 
 \begin{figure}[H]
@@ -225,8 +225,8 @@ Um solche Tendenzen der Gutachter aufzeigen zu können, vergleiche ich die gefund
 \item Falsch-Positiv: Der Gutachter gibt an, dass der Wissenstyp in dieser Einheit vorhanden ist, obwohl dies laut Goldstichprobe nicht der Fall ist.
 \item Falsch-Negativ: Der Gutachter hat keine Markierung mit diesem Wissenstyp getätigt, obwohl in der Goldstichprobe mindestens eine davon vorhanden ist. 
 \end{enumerate}
-Im folgenden wird für jeden Wissenstyp dargelegt, wie oft die Gutachter die Einheiten der Goldstichprobe falsch markiert haben, sowie welche Anteile durch die falsch-positiv (FP) und falsch-negativen (FN)  Bewertungen verursacht wurden. Da jede Einheit doppelt typisiert wurde, liegt eine Menge von 336 Typisierungen mit insgesamt $336 * 12 =  4032 $  \footnote{Es gibt 12 Wissenstypen} Bewertungen zu Grunde. \\
-In Abbildung \ref{tab:Unstimmigkeiten-Goldstichprobe} wird deutlich, dass die meisten Unstimmigkeiten bezüglich des Wissenstyps "`Structure and Relationship"' (83) entstanden sind und am wenigsten Uneinigkeit bezüglich bei dem Wissenstypen"`Code-Example"' herrscht. Das ist deswegen plausibel, weil Programmierbeispiele im Gegensatzu zu den meisten anderen Typen einfach an Hand der Syntax identifiziert werden können. 
+Im folgenden wird für jeden Wissenstyp dargelegt, wie oft die Gutachter die Einheiten der Goldstichprobe falsch markiert haben, sowie welche Anteile durch die falsch-positiven (FP) und falsch-negativen (FN)  Bewertungen verursacht wurden. Da jede Einheit doppelt typisiert wurde, liegt eine Menge von 336 Typisierungen mit insgesamt $336 * 12 =  4032 $  \footnote{Es gibt 12 Wissenstypen} Bewertungen zugrunde. \\
+In Abbildung \ref{tab:Unstimmigkeiten-Goldstichprobe} wird deutlich, dass die meisten Unstimmigkeiten bezüglich des Wissenstyps "`Structure and Relationship"' (83) entstanden sind und am wenigsten Uneinigkeit bei dem Wissenstypen "`Code-Example"' herrscht. Das ist deswegen plausibel, weil Programmierbeispiele im Gegensatzu zu den meisten anderen Typen einfach anhand der Syntax identifiziert werden können. 
 \begin{figure}[H]
 \centering
 \begin{tabular}{|c|c|c|c|c|} \hline
@@ -260,9 +260,9 @@ Die Verträglichkeit bezieht sich auf die einzelnen Markierungen einer Einheit un
 \item diese umschließt (größer oder gleich groß ist) \textbf{oder}
 \item zu mindestens 50 Prozent Teil dieser Markierung ist
 \end{enumerate}
-und beide Markierungen den selben Wissenstypen oder eine Kombination aus den Konfusionspaaren besitzen. \\
+und beide Markierungen denselben Wissenstypen oder eine Kombination aus den Konfusionspaaren besitzen. \\
 Oder anders ausgedrückt: \\
-Sei $B_{i}$ der Beginn, $E_{i}$ das Ende und $W_{i}$ der Wissenstyp der Markierung i, "`\&' das Zeichen für das logische "`und"', "`||"' das Zeichen für das logische "`oder"' und $confusion(i,j)$ eine Funktion, die angibt, ob die Wissenstypen i und j zu den aufgelösten Konfusionen gehören. Dann heißen zwei Markierungen M1 und M2 verträglich, wenn:
+Seien $B_{i}$ der Beginn, $E_{i}$ das Ende und $W_{i}$ der Wissenstyp der Markierung i, "`\&' das Zeichen für das logische "`und"', "`||"' das Zeichen für das logische "`oder"' und $confusion(i,j)$ eine Funktion, die angibt, ob die Wissenstypen i und j zu den aufgelösten Konfusionen gehören. Dann heißen zwei Markierungen M1 und M2 verträglich, wenn:
 \begin{enumerate}
 \item $(B_{1}>=B_{2}) $ \& $ (E_{1}<=E_{2})$ \textbf{||}
 \item $(E_{1}>=B_{2}$ \& $B_{1}<=B_{2}) $ \& $ ((E_{1}-B_{2})>=\frac{E_{1}-B_{1}}{2})$
@@ -276,7 +276,7 @@ Die Verträglichkeiten für jede Einheit werden auf zwei Weisen berechnet:
 
 Während in Abbildung \ref{fig:Verträglichkeit_Gutachter} die durchschnittliche Verträglichkeit pro Gutachter dargestellt wird, zeigt Abbildung \ref{fig:Verträglichkeit_Kategorie} diese pro Kategorie. \\
 Von beiden Werten ist die Verträglichkeit nach Zeichen aussagekräftiger als die Verträglichkeit nach Markierungen, da so die Verträglichkeiten anhand der Länge gewichtet werden.  So erhält eine kurze Markierung nur geringes Gewicht bei der Berechnung und analog dazu eine lange Markierung entsprechend viel Gewicht. \\ 
-Insgesamt ist erkennbar, dass die Markierungen im Durchschnitt zu mehr als 80 Prozent verträglich zueinander sind. Dass die Verträglichkeitswerte gemessen an der Zeichenanzahl durchgehend höher sind als die nach Anzahl der Markierungen macht deutlich, dass sich Gutachter bei größeren Segementen eher einig sind als bei kleineren. \\
+Insgesamt ist erkennbar, dass die Markierungen im Durchschnitt zu mehr als 80 Prozent verträglich zueinander sind. Dass die Verträglichkeitswerte gemessen an der Zeichenanzahl durchgehend höher sind als die nach Anzahl der Markierungen, macht deutlich, dass sich Gutachter bei größeren Segmenten eher einig sind als bei kleineren. \\
 
  
 \begin{figure}[H]
@@ -319,17 +319,17 @@ Klassen &0,786& 0,772 \\
 Da jede Einheit aus der Hauptstichprobe ebenfalls von zwei Gutachtern bewertet wurde, müssen auch diese Ergebnisse zusammengeführt werden. 
 Diese Stichprobe ist mit 1548 Einheiten allerdings erheblich größer als die Goldstichprobe mit 168 Einheiten, deswegen soll dies durch ein Skript (Django-Kommando) automatisiert werden. \\
 Das Markierungsresultat wird für die Markierungen der Gutachter $G_{i}$ und $ G_{j}$ wie folgt bestimmt: \\
-Die Markierung werden nach ihrem Auftreten aufsteigend sortiert. 
-Nacheinander werden alle Markierungen, die sich zu mindestens 50 Prozent überschneiden, mit einander verglichen. Sobald ein Gutachter bei diesem Vergleich die Markierung mit dem "`besseren"' Wissenstyp (laut Konfusionergebnis) getätigt hat, bekommt dieser einen "`Pluspunkt"' und seine Markierung wird in das Endresultat übernommen (erster Fall).\\ Wenn es für eine Markierung entweder eine Übereinstimmung der Wissenstypen gibt oder diese so verschieden sind, dass diese nicht zu den aufgelösten Konfusionspaaren gehören, dann wird die Markierung des Gutachters mit mehr "`Pluspunkten"' übernommen (zweiter Fall). \\
-Falls die "`Pluspunkte"' kein eindeutiges Ergebnis liefern, werden die Gutachter mit dem besseren Ergebnissen im Vergleich zur Goldstichprobe bevorzugt (dritter Fall). 
+Die Markierungen werden nach ihrem Auftreten aufsteigend sortiert. 
+Nacheinander werden alle Markierungen, die sich zu mindestens 50 Prozent überschneiden, miteinander verglichen. Sobald ein Gutachter bei diesem Vergleich die Markierung mit dem "`besseren"' Wissenstyp (laut Konfusionsergebnis) getätigt hat, bekommt er einen "`Pluspunkt"' und seine Markierung wird in das Endresultat übernommen (erster Fall).\\ Wenn es für eine Markierung entweder eine Übereinstimmung der Wissenstypen gibt oder sie so verschieden sind, dass diese nicht zu den aufgelösten Konfusionspaaren gehören, dann wird die Markierung des Gutachters mit mehr "`Pluspunkten"' übernommen (zweiter Fall). \\
+Falls die "`Pluspunkte"' kein eindeutiges Ergebnis liefern, werden die Gutachter mit den besseren Ergebnissen im Vergleich zur Goldstichprobe bevorzugt (dritter Fall). 
 \\
-Wenn die Segmentierungsweisen (also die Start und Endpunkte der Markierungen) beider Gutachtern stark von einander abweichen, entstehen im Endergebnis unter Umständen mehr Markierungen als im Durchschnitt beider Gutachter. Insgesamt wurden so 5737 Markierungen auf 1548 Einheiten identifiziert, also im Durchschnitt 3,7 Markierungen pro Einheit.
+Wenn die Segmentierungsweisen (also die Start und Endpunkte der Markierungen) beider Gutachtern stark voneinander abweichen, entstehen im Endergebnis unter Umständen mehr Markierungen als im Durchschnitt beider Gutachter. Insgesamt wurden so 5737 Markierungen auf 1548 Einheiten identifiziert, also im Durchschnitt 3,7 Markierungen pro Einheit.
 
 \subsection{Strukturen und Muster der Wissenstypen}
 In diesem Abschnitt wird das Endergebnis der Hauptstichprobe auf die Strukturen und Muster der vorkommenden Wissenstypen untersucht.  
 \subsubsection{Vorkommen und Verhältnis }
 \label{sec:Vorkommen_Verhaeltnis}
-Abbildung \ref{fig:Haeufigkeiten-Wissenstypen} zeigt die Häufigkeit aller aufgetretenen Wissenstypen über alle Markierungen in absoluten Zahlen an. In Abbildung \ref{fig:Haeufigkeiten-Wissenstypen-prozent} wird diese Darstellung noch einmal mit relativen Zahlen im Bezug zur Gesamtmenge aller Markierungen wiederholt. In Abbildung \ref{fig:Verhaeltnis-Wissenstypen} wird das Verhältnis der Wissenstypen über alle Dokumentationseinheiten  dargestellt, zum Beispiel enthalten 72 Prozent aller Einheiten den Wissenstyp "`Functionality and Behaviour"'. Diese Informationen werden dann in Abbildung \ref{tab:Verhaeltnis-Wissesntypen-Kategorie} noch einmal für jede Kategorie einzeln dargestellt. Aus dieser Tabelle wird beispielsweise deutlich, dass die Einheiten der Kategorie "`Methoden"' eindeutig mehr Wissen zu dem Wissenstyp "`Functionality and Behavior"' enthalten als alle anderen Einheiten (mindestens 30 Prozent mehr) und, dass in Modulen viel häufiger Programmierbeispiele vorkommen als in allen anderen Kategorien (mindestens dreieinhalb mal so viel).
+Abbildung \ref{fig:Haeufigkeiten-Wissenstypen} zeigt die Häufigkeit aller aufgetretenen Wissenstypen über alle Markierungen in absoluten Zahlen an. In Abbildung \ref{fig:Haeufigkeiten-Wissenstypen-prozent} wird diese Darstellung noch einmal mit relativen Zahlen im Bezug zur Gesamtmenge aller Markierungen wiederholt. In Abbildung \ref{fig:Verhaeltnis-Wissenstypen} wird das Verhältnis der Wissenstypen über alle Dokumentationseinheiten  dargestellt, zum Beispiel enthalten 72 Prozent aller Einheiten den Wissenstyp "`Functionality and Behaviour"'. Diese Informationen werden dann in Abbildung \ref{tab:Verhaeltnis-Wissesntypen-Kategorie} noch einmal für jede Kategorie einzeln dargestellt. Aus dieser Tabelle wird beispielsweise deutlich, dass die Einheiten der Kategorie "`Methoden"' eindeutig mehr Wissen zu dem Wissenstyp "`Functionality and Behavior"' enthalten als alle anderen Einheiten (mindestens 30 Prozent mehr) und dass in Modulen viel häufiger Programmierbeispiele vorkommen als in allen anderen Kategorien (mindestens dreieinhalbmal so viel).
 
 \begin{figure}[H]
 \centering
@@ -448,9 +448,9 @@ Non-Info.&0.02 & 0.02 & 0.17 & 0.08 & 0.00 \\ \hline
 \subsubsection{positive Korrelation}
 Die Auswertung in Kapitel \ref{sec:Vorkommen_Verhaeltnis} zeigt die Verteilung der verschiedenen Wissenstypen, jedoch kein direktes Muster von gemeinsam auftretenden Wissenstypen. Fraglich ist, ob es beispielsweise den Wissenstyp "`Quality Attributes and Internal Aspects"' meist in Verbindung mit "`Functionality and Behavior"' gibt. \\ 
 Daher wird in Abbildung \ref{tab:Kookurrenz-absolut} die Korrelation zwischen zwei verschiedenen Wissenstypen in absoluten Zahlen und in Abbildung \ref{fig:punchcard:Kookurrenz} im Verhältnis zum Vorkommen beider Typen im Endergebnis angezeigt. Die Berechnung dieser Werte erfolgte jeweils innerhalb eines Django-Kommandos. Wenn ein Wissenstyp mehr als einmal in einer Dokumentationseinheit vorgekommen ist, wurde dieser (analog zum Artikel von Maalej und Robillard \cite{MaalejRobillard}) nur einmal gewertet. \\
-Grundsätzlich sind dabei alle 66 möglichen Kombinationen aufgetreten. Am meisten korrelieren die Wissenstypen "`Patterns"' mit "`Examples"' (23 Prozent) sowie "`Concepts"' mit "`Structure"' (21 Prozent), am wenigsten korrelieren "`Control"' mit "`References"' (3 Prozent) sowie "`Control"' mit "`Non-Information"`' (4 Prozent). \\
+Grundsätzlich sind dabei alle 66 möglichen Kombinationen aufgetreten. Am meisten korrelieren die Wissenstypen "`Patterns"' mit "`Examples"' (23 Prozent) sowie "`Concepts"' mit "`Structure"' (21 Prozent), am wenigsten korrelieren "`Control"' mit "`References"' (3 Prozent) sowie "`Control"' mit "`Non-Information"' (4 Prozent). \\
+Im Durchschnitt gibt es zwischen zwei Wissenstypen eine Korrelation von 12 Prozent. Signifikat nach oben abweichende Werte können als "`positive Korrelation"', nach unten als "`negative Korrelation"' bezeichnet werden, um die Vergleichbarkeit mit der Originalstudie zu erhöhen. 
 
-%In diesem Abbildungen erkennt man, dass es keine Kombination gibt, die nicht aufgetreten ist. Die prozentualen Werte reichen von 6 Prozent ("`Non-Information"' mit "`Functionaltiy and Behaivor"' und "`Control-Flow"' mit "'Structure and Relationships"') bis  49 Prozent ("`Concepts"' mit "`Structure"'). 
 
 \begin{figure}[H]
 \centering
@@ -518,10 +518,10 @@ Weiterhin kann die Beziehung zwischen der Anzahl der verschiedenen Wissenstypen 
 Für die Länge der Einheiten wird analog zur Originalstudie die Anzahl der Wörter gemessen. Wörter sind hierfür als durch Leerzeichen getrennte Zeichenketten definiert. 
 In Abbildung \ref{tab:Woerter-Kategorie} wird die Beziehung zwischen der Länge der Einheiten und der Kategorie in Tabellenform angegeben und in Abbildung \ref{fig:Woerter-Kategorie} mit Hilfe eines Boxplot-Diagramms dargestellt. \\ 
 In den Abbildungen \ref{fig:Methoden:Woerter:Wissenstypen} bis \ref{fig:Beschreibungen:Woerter:Wissenstypen} werden für je eine Kategorie die Anzahl der verschiedenen typisierten Wissenstypen mit den Längen der Einheiten dargestellt. Während "`Minimum"' und "`Maximum"' die "`Antennen"' (auch "`Whisker"' genannt) der Boxplots angeben, wird das Rechteck durch die Werte "`unteres Quartil"' und "`oberes Quartil"' gegeben. Die zusätzlich Linie innerhalb des Rechtecks bezeichnet den "`Median"'.\\
- In der Studie von Walid Maalej und Martin Robillard wurden die "`Whisker"' anders berechnet, so dass zusätzlich noch "`Ausreißer"' als Punkte dargestellt werden konnten. Da die Berechnung dieser "`Antennen"' allerdings nicht einheitlich geregelt ist und sich in der Originalstudie keinen Hinweis darauf finden lässt, wie diese berechnet wurde, werden hier die Extrema dafür festgelegt. \\
-Es ist dabei eine deutliche, proportionale Korrelation zwischen Länge der Einheiten und gefundenen Wissenstypen erkennbar. Am deutlichsten ausgeprägt ist \mbox{diese} für die Einheiten der Kategorien "`Methoden"' und "`Klassen"'. \\
-Die Ergebnisse für die Kategorie in Abbildung \ref{fig:Beschreibungen:Woerter:Wissenstypen} "`Beschreibungen"' zeigen vor allem, dass diese Einheiten nicht nur recht kurz sind (wie bereits in Abbildung \ref{fig:Woerter-Kategorie} gezeigt) sondern auch nur wenig unterscheidbare Informationen enthalten; ähnlich verhält es sich mit den Einheiten der Kategorie "`Felder"'. 
-Die Einheiten ohne zugeordnete Wissenstypen haben zwei unterschiedliche Ursachen: Zum einen gibt es immer wieder Einheiten, welche lediglich eine Überschrift und nur den Satz "`[something removed here]"' besitzen, da der Inhalt vollständig in untere Kategorien durch den Extrahierer aufgeteilt wurde. Zum anderen gab es wenige Einheiten, die keine Informationen über die API sondern über die Benutzung der GUI \footnote{Graphical User Interface (engl.) = Grafische Benutzeroberfläche} beinhalteten und deswegen auch nicht typisiert wurden. \\ 
+ In der Studie von Walid Maalej und Martin Robillard wurden die "`Whisker"' anders berechnet, so dass zusätzlich noch "`Ausreißer"' als Punkte dargestellt werden konnten. Da die Berechnung dieser "`Antennen"' allerdings nicht einheitlich geregelt ist und sich in der Originalstudie kein Hinweis darauf finden lässt, wie diese berechnet wurde, werden hier die Extrema dafür festgelegt. \\
+Es ist dabei eine deutliche  proportionale Korrelation zwischen Länge der Einheiten und gefundenen Wissenstypen erkennbar. Am deutlichsten ausgeprägt ist \mbox{diese} für die Einheiten der Kategorien "`Methoden"' und "`Klassen"'. \\
+Die Ergebnisse für die Kategorie in Abbildung \ref{fig:Beschreibungen:Woerter:Wissenstypen} "`Beschreibungen"' zeigen vor allem, dass diese Einheiten nicht nur recht kurz sind (wie bereits in Abbildung \ref{fig:Woerter-Kategorie} gezeigt), sondern auch nur wenig unterscheidbare Informationen enthalten; ähnlich verhält es sich mit den Einheiten der Kategorie "`Felder"'. 
+Die Einheiten ohne zugeordnete Wissenstypen haben zwei unterschiedliche Ursachen: Zum einen gibt es immer wieder Einheiten, welche lediglich eine Überschrift und nur den Satz "`[something removed here]"' besitzen, da der Inhalt vollständig in untere Kategorien durch den Extrahierer aufgeteilt wurde. Zum anderen gab es wenige Einheiten, die keine Informationen über die API, sondern über die Benutzung der GUI \footnote{Graphical User Interface (engl.) = Grafische Benutzeroberfläche} bein\-halteten und deswegen auch nicht typisiert wurden. \\ 
 
 
 \begin{figure}[H]
@@ -834,8 +834,8 @@ boxplot/draw direction=y,
 x axis line style={opacity=0},
 axis x line*=bottom,
 axis y line=left,
-%ymin = -10,
-%ymax=250,
+ymin = 0,
+ymax=750,
 enlarge y limits,
 ymajorgrids,
 xtick={1,2,3,4,5,6,7,8,9,10,11},
