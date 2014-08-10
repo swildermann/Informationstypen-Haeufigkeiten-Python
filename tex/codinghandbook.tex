@@ -1,15 +1,14 @@
-Knowledge Types
+\section*{Knowledge Types}
 
-1 Functionality and Behavior
-
-Describes what the API does (or does not do) in terms of functionality or features. The block describes what happens when the API is used (a field value is set, or a method is called). This also includes specified behavior such as what an element does, given special input values (for example, null).
+\subsection*{1 Functionality and Behavior}
+Describes what the API does (or does not do) in terms of functionality or features. The block describes what happens when the API is used (a field value is set, or a method is called). This also includes specified behavior such as what an element does, given special input values (for example, null). \\
 
 Functionality and behavior knowledge can also be found in the description of parameters (e.g., what the element does in response to a specific input), return values (e.g., what the API element returns), and thrown exceptions.
-
+\\
 Detects stream close and notifies the watcher
 Obtains the SSL session of the underlying connection, if any. If this connection is open, and the underlying socket is an SSLSocket, the SSL session of that socket is obtained. This is a potentially blocking operation.
 Only rate this type as true if the block contains information that actually adds to what is obvious given the complete signature of the API element associated with the block. If a description of functionality only repeats the name of the method or field, it does not contain this type of knowledge and you should rate it as false, and instead rate the knowledge type non-information as true. For example, this would be the case if the documentation for a method called getTitle was
-
+\\
 Returns the title.
 Similarly for constructors, if the documentation simply states "Constructs a new X", "Instantiates a new object", or something similar the value is false (with non-information coded as true). In some cases non-information will be phrased to look like a description of functionality, for examples with sentences that start with verbs like "gets", "adds", "determines", "initializes". Carefully read the name and signature of the API element and only assign a value of true for this knowledge type if the block adds something to the description of the element.
 
@@ -77,13 +76,13 @@ Note: Descriptions of how the programmer should organize the control-flow of the
 
 Describes the internal organization of a compound element (for example important classes, fields, or methods), information about type hierarchies, how elements are related to each other, or the static properties of an element. Basically, structural knowledge is knowledge about how different API elements related to each other.
 
-Node has five subtypes: Node_Blank, Node_Anon, Node_URI, Node_Variable, and Node_ANY.
+\verb|Node has five subtypes: Node_Blank, Node_Anon, Node_URI, Node_Variable, and Node_ANY.|
 Note that the order of arguments here is different from the similar public constructor, as required by Java
 public interface CookieSpec. Cookie management specification must define: a) rules of parsing ?Set-Cookie? header; b) rules of validation of parsed cookies; c) formatting of ?Cookie? header; for a given host, port and path of origin chosen cipher suite.
 This class is used with the [LINK] GZipStream and [LINK] DeflateStream classes
 Note: Pointers to other sections of the reference documentation of the API (element names, hyperlinks, manually-added "see also" references) can also represent structural information if they indicate how elements relate to each other or what their properties are. (For references to elements in other APIs or to other documents, see the variable References.) For example, a note such as the following contains structural knowledge because it indicates another API element similar to the one documented:
 
-Same as {@link #close close()}.
+\verb|Same as {@link #close close()}.|
 Management interface for client connections. [A link to the class managed by the interface]
 However, simply adding a link to another part of the API does not automatically provide structural knowledge if it is not also mentioned why or how this element is related, or its role in the structure of the API. For example
 
@@ -163,7 +162,7 @@ overrides [and the text which belongs to it]
 DotNet
 
 Inheritance Hierarchy [this might be valuable context information]
-Syntax except C#
+\verb|Syntax except C#|
 Version Information
 Platforms
 This sentence in section Thread Safety: [Any public static (Shared in Visual Basic) members of this type are thread safe. Any instance members are not guaranteed to be thread safe.]

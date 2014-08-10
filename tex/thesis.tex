@@ -14,7 +14,7 @@
     \pgfplotsset{compat=newest}
 
 \usepgfplotslibrary{statistics}
-\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees,er}
 %tikz-setup for drawing trees
 \tikzset{
   basic/.style  = {draw, text width=2cm, drop shadow, font=\sffamily, rectangle},
@@ -26,8 +26,6 @@
 }
 %
 %
-
-
 %
 \usepackage{fancyref}
 \usepackage{fancyhdr} 
@@ -45,9 +43,10 @@
 \definecolor{skyblue}{rgb}{0.447,0.624,0.812}
 
 % PDF settings
-\usepackage[pdfstartview=FitH,pdftitle={Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation },pdfauthor={Sven Wildermann}, colorlinks=true, linktocpage]{hyperref}
+\usepackage[pdfstartview=FitH,pdftitle={Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation },pdfauthor={Sven Wildermann}, colorlinks=false, linktocpage, pdfborder={0 0 0 }]{hyperref}
 % colorlinks=false, pdfborder={0 0 0} = keine farbigen Links
 %
+ %
 % Header and Footer Style
 \pagestyle{fancy}
 \fancyhead{}
@@ -95,14 +94,12 @@ Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation}
 
 \begin{titlepage}
 
+
 \pagenumbering{alph}
 \maketitle
 \thispagestyle{empty}
 
 \vfill{}
-
-
-
 \vfill{}
 
 \end{titlepage}
@@ -110,11 +107,29 @@ Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation}
 \pagestyle{empty}
 \clearpage\pagenumbering{roman}
 
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
 \include{abstract}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
 \include{acknowledgements}
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
 \include{declaration}
+
 \setcounter{tocdepth}{5}
 \setcounter{secnumdepth}{5}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
 
 \tableofcontents
 \listoffigures
@@ -123,7 +138,10 @@ Messung der Informationstypen-Häufigkeiten in der Python-Dokumentation}
 \setcounter{page}{0}
 
 %\include{ideas}
-\include{1_introduction}      
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\include{1_introduction} 
 \include{2_fundamentals}      
 \include{3_main}            
 \include{4_results}
